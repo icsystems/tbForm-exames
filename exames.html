@@ -1,0 +1,347 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Exames - Preencha todos os campos do Formulário abaixo.</title>
+	<link rel="stylesheet" type="text/css" href="./css/form_style.css" />
+	<link rel="stylesheet" type="text/css" href="./css/page_style.css" />
+	<link rel="stylesheet" type="text/css" href="./css/smoothness/jquery-ui.css" />
+	<script src='./js/jquery.js'          type='text/javascript'></script>
+	<script src='./js/jquery-ui.js'       type='text/javascript'></script>
+	<script src='./js/jquery.form.js'     type='text/javascript'></script>
+	<script src='./js/jquery.validate.js' type='text/javascript'></script>
+	<script src='./js/messages_ptbr.js'   type='text/javascript'></script>
+	<script src='./js/actions.js'         type='text/javascript'></script>
+</head>
+<body>
+<div id='menu'>
+	<ul>
+		<li><a href='#'>Formulários</a></li>
+		<li><a href='#'>Operaç&otilde;es</a></li>
+		<li><a href='#'>Análise</a></li>
+		<li><a href='#'>Listar</a></li>
+		<li><a href='#'>Backup</a></li>
+		<li class='help'><a href='#'>Ajuda</a></li>
+	</ul>
+</div>
+<div id='mainFrame'>
+<div id='content'>
+	<div id='title'>Novos Métodos Diagnósicos em TB pulmonar <br /> Policlínica Augusto Amaral Peixoto - SMS - RJ</div>
+	<div id='subtitle'>Análise de exames</div>
+	<div id='maincontent'><form id='form_exams'>
+		<fieldset id='soro'>
+			<legend>Soro</legend>
+			<div id='divSoroColetado' class='primary required'>
+				<label for='soroColetado'>Soro Coletado:</label>
+				<select name='soroColetado' id='soroColetado' class='selectOne'>
+					<option value='' > ------ </option>
+					<option value='sim'> Sim  </option>
+					<option value='nao'> N&atilde;o  </option>
+					<option value='ignorado'> Ignorado  </option>
+				</select>
+			</div>
+			<div id='divNSoro' class='secondary'>
+				<label for='nSoro'> Número do Soro:</label>
+				<input  name="nSoro" id="nSoro" type="text" />
+			</div>
+		</fieldset>
+		<fieldset id='sangue'>
+			<legend>Sangue</legend>
+			<div id='divSangueColetado' class='primary required'>
+				<label for='sangueColetado'>Sangue Coletado:</label>
+				<select name='sangueColetado' id='sangueColetado' class='selectOne required'>
+					<option value='' > ------ </option>
+					<option value='sim'> Sim  </option>
+					<option value='nao'> N&atilde;o  </option>
+					<option value='ignorado'> Ignorado  </option>
+				</select>
+			</div>
+			<div id='divNSangue' class='secondary'>
+				<label for='nSangue'> Número do Sangue:</label>
+				<input  name="nSangue" id="nSangue" type="text" />
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>PPD</legend>
+			<div id='divResultadoLeitura' class='primary required'>
+				<label for='resultadoLeitura'> Resultado da leitura:</label>
+				<input  name="resultadoLeitura" id="resultadoLeitura" type="text" size='2' maxlength='2'/> mm de enduraç&atilde;o
+			</div>
+			<div id='divDataAplicaç&atilde;o' class='primary required'>
+				<label for='data_aplicacao'> Data de aplicaç&atilde;o da prova tuberculíca:</label>
+				<input  name="data_aplicacao" id="data_aplicacao" type="text" />
+			</div>
+			<div id='divDataLeitura' class='primary required'>
+				<label for='data_leitura'> Data da Leitura:</label>
+				<input  name="data_leitura" id="data_leitura" type="text" />
+			</div>
+			<div id='divPt' class='primary required'>
+				<label for='pt'> Responsável pela leitura:</label>
+				<input  name="pt" id="pt" type="text" />
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>HIV/AIDS</legend>
+			<div id='divHIVteste' class='primary required'>
+				<label for='HIVteste'> Teste de HIV</label>
+				<select name='HIVteste' id='HIVteste' class='selectOne'>
+					<option value=''         > ------    </option>
+					<option value='positivo' > Positivo  </option>
+					<option value='negativo' > Negativo  </option>
+					<option value='ignorado' > Ignorado  </option>
+				</select>
+			</div>
+			<div id='divDataHIV' class='secondary'>
+				<label for='data_antiHIV'> Data do anti-HIV:</label>
+				<input  name="data_antiHIV" id="data_antiHIV" type="text" />
+			</div>
+
+		</fieldset>
+		<fieldset>
+			<legend>RX de Toráx (ao entrar no estudo)</legend>
+			<div id='divProbabilidadeTBAtiva' class='primary required'>
+				<label for='probabilidadeTBAtiva'>Probabilidade de TB ativa ao avaliar o RXT:</label>
+				<select name='probabilidadeTBAtiva' id='probabilidadeTBAtiva' class='selectOne'>
+					<option value=''      > ------ </option>
+					<option value='alta'  > Alta   </option>
+					<option value='media' > Média  </option>
+					<option value='baixa' > Baixa  </option>
+				</select>
+			</div>
+			<div id='divCativacao' class='secondary'>
+				<label for='cativacao'> Cativaç&atilde;o:</label>
+				<select name='cativacao' id='cativacao' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+			</div>
+			<div id='divPadraoTipico' class='secondary'>
+				<label for='padraoTipico'> Padrão típico:</label>
+				<select name='padraoTipico' id='padraoTipico' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+				<small>Infiltrado em lobo(s) superior(es) e/ou segmento apical de lobo inferior</small>
+			</div>
+			<div id='divCompativel' class='secondary'>
+				<label for='compativel'> Compatível:</label>
+				<select name='compativel' id='compativel' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+				<small> Alargamento mediastinal ou linf. hilar, padrão miliar, ou derrame pleural</small>
+			</div>
+			<div id='divAtipico' class='secondary'>
+				<label for='atipico'> Atípico:</label>
+				<select name='atipico' id='atipico' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+				<small>Qualquer outro padr&atilde;o</small>
+			</div>
+			<div id='divcasoBaixaProbabilidade' class='secondary'>
+				<label for='casoBaixaProbabilidade' > &nbsp;</label>
+				<select name='casoBaixaProbabilidade' id='casoBaixaProbabilidade' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='inativa_sequela'> TB inativa sequela </option>
+					<option value='outra'          > Outra doença       </option>
+					<option value='normal'         > Normal             </option>
+					<option value='ignorado'       > Ignorado           </option>
+					<option value='nsa'            > NSA                </option>
+				</select>
+			</div>
+			<div id='divDataRX' class='primary required'>
+				<label for='data_rx'> Data do RX:</label>
+				<input name="data_rx" id="data_rx" type="text" />
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>RX de Toráx (entre 60 e 90 dias no estudo)</legend>
+			<div id='divProbabilidadeTBAtivaAposEstudoRX' class='primary'>
+				<label for='probabilidadeTBAtivaAposEstudoRX'>Probabilidade de TB ativa ao avaliar o RXT:</label>
+				<select name='probabilidadeTBAtivaAposEstudoRX' id='probabilidadeTBAtivaAposEstudoRX' class='selectOne'>
+					<option value=''      > ------ </option>
+					<option value='alta'  > Alta   </option>
+					<option value='media' > Média  </option>
+					<option value='baixa' > Baixa  </option>
+				</select>
+			</div>
+			<div id='divCativacao90dias' class='secondary'>
+				<label for='cativacao90dias'> Cativaç&atilde;o:</label>
+				<select name='cativacao90dias' id='cativacao90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+			</div>
+			<div id='divPadraoTipico90dias' class='secondary'>
+				<label for='padraoTipico90dias'> Padrão típico:</label>
+				<select name='padraoTipico90dias' id='padraoTipico90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+				<small>Infiltrado em lobo(s) superior(es) e/ou segmento apical de lobo inferior</small>
+			</div>
+			<div id='divCompativel90dias' class='secondary'>
+				<label for='compativel90dias'> Compatível:</label>
+				<select name='compativel90dias' id='compativel90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+				<small> Alargamento mediastinal ou linf. hilar, padrão miliar, ou derrame pleural</small>
+			</div>
+			<div id='divAtipico90dias' class='secondary'>
+				<label for='atipico90dias'> Atípico:</label>
+				<select name='atipico90dias' id='atipico90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='sim'     > Sim         </option>
+					<option value='nao'     > N&atilde;o  </option>
+					<option value='ignorado'> Ignorado    </option>
+				</select>
+				<small>Qualquer outro padr&atilde;o</small>
+			</div>
+			<div id='divcasoBaixaProbabilidade90dias' class='secondary'>
+				<label for='casoBaixaProbabilidade90dias' > &nbsp;</label>
+				<select name='casoBaixaProbabilidade90dias' id='casoBaixaProbabilidade90dias' class='selectOne'>
+					<option value=''        > ------      </option>
+					<option value='inativa_sequela'> TB inativa sequela </option>
+					<option value='outra'          > Outra doença       </option>
+					<option value='normal'         > Normal             </option>
+					<option value='ignorado'       > Ignorado           </option>
+					<option value='nsa'            > NSA                </option>
+				</select>
+			</div>
+			<div id='divDataRX90dias' class='primary'>
+				<label for='data_rx_90dias'> Data do RX:</label>
+				<input name="data_rx_90dias" id="data_rx_90dias" type="text" />
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>CEPA</legend>
+			<table class='datatable'>
+			<thead>
+				<tr>
+					<th > Número        </th>
+					<th > Data          </th>
+					<th > Origem        </th>
+					<th > Material      </th>
+					<th > Baciloscopia  </th>
+					<th colspan='2'> Cultura       </th>
+					<th colspan='2'> Sensibilidade  <img id='helpicon' src='images/help.png' width='15' /></th>
+				</tr>
+			</thead>
+			</table>
+			<div class='add-row'><input value="Adicionar Linha" class='inputButton' id='addline_button' type="button"></div>
+		</fieldset>
+		<fieldset id='outrosExames'>
+			<legend>Outros Exames</legend>
+			<div id='divQuatiferon' class='primary'>
+				<label for='quatiferon'>Quatiferon:</label>
+				<select name='quantiferon' id='quatiferon' class='selectOne'>
+					<option value=''             > ------ </option>
+					<option value='sim'          > Positivo  </option>
+					<option value='nao'          > Negativo  </option>
+					<option value='ignorado'     > Ignorado  </option>
+					<option value='nao_realizado'> N&atilde;o Realizado  </option>
+				</select>
+			</div>
+			<div id='divPCR' class='primary'>
+				<label for='pcr'>PCR:</label>
+				<select name='pcr' id='pcr' class='selectOne'>
+					<option value=''             > ------ </option>
+					<option value='sim'          > Positivo  </option>
+					<option value='nao'          > Negativo  </option>
+					<option value='ignorado'     > Ignorado  </option>
+					<option value='nao_realizado'> N&atilde;o Realizado  </option>
+				</select>
+			</div>
+			<div id='divGeneXPert' class='primary'>
+				<label for='geneXPert'>Gene-XPERT:</label>
+				<select name='geneXPert' id='geneXPert' class='selectOne'>
+					<option value=''             > ------ </option>
+					<option value='sim'          > Positivo  </option>
+					<option value='nao'          > Negativo  </option>
+					<option value='ignorado'     > Ignorado  </option>
+					<option value='nao_realizado'> N&atilde;o Realizado  </option>
+				</select>
+			</div>
+			<div id='divOutrosOutros1' class='primary'>
+				<label for='outrosOutros1'>
+					<input name="outros_exames_1" id="outros_exames_1" type="text" />
+				</label>
+				<select name='outrosExames1' id='outrosExames1' class='selectOne' disabled='disabled'>
+					<option value=''             > ------ </option>
+					<option value='sim'          > Positivo  </option>
+					<option value='nao'          > Negativo  </option>
+					<option value='ignorado'     > Ignorado  </option>
+					<option value='nao_realizado'> N&atilde;o Realizado  </option>
+				</select>
+			</div>
+			<div id='divOutrosOutros2' class='primary'>
+				<label for='outrosOutros2'>
+					<input name="outros_exames_2" id="outros_exames_2" type="text" />
+				</label>
+				<select name='outrosExames2' id='outrosExames2' class='selectOne' disabled='disabled'>
+					<option value=''             > ------ </option>
+					<option value='sim'          > Positivo  </option>
+					<option value='nao'          > Negativo  </option>
+					<option value='ignorado'     > Ignorado  </option>
+					<option value='nao_realizado'> N&atilde;o Realizado  </option>
+				</select>
+			</div>
+			<div id='divOutrosOutros3' class='primary'>
+				<label for='outrosOutros3'>
+					<input name="outros_exames_3" id="outros_exames_3" type="text" />
+				</label>
+				<select name='outrosExames3' id='outrosExames3' class='selectOne' disabled='disabled'>
+					<option value=''             > ------ </option>
+					<option value='sim'          > Positivo  </option>
+					<option value='nao'          > Negativo  </option>
+					<option value='ignorado'     > Ignorado  </option>
+					<option value='nao_realizado'> N&atilde;o Realizado  </option>
+				</select>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<div class='submit'><input value="Enviar Formulário" class='inputButton'  type="submit"></div>
+		</fieldset>
+	</form>
+	</div><!-- /maincontent-->
+</div><!-- content-->
+</div><!-- /mainFrame-->
+
+<div id="layer1">
+	<div id="layer1_handle">
+	<span id="close">[ x ]</span>
+		Ajuda
+	</div>
+	<div id='layer1_content' class='tipbox'>
+		<table>
+			<tr> <td> R  </td><td> Rifampicina   </td> </tr>
+			<tr> <td> H  </td><td> Isoniazida    </td> </tr>
+			<tr> <td> E  </td><td> Etambutol     </td> </tr>
+			<tr> <td> S  </td><td> Estreptomicina</td> </tr>
+			<tr> <td> Z  </td><td> Pirazinamida  </td> </tr>
+			<tr> <td> Et </td><td> Etionamida   </td> </tr>
+			<tr> <td> O  </td><td> Ofloxacino    </td> </tr>
+			<tr> <td> L  </td><td> Levofloxacina </td> </tr>
+			<tr> <td> T  </td><td> Terizidona    </td> </tr>
+			<tr> <td> M  </td><td> Moxifloxacino </td> </tr>
+		<table>
+	</div>
+</div>
+</body>
+</html>
