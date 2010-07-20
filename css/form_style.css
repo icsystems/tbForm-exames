@@ -155,7 +155,6 @@ form div textarea{
 	margin: 0 0 0 180px;
 }
 
-
 form div select.selectOne, form div select.selectMultiple {
 	width: 211px;
 	padding: 1px 3px;
@@ -175,6 +174,11 @@ form div.divButton {
 	width: 100%;
 }
 
+div.add-field{
+	width: 200;
+	padding-top:10px;
+	padding-left:220px;
+}
 
 form div.reset {
 	display: inline;
@@ -207,7 +211,6 @@ table.datatable {
 	color:#333333;
 	font-family:arial;
 	font-size:10pt;
-	width:85%;
 }
 
 table.datatable tbody td{
@@ -269,7 +272,17 @@ table.datatable tbody tr.even td.description {
 	padding           :   5px;
 }
 
+table.cepa {
+	width:85%
+}
+table.soro, table.sangue {
+	padding-left: 220px;
+	empty-cells : show;
+}
 
+table.soro th, table.sangue th{
+	width: 130px;
+}
 fieldset.fs_sensibilidade {
 	border-width  : 0px;
 	margin        : 0px;

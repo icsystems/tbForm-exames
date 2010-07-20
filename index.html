@@ -9,7 +9,9 @@
 	<script src='./js/jquery-ui.js'       type='text/javascript'></script>
 	<script src='./js/jquery.form.js'     type='text/javascript'></script>
 	<script src='./js/jquery.validate.js' type='text/javascript'></script>
+	<script src='./js/jquery.appendText.js' type='text/javascript'></script>
 	<script src='./js/messages_ptbr.js'   type='text/javascript'></script>
+	<script src='./js/CepaRow.js'         type='text/javascript'></script>
 	<script src='./js/actions.js'         type='text/javascript'></script>
 </head>
 <body>
@@ -40,35 +42,29 @@
 		</fieldset>
 		<fieldset id='soro'>
 			<legend>Soro</legend>
-			<div id='divSoroColetado' class='primary required'>
-				<label for='soroColetado'>Soro Coletado:</label>
-				<select name='soroColetado' id='soroColetado' class='selectOne'>
-					<option value='' > ------ </option>
-					<option value='sim'> Sim  </option>
-					<option value='nao'> N&atilde;o  </option>
-					<option value='ignorado'> Ignorado  </option>
-				</select>
-			</div>
-			<div id='divNSoro' class='secondary'>
-				<label for='nSoro'> Número do Soro:</label>
-				<input  name="nSoro" id="nSoro" type="text" />
-			</div>
+			<table class='datatable soro'>
+			<thead>
+				<tr>
+					<th></th>
+					<th> Soro Coletado </th>
+					<th> Número do Soro</th>
+				</tr>
+			</thead>
+			</table>
+			<div class='add-field'><input value="Adicionar Linha" class='inputButton' id='addSoro_button' type="button"></div>
 		</fieldset>
 		<fieldset id='sangue'>
 			<legend>Sangue</legend>
-			<div id='divSangueColetado' class='primary required'>
-				<label for='sangueColetado'>Sangue Coletado:</label>
-				<select name='sangueColetado' id='sangueColetado' class='selectOne required'>
-					<option value='' > ------ </option>
-					<option value='sim'> Sim  </option>
-					<option value='nao'> N&atilde;o  </option>
-					<option value='ignorado'> Ignorado  </option>
-				</select>
-			</div>
-			<div id='divNSangue' class='secondary'>
-				<label for='nSangue'> Número do Sangue:</label>
-				<input  name="nSangue" id="nSangue" type="text" />
-			</div>
+			<table class='datatable sangue'>
+			<thead>
+				<tr>
+					<th></th>
+					<th> Sangue Coletado </th>
+					<th> Número do Sangue</th>
+				</tr>
+			</thead>
+			</table>
+			<div class='add-field'><input value="Adicionar Linha" class='inputButton' id='addSangue_button' type="button"></div>
 		</fieldset>
 		<fieldset>
 			<legend>Prova Tuberculínica (PT)</legend>
@@ -87,6 +83,29 @@
 			<div id='divPt' class='primary required'>
 				<label for='pt'> Responsável pela leitura:</label>
 				<input  name="pt" id="pt" type="text" />
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend> IGRA </legend>
+			<div id='divIGRA' class='primary required'>
+				<label for='IGRA'>IGRA:</label>
+				<select name='IGRA' id='IGRA' class='selectOne required'>
+					<option value=''             > ------    </option>
+					<option value='sim'          > Sim       </option>
+					<option value='nao'          > Não  </option>
+				</select>
+			</div>
+			<div id='divIGRAMetodo' class='secondary'>
+				<label for='IGRAMetodo'>PCR:</label>
+				<select name='IGRAMetodo' id='IGRAMetodo' class='selectOne'>
+					<option value=''          > ------      </option>
+					<option value='qualiferon'> Qualiferon   </option>
+					<option value='t-spot' > T-Spot   </option>
+					<option id='outros_options_IGRA' > Outros Métodos  </option>
+				</select>
+			</div>
+			<div id='divIGRA' class='secondary'>
+				<input type="text" name="outrosIGRA" id="outrosIGRA" class='inputText'/>
 			</div>
 		</fieldset>
 		<fieldset id='fsSIDA'>
@@ -183,14 +202,12 @@
 		</fieldset>
 		<fieldset>
 			<legend>Número de Amostras (Laboratório Micobacteria)</legend>
-			<table class='datatable'>
+			<table class='datatable cepa'>
 			<thead>
 				<tr>
-					<th > Número              </th>
-					<th > Data de entrada     </th>
 					<th > Nome do Laboratório </th>
-					<th > Material            </th>
-					<th > Baciloscopia        </th>
+					<th colspan='2'> Baciloscopia        </th>
+					<th colspan='2'> Material            </th>
 					<th colspan='2'> Cultura       </th>
 					<th colspan='2'> Sensibilidade  <img id='helpicon' src='images/help.png' width='15' /></th>
 				</tr>
@@ -200,28 +217,53 @@
 		</fieldset>
 		<fieldset>
 			<legend> PCR </legend>
-			<div id='divPCR' class='primary'>
+			<div id='divPCR' class='primary required'>
 				<label for='pcr'>PCR:</label>
-				<select name='pcr' id='pcr' class='selectOne'>
+				<select name='pcr' id='pcr' class='selectOne required'>
 					<option value=''             > ------    </option>
 					<option value='sim'          > Sim       </option>
 					<option value='nao'          > Não  </option>
 				</select>
 			</div>
-			<div id='divPCRResultado' class='secondary'>
-				<label for='pcrResultado'>PCR:</label>
-				<select name='pcrResultado' id='pcrResultado' class='selectOne'>
+			<div id='divPCRMetodo' class='secondary'>
+				<label for='pcrMetodo'>PCR:</label>
+				<select name='pcrMetodo' id='pcrMetodo' class='selectOne'>
 					<option value=''          > ------      </option>
 					<option value='roche'     > Roche       </option>
 					<option value='gen_probe' > Gen Probe   </option>
 					<option value='biometrix' > Biometrix   </option>
 					<option value='genexpert' > Genexpert   </option>
 					<option value='detectTb'  > Detect TB   </option>
-					<option id='outros_options_pcr'   > Outros PCR  </option>
+					<option id='outros_options_pcr'   > Outros  </option>
 				</select>
 			</div>
 			<div id='divOutrosPCR' class='secondary'>
 				<input type="text" name="outrosPCR" id="outrosPCR" class='inputText'/>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend> Deteção de TB Resistente </legend>
+			<div id='divTbResistente' class='primary required'>
+				<label for='tbResistente'>Deteção de TB Resistente:</label>
+				<select name='pcr' id='pcr' class='selectOne required'>
+					<option value=''             > ------    </option>
+					<option value='sim'          > Sim       </option>
+					<option value='nao'          > Não  </option>
+				</select>
+			</div>
+			<div id='divTbResistenteMetodo' class='secondary'>
+				<label for='tbResistenteMetodo'>PCR:</label>
+				<select name='tbResistenteMetodo' id='tbResistenteMetodo' class='selectOne'>
+					<option value=''          > ------      </option>
+					<option value='fita_hain'     > Fita Hain   </option>
+					<option value='genexpert' > Genexpert   </option>
+					<option value='mgit960' > MGIT960     </option>
+					<option value='rema' > REMA     </option>
+					<option id='outros_options_tbResistente'   > Outros Métodos  </option>
+				</select>
+			</div>
+			<div id='divTbResistentePCR' class='secondary'>
+				<input type="text" name="outrosTbResistente" id="outrosTbResistente" class='inputText'/>
 			</div>
 		</fieldset>
 		<fieldset>

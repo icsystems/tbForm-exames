@@ -5,7 +5,6 @@
  * Date:   March 15th, 2010
  */
 
-
 if(typeof(String.prototype.trim) === "undefined")
 {
 	String.prototype.trim = function()
@@ -20,491 +19,6 @@ not_tested[0]  = ['R', 'H','E', 'S', 'Z', 'Et', 'O', 'L', 'T', 'M'].sort();
 
 var sensivel  = new Array();
 var resistent = new Array();
-
-(function($) {
-/* jQuery object extension methods */
-	$.fn.extend({
-		appendText: function(e) {
-			if ( typeof e == "string" )
-				return this.append( document.createTextNode( e ) );
-			return this;
-		}
-	});
-})(jQuery);
-
-
-function CEPARow(numCepa){
-	if(numCepa % 2 == 0) var cRow = 'even';
-	else var cRow = 'odd';
-	var content = ($('<tr>')
-		.addClass(cRow)
-		.append($('<td/>')
-			.append($('<input/>')
-				.attr('name', 'numero_cepa_' + numCepa)
-				.attr(  'id', 'numero_cepa_' + numCepa)
-				.attr('size', '4')
-			)
-			.attr('rowspan', '4')
-		)
-		.append($('<td />')
-			.append($('<input/>')
-				.attr('name', 'data_cepa_' + numCepa)
-				.attr(  'id', 'data_cepa_' + numCepa)
-				.addClass('data_cepa')
-				.attr('size', '11')
-				.attr('readonly', 'readonly')
-			)
-			.attr('rowspan', '4')
-		)
-		.append($('<td />')
-			.append($('<select /> ')
-				.attr('name', 'origem_cepa_' + numCepa)
-				.attr(  'id', 'origem_cepa_' + numCepa)
-				.addClass('origem_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> HU </option>')
-					.attr('value', 'hu')
-				)
-				.append($('<option> PAAP </option>')
-					.attr('value', 'paap')
-				)
-				.append($('<option> FIOCRUZ </option>')
-					.attr('value', 'fiocruz')
-				)
-			)
-			.attr('rowspan', '4')
-		)
-		.append($('<td />')
-			.append($('<select /> ')
-				.attr('name', 'material_cepa_' + numCepa)
-				.attr(  'id', 'material_cepa_' + numCepa)
-				.addClass('material_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> Espontâneo </option>')
-					.attr('value', 'escarro_espontaneo')
-				)
-				.append($('<option> Induzido </option>')
-					.attr('value', 'escarro_induzido')
-				)
-				.append($('<option> LBA </option>')
-					.attr('value', 'lba')
-				)
-			)
-			.attr('rowspan', '4')
-		)
-		.append($('<td />')
-			.append($('<select /> ')
-				.attr('name', 'baciloscopia_material_cepa_' + numCepa)
-				.attr(  'id', 'baciloscopia_material_cepa_' + numCepa)
-				.addClass('baciloscopia_material_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> + </option>')
-					.attr('value', '+')
-				)
-				.append($('<option> ++ </option>')
-					.attr('value', '++')
-				)
-				.append($('<option> +++ </option>')
-					.attr('value', '+++')
-				)
-				.append($('<option> Negativo </option>')
-					.attr('value', 'negativo')
-				)
-				.append($('<option> Ignorado </option>')
-					.attr('value', 'ignorado')
-				)
-			)
-			.attr('rowspan', '4')
-		)
-		.append($('<td />')
-			.append('Método')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<select /> ')
-				.css(  'width', '220px')
-				.attr('name', 'metodo_cultura_cepa_' + numCepa)
-				.attr(  'id', 'metodo_cultura_cepa_' + numCepa)
-				.addClass('metodo_cultura_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> LJ </option>')
-					.attr('value', 'lj')
-				)
-				.append($('<option> MGIT </option>')
-					.attr('value', 'mgit')
-				)
-				.append($('<option> Ogawa </option>')
-					.attr('value', 'ogawa')
-				)
-			)
-		)
-		.append($('<td />')
-			.append('Sensibilidade')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<fieldset />')
-				.addClass('fs_sensibilidade')
-				.attr('id', 'sensibilidade_' + numCepa )
-				.append($('<table />')
-					.addClass('table_sensibilidade')
-					.append($('<tr />')
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_R' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'R' )
-									.attr('id', 'sensibilidade_' + numCepa + '_R' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' R')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_H' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'H' )
-									.attr('id', 'sensibilidade_' + numCepa + '_H' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' H')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_E' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'E' )
-									.attr('id', 'sensibilidade_' + numCepa + '_E' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' E')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_S' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'S' )
-									.attr('id', 'sensibilidade_' + numCepa + '_S' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' S')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_Z' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'Z' )
-									.attr('id', 'sensibilidade_' + numCepa + '_Z' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' Z')
-							)
-						)
-					)
-					.append($('<tr />')
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_Et' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'Et' )
-									.attr('id', 'sensibilidade_' + numCepa + '_Et' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' Et')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_O' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'O' )
-									.attr('id', 'sensibilidade_' + numCepa + '_O' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' O')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_L' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'L' )
-									.attr('id', 'sensibilidade_' + numCepa + '_L' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' L')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_T' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'T' )
-									.attr('id', 'sensibilidade_' + numCepa + '_T' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' T')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'sensibilidade_' + numCepa + '_M' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'M' )
-									.attr('id', 'sensibilidade_' + numCepa + '_M' )
-									.addClass('input_sensibilidade')
-								)
-								.append(' M')
-							)
-						)
-					)
-				)
-			)
-		)
-	);
-	content = $.merge($.merge([], content), $('<tr />')
-		.addClass(cRow)
-		.append($('<td />')
-			.append('Resultado')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<select /> ')
-				.css(  'width', '220px')
-				.attr('name', 'resultado_cultura_cepa_' + numCepa)
-				.attr(  'id', 'resultado_cultura_cepa_' + numCepa)
-				.addClass('resultado_cultura_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> + </option>')
-					.attr('value', '+')
-				)
-				.append($('<option> ++ </option>')
-					.attr('value', '++')
-				)
-				.append($('<option> +++ </option>')
-					.attr('value', '+++')
-				)
-				.append($('<option> Negativo </option>')
-					.attr('value', 'negativo')
-				)
-				.append($('<option> Ignorado </option>')
-					.attr('value', 'ignorado')
-				)
-			)
-		)
-		.append($('<td />')
-			.append('Resistência')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<fieldset />')
-				.addClass('fs_resistente')
-				.attr('id', 'resistente_' + numCepa )
-				.append($('<table />')
-					.addClass('table_resistente')
-					.append($('<tr />')
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_R' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'R' )
-									.attr('id', 'resistente_' + numCepa + '_R' )
-									.addClass('input_resistente')
-								)
-								.append(' R')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_H' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'H' )
-									.attr('id', 'resistente_' + numCepa + '_H' )
-									.addClass('input_resistente')
-								)
-								.append(' H')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_E' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'E' )
-									.attr('id', 'resistente_' + numCepa + '_E' )
-									.addClass('input_resistente')
-								)
-								.append(' E')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_S' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'S' )
-									.attr('id', 'resistente_' + numCepa + '_S' )
-									.addClass('input_resistente')
-								)
-								.append(' S')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_Z' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'Z' )
-									.attr('id', 'resistente_' + numCepa + '_Z' )
-									.addClass('input_resistente')
-								)
-								.append(' Z')
-							)
-						)
-					)
-					.append($('<tr />')
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_Et' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'Et' )
-									.attr('id', 'resistente_' + numCepa + '_Et' )
-									.addClass('input_resistente')
-								)
-								.append(' Et')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_O' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'O' )
-									.attr('id', 'resistente_' + numCepa + '_O' )
-									.addClass('input_resistente')
-								)
-								.append(' O')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_L' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'L' )
-									.attr('id', 'resistente_' + numCepa + '_L' )
-									.addClass('input_resistente')
-								)
-								.append(' L')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_T' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'T' )
-									.attr('id', 'resistente_' + numCepa + '_T' )
-									.addClass('input_resistente')
-								)
-								.append(' T')
-							)
-						)
-						.append($('<td />')
-							.append($('<label />')
-								.attr('for', 'resistente_' + numCepa + '_M' )
-								.append($('<input />')
-									.attr('type', 'checkbox')
-									.val( 'M' )
-									.attr('id', 'resistente_' + numCepa + '_M' )
-									.addClass('input_resistente')
-								)
-								.append(' M')
-							)
-						)
-					)
-				)
-			)
-		)
-	);
-	content = $.merge($.merge([], content) , $('<tr />')
-		.addClass(cRow)
-		.append($('<td />')
-			.append('Número de Dias')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<input/>')
-				.attr('name', 'dias_cultura_cepa_' + numCepa)
-				.attr(  'id', 'dias_cultura_cepa_' + numCepa)
-				.attr(  'size', 2)
-				.addClass('dias_cultura_cepa')
-				.addClass('number')
-			)
-		)
-		.append($('<td />')
-			.append('Não Testado ')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.attr('id', 'nao_testado_'+ numCepa)
-		)
-	);
-	content = $.merge($.merge([], content) , $('<tr />')
-		.addClass(cRow)
-		.append($('<td />')
-			.append('Identificação')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<select /> ')
-				.css(  'width', '220px')
-				.attr('name', 'identificacao_cultura_cepa_' + numCepa)
-				.attr(  'id', 'identificacao_cultura_cepa_' + numCepa)
-				.addClass('identificacao_cultura_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> Micobacterium Tuberculosis (MTB)</option>')
-					.attr('value', 'mtb')
-				)
-				.append($('<option> Micobacterium N&atilde;o Tuberculosis (MNT)</option>')
-					.attr('value', 'mnt')
-				)
-				.append($('<option> N&atilde;o se aplica </option>')
-					.attr('value', 'nao_se_aplica')
-				)
-				.append($('<option> Ignorado </option>')
-					.attr('value', 'ignorado')
-				)
-			)
-		)
-		.append($('<td />')
-			.attr('colspan', 2)
-		)
-	);
-	content = ($('<tbody cepanum="'+numCepa+'">').append(content))
-	$.each(not_tested, function(i,val){
-		var el = 'nao_testado_' + numCepa;
-		$(el).append(val + ', ');
-	});
-	return content;
-}
 
 //Document is ready, let's play
 $(document).ready(function(){
@@ -777,12 +291,11 @@ $(document).ready(function(){
 			}
 		}
 	});
-
 	$('div.secondary').css('display', 'none');
 	//\Toggle Options
 	var cepaNum = 1;
 	var content = CEPARow(cepaNum);
-	$('table.datatable').append(content);
+	$('table.cepa').append(content);
 	not_tested[cepaNum] = new Array();
 	not_tested[cepaNum] = not_tested[0];
 	$('#nao_testado_'+cepaNum).html(not_tested[cepaNum].toString());
@@ -790,7 +303,7 @@ $(document).ready(function(){
 	$("#addline_button").click(function(){
 		cepaNum++;
 		var content = CEPARow(cepaNum);
-		$('table.datatable').append(CEPARow(cepaNum));
+		$('table.cepa').append(CEPARow(cepaNum));
 		not_tested[cepaNum] = new Array();
 		not_tested[cepaNum] = not_tested[0];
 		$('#nao_testado_'+cepaNum).html(not_tested[cepaNum].toString());
@@ -850,6 +363,57 @@ $(document).ready(function(){
 		}
 	});
 
+	//Soro
+	var soroNum = 1;
+	var content = soroRow(soroNum);
+	$('table.soro').append(content);
+	// add row button
+	$("#addSoro_button").click(function(){
+		if($('#soroColetado_'+soroNum).val() == 'sim'){
+			soroNum++;
+			var content = soroRow(soroNum);
+			$('table.soro').append(content);
+		}
+	});
+	$('select.soro').live('change', function(){
+		params = $(this).attr('id').split('_');
+		numSoro = params[1];
+		if($(this).val() == 'sim'){
+			$('#numeroSoro_'+ numSoro).removeAttr('disabled');
+			$('#numeroSoro_'+ numSoro).addClass('required');
+		} else {
+			$('#numeroSoro_'+ numSoro).attr('disabled', 'disabled');
+			$('#numeroSoro_'+ numSoro).val('');
+			$('#numeroSoro_'+ numSoro).removeClass('required');
+			$('#numeroSoro_'+ numSoro).valid();
+		}
+	});
+	//Sangue
+	var sangueNum = 1;
+	var content = sangueRow(sangueNum);
+	$('table.sangue').append(content);
+	// add row button
+	$("#addSangue_button").click(function(){
+		if($('#sangueColetado_'+sangueNum).val() == 'sim'){
+			sangueNum++;
+			var content = sangueRow(sangueNum);
+			$('table.sangue').append(content);
+		}
+	});
+	$('select.sangue').live('change', function(){
+		params = $(this).attr('id').split('_');
+		numSangue = params[1];
+		if($(this).val() == 'sim'){
+			$('#numeroSangue_'+ numSangue).removeAttr('disabled');
+			$('#numeroSangue_'+ numSangue).addClass('required');
+		} else {
+			$('#numeroSangue_'+ numSangue).attr('disabled', 'disabled');
+			$('#numeroSangue_'+ numSangue).val('');
+			$('#numeroSangue_'+ numSangue).removeClass('required');
+			$('#numeroSangue_'+ numSangue).valid();
+		}
+	});
+
 	//Display help tipbox
 	$('#helpicon').css('cursor', 'pointer');
 	$('#helpicon').css('*cursor', 'hand');
@@ -901,7 +465,6 @@ $(document).ready(function(){
 			$('#outrosExames3').attr('disabled', 'disabled');
 	});
 
-
 	$('#form_exams').validate({
 		rules: {
 			soroColetado: {
@@ -937,5 +500,4 @@ $(document).ready(function(){
 			}
 		}
 	});
-
 });
