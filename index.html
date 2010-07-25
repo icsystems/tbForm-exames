@@ -9,6 +9,7 @@
 	<script src='./js/jquery-ui.js'       type='text/javascript'></script>
 	<script src='./js/jquery.form.js'     type='text/javascript'></script>
 	<script src='./js/jquery.validate.js' type='text/javascript'></script>
+	<script src='./js/jquery.readonly.js' type='text/javascript'></script>
 	<script src='./js/jquery.appendText.js' type='text/javascript'></script>
 	<script src='./js/messages_ptbr.js'   type='text/javascript'></script>
 	<script src='./js/CepaRow.js'         type='text/javascript'></script>
@@ -96,7 +97,7 @@
 				</select>
 			</div>
 			<div id='divIGRAMetodo' class='secondary'>
-				<label for='IGRAMetodo'>PCR:</label>
+				<label for='IGRAMetodo'>Método:</label>
 				<select name='IGRAMetodo' id='IGRAMetodo' class='selectOne'>
 					<option value=''          > ------      </option>
 					<option value='qualiferon'> Qualiferon   </option>
@@ -104,7 +105,7 @@
 					<option id='outros_options_IGRA' > Outros Métodos  </option>
 				</select>
 			</div>
-			<div id='divIGRA' class='secondary'>
+			<div id='divIGRAOutros' class='secondary'>
 				<input type="text" name="outrosIGRA" id="outrosIGRA" class='inputText'/>
 			</div>
 		</fieldset>
@@ -143,7 +144,7 @@
 				</select>
 			</div>
 			<div id='divCativacao' class='secondary'>
-				<label for='cativacao'> Cativaç&atilde;o:</label>
+				<label for='cativacao'> Cavitaç&atilde;o:</label>
 				<select name='cativacao' id='cativacao' class='selectOne'>
 					<option value=''        > ------      </option>
 					<option value='sim'     > Sim         </option>
@@ -199,6 +200,15 @@
 		</fieldset>
 		<fieldset>
 			<legend>RX de Toráx (entre 60 e 90 dias no estudo)</legend>
+			<div id='divAvaliacaoPos90dias' class='primary required'>
+				<label> Avaliação: </label>
+				<select name='avaliacaoPos90dias' class='selectOne required'>
+					<option>  ----  </option>
+					<option value='piora'>Piora</option>
+					<option value='melhora'>Melhora</option>
+					<option value='Inalterado'>Inalterado</option>
+				</select>
+			</div>
 		</fieldset>
 		<fieldset>
 			<legend>Número de Amostras (Laboratório Micobacteria)</legend>
@@ -226,7 +236,7 @@
 				</select>
 			</div>
 			<div id='divPCRMetodo' class='secondary'>
-				<label for='pcrMetodo'>PCR:</label>
+				<label for='pcrMetodo'>Método:</label>
 				<select name='pcrMetodo' id='pcrMetodo' class='selectOne'>
 					<option value=''          > ------      </option>
 					<option value='roche'     > Roche       </option>
@@ -244,15 +254,15 @@
 		<fieldset>
 			<legend> Deteção de TB Resistente </legend>
 			<div id='divTbResistente' class='primary required'>
-				<label for='tbResistente'>Deteção de TB Resistente:</label>
-				<select name='pcr' id='pcr' class='selectOne required'>
+				<label for='detecao_tb_resistente'>Deteção de TB Resistente:</label>
+				<select name='detecao_tb_resistente' id='detecao_tb_resistente' class='selectOne required'>
 					<option value=''             > ------    </option>
 					<option value='sim'          > Sim       </option>
 					<option value='nao'          > Não  </option>
 				</select>
 			</div>
 			<div id='divTbResistenteMetodo' class='secondary'>
-				<label for='tbResistenteMetodo'>PCR:</label>
+				<label for='tbResistenteMetodo'> Método:</label>
 				<select name='tbResistenteMetodo' id='tbResistenteMetodo' class='selectOne'>
 					<option value=''          > ------      </option>
 					<option value='fita_hain'     > Fita Hain   </option>
