@@ -435,17 +435,44 @@ $(document).ready(function(){
 
 	$('select.origem_cepa').live('change', function(){
 		var origemStr = $(this).val();
+		var l = ['R','H','E','S','Et','O','L','T','M','Z'];
 		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
 			$('#baciloscopia_metodo_' + num).removeAttr('disabled');
 		} else {
 			$('#baciloscopia_metodo_' + num).attr('disabled', true);
 			$('#baciloscopia_metodo_' + num).val('----');
+			$('#baciloscopia_material_cepa_' + num).attr('disabled', true);
+			$('#baciloscopia_material_cepa_' + num).val('----');
+			$('#baciloscopia_data_' + num).attr('disabled', true);
+			$('#baciloscopia_data_' + num).val('');
+			$('#numero_cepa_' + num).attr('disabled', true);
+			$('#numero_cepa_' + num).val('');
+			$('#data_cepa_' + num).attr('disabled', true);
+			$('#data_cepa_' + num).val('');
+			$('#material_cepa_' + num).attr('disabled', true);
+			$('#material_cepa_' + num).val('');
+			$('#metodo_cultura_cepa_' + num).attr('disabled', true);
+			$('#metodo_cultura_cepa_' + num).val('');
+			$('#resultado_cultura_cepa_' + num).attr('disabled', true);
+			$('#resultado_cultura_cepa_' + num).val('');
+			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
+			$('#dias_cultura_cepa_' + num).val('');
+			$('#dias_cultura_cepa_' + num).attr('disabled', true);
+			for(var i= 0; i<l.length; i++){
+				$('#sensibilidade_'+num+'_'+l[i]).attr('disabled', true);
+				$('#sensibilidade_'+num+'_'+l[i]).attr('checked', false);
+				$('#resistente_'   +num+'_'+l[i]).attr('disabled', true);
+				$('#resistente_'   +num+'_'+l[i]).attr('checked', false);
+				$('#sensibilidade_'+num+'_'+l[i]).parent().addClass('disabledField');
+				$('#resistente_'+num+'_'+l[i]).parent().addClass('disabledField');
+			}
 		}
 	});
 
 	$('select.baciloscopia_metodo').live('change',  function(){
 		var origemStr = $(this).val();
+		var l = ['R','H','E','S','Et','O','L','T','M','Z'];
 		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
 			$('#baciloscopia_data_' + num).removeAttr('disabled');
@@ -455,25 +482,69 @@ $(document).ready(function(){
 			$('#baciloscopia_data_' + num).val('');
 			$('#baciloscopia_material_cepa_' + num).attr('disabled', true);
 			$('#baciloscopia_material_cepa_' + num).val('----');
-		}
-	});
-	$('select.baciloscopia_material_cepa').live('change',  function(){
-		var origemStr = $(this).val();
-		num = parseInt($(this).attr('id').split('_')[3]);
-		console.log(origemStr);
-		if(origemStr.replace(/-/g,'')){
-			console.log('AKI-> ' +origemStr.replace(/-/g,''));
-			$('#numero_cepa_' + num).removeAttr('disabled');
-			$('#data_cepa_' + num).removeAttr('disabled');
-			$('#material_cepa_' + num).removeAttr('disabled');
-		} else {
-			console.log(origemStr.replace(/-/g,''));
 			$('#numero_cepa_' + num).attr('disabled', true);
-			$('#numero_cepa_' + num).val('----');
+			$('#numero_cepa_' + num).val('');
 			$('#data_cepa_' + num).attr('disabled', true);
 			$('#data_cepa_' + num).val('');
 			$('#material_cepa_' + num).attr('disabled', true);
 			$('#material_cepa_' + num).val('');
+			$('#metodo_cultura_cepa_' + num).attr('disabled', true);
+			$('#metodo_cultura_cepa_' + num).val('');
+			$('#resultado_cultura_cepa_' + num).attr('disabled', true);
+			$('#resultado_cultura_cepa_' + num).val('');
+			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
+			$('#dias_cultura_cepa_' + num).val('');
+			$('#dias_cultura_cepa_' + num).attr('disabled', true);
+			for(var i= 0; i<l.length; i++){
+				$('#sensibilidade_'+num+'_'+l[i]).attr('disabled', true);
+				$('#sensibilidade_'+num+'_'+l[i]).attr('checked', false);
+				$('#resistente_'   +num+'_'+l[i]).attr('disabled', true);
+				$('#resistente_'   +num+'_'+l[i]).attr('checked', false);
+				$('#sensibilidade_'+num+'_'+l[i]).parent().addClass('disabledField');
+				$('#resistente_'+num+'_'+l[i]).parent().addClass('disabledField');
+			}
+		}
+	});
+	$('select.baciloscopia_material_cepa').live('change',  function(){
+		var origemStr = $(this).val();
+		var l = ['R','H','E','S','Et','O','L','T','M','Z'];
+		num = parseInt($(this).attr('id').split('_')[3]);
+		if(origemStr.replace(/-/g,'')){
+			$('#numero_cepa_' + num).removeAttr('disabled');
+			$('#data_cepa_' + num).removeAttr('disabled');
+			$('#material_cepa_' + num).removeAttr('disabled');
+			$('#metodo_cultura_cepa_' + num).removeAttr('disabled');
+			$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
+			$('#dias_cultura_cepa_' + num).removeAttr('disabled');
+			$('#identificacao_cultura_cepa_' + num).removeAttr('disabled');
+			for(var i= 0; i<l.length; i++){
+				$('#sensibilidade_'+num+'_'+l[i]).removeAttr('disabled');
+				$('#resistente_'+num+'_'+l[i]).removeAttr('disabled');
+				$('#sensibilidade_'+num+'_'+l[i]).parent().removeClass('disabledField');
+				$('#resistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
+			}
+		} else {
+			$('#numero_cepa_' + num).attr('disabled', true);
+			$('#numero_cepa_' + num).val('');
+			$('#data_cepa_' + num).attr('disabled', true);
+			$('#data_cepa_' + num).val('');
+			$('#material_cepa_' + num).attr('disabled', true);
+			$('#material_cepa_' + num).val('');
+			$('#metodo_cultura_cepa_' + num).attr('disabled', true);
+			$('#metodo_cultura_cepa_' + num).val('');
+			$('#resultado_cultura_cepa_' + num).attr('disabled', true);
+			$('#resultado_cultura_cepa_' + num).val('');
+			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
+			$('#dias_cultura_cepa_' + num).val('');
+			$('#dias_cultura_cepa_' + num).attr('disabled', true);
+			for(var i= 0; i<l.length; i++){
+				$('#sensibilidade_'+num+'_'+l[i]).attr('disabled', true);
+				$('#sensibilidade_'+num+'_'+l[i]).attr('checked', false);
+				$('#resistente_'   +num+'_'+l[i]).attr('disabled', true);
+				$('#resistente_'   +num+'_'+l[i]).attr('checked', false);
+				$('#sensibilidade_'+num+'_'+l[i]).parent().addClass('disabledField');
+				$('#resistente_'+num+'_'+l[i]).parent().addClass('disabledField');
+			}
 		}
 	});
 
