@@ -285,130 +285,43 @@ $(document).ready(function(){
 			}
 		}
 	});
-	//Probabilidade de TBativa
-	$('#probabilidadeTBAtiva').change(function(){
-		var alta = new Array();
-		alta[0] = '#divCativacao';
-		alta[1] = '#divPadraoTipico';
-		alta[2] = '#divCompativel';
-		alta[3] = '#divAtipico';
+	$('#data_rx').datepicker({
+		dateFormat: 'dd/mm/yy',
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true,
+		maxDate : '+0y',
+		minDate : '-130y',
+		yearRange : '-130:+130',
+		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+	});
+
+	$('#padrao').change(function(){
 		var baixa = new Array();
 		baixa[0] = '#divcasoBaixaProbabilidade';
-		// Se alta ou media, disponibilizar colunas listadas a cima
-		if($(this).val()=='alta' || $(this).val() == 'media'){
-			for(div in alta){
-				var elems = $('*', alta[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(alta[div]).css('display') != 'block')
-					$(alta[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
+		//Definindo a probabilidade
+		if ($(this).val() == 'padraoTipico')
+		$('#probabilidadeTBAtivaAposEstudoRX').val('Alta');
+		else if ($(this).val() == 'padraoCompativel')
+		$('#probabilidadeTBAtivaAposEstudoRX').val('Média');
+		else if ($(this).val() == 'padraoAtipico'){
+			$('#probabilidadeTBAtivaAposEstudoRX').val('Baixa');
 			for(div in baixa){
-				var elems = $('*', baixa[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
+			if($(baixa[div]).css('display') != 'block')
+				$(baixa[div]).toggle(function() {
+					$(this).css('background-color', hlcolor);
+					$(this).animate({backgroundColor : "white"}, 4000);
 				});
-				if($(baixa[div]).css('display') != 'none')
-					$(baixa[div]).toggle();
 			}
 		}
-		// Se baixa, ocultar colunas listadas a cima
-		if($(this).val()=='baixa'){
-			for(div in alta){
-				if($(alta[div]).css('display') != 'none')
-					$(alta[div]).toggle();
-			}
-			for(div in baixa){
-				var elems = $('*', baixa[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).addClass('required');
-				});
-				if($(baixa[div]).css('display') != 'block')
-					$(baixa[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
+
+	if($(this).val() != 'padraoAtipico')
+		for(div in baixa)
+			if($(baixa[div]).css('display') != 'none')
+				$(baixa[div]).toggle();
 	});
 
-	$('select', '#sensivel_td').change(function(){
-		var text = $('#sensivel_div').html();
-		var v = '';
-		if(text.trim() != '') v= ', ';
-		$('#sensivel_div').html(text + v + $(this).val());
-	});
-
-	//Probabilidade de TBativa
-	$('#probabilidadeTBAtivaAposEstudoRX').change(function(){
-		var alta = new Array();
-		alta[0] = '#divCativacao90dias';
-		alta[1] = '#divPadraoTipico90dias';
-		alta[2] = '#divCompativel90dias';
-		alta[3] = '#divAtipico90dias';
-		var baixa = new Array();
-		baixa[0] = '#divcasoBaixaProbabilidade90dias';
-		// Se alta ou media, disponibilizar colunas listadas a cima
-		if($(this).val()=='alta' || $(this).val() == 'media'){
-			for(div in alta){
-				if($(alta[div]).css('display') != 'block')
-					$(alta[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-			for(div in baixa){
-				var elems = $('*', baixa[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(baixa[div]).css('display') != 'none')
-					$(baixa[div]).toggle();
-			}
-		}
-		// Se baixa, ocultar colunas listadas a cima
-		if($(this).val()=='baixa'){
-			for(div in alta){
-				var elems = $('*', alta[div]);
-				$(elems).each(function(){
-					var element = $(this);
-					if (   element[0].nodeName != 'FIELDSET'
-					    && element[0].nodeName != 'SMALL'
-					    && element[0].nodeName != 'OPTION')
-						$(this).removeClass('required');
-				});
-				if($(alta[div]).css('display') != 'none')
-					$(alta[div]).toggle();
-			}
-			for(div in baixa){
-				if($(baixa[div]).css('display') != 'block')
-					$(baixa[div]).toggle(function() {
-						$(this).css('background-color', hlcolor);
-						$(this).animate({backgroundColor : "white"}, 4000);
-					});
-			}
-		}
-	});
 	$('div.secondary').css('display', 'none');
 	//\Toggle Options
 	var cepaNum = 1;
