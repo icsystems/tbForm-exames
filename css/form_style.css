@@ -272,7 +272,7 @@ table.datatable tbody tr.even td.description {
 	padding           :   5px;
 }
 
-table.cepa {
+table.cepa, table.cepaCultura, table.cepaTBResistente {
 	width:85%
 }
 table.soro, table.sangue {
@@ -316,7 +316,6 @@ label.disabledField {
 {
 	position: absolute;
 	left:650px;
-	top:1550px;
 	width:250px;
 	background-color: #ffd700;
 	border: 1px solid #000;

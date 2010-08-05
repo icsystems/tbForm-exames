@@ -12,10 +12,12 @@ if(typeof(String.prototype.trim) === "undefined")
 		return String(this).replace(/^\s+|\s+$/g, '');
 	};
 }
+var medicines = ['R','H','E','S','Et','O','L','T','M','Z', 'C'];
 
 var not_tested = new Array();
-not_tested[0]  = new Array();
-not_tested[0]  = ['R', 'H','E', 'S', 'Z', 'Et', 'O', 'L', 'T', 'M'].sort();
+not_tested[0]  = medicines.sort();
+var not_tested_tbresistente = new Array();
+not_tested_tbresistente[0]  = medicines.sort();
 
 var sensivel  = new Array();
 var resistent = new Array();
@@ -171,6 +173,7 @@ $(document).ready(function(){
 	$('#pcr').change(function(){
 		var dep = new Array();
 		dep[0] = '#divPCRMetodo';
+		dep[1] = '#divPCRResultado';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){
@@ -411,9 +414,6 @@ $(document).ready(function(){
 	var cepaNum = 1;
 	var content = CEPARow(cepaNum);
 	$('table.cepa').append(content);
-	not_tested[cepaNum] = new Array();
-	not_tested[cepaNum] = not_tested[0];
-	$('#nao_testado_'+cepaNum).html(not_tested[cepaNum].toString());
 	// add row button
 	$("#addline_button").click(function(){
 		var origemStr = $('#origem_cepa_'+ cepaNum).val();
@@ -421,9 +421,6 @@ $(document).ready(function(){
 			cepaNum++;
 			var content = CEPARow(cepaNum);
 			$('table.cepa').append(CEPARow(cepaNum));
-			not_tested[cepaNum] = new Array();
-			not_tested[cepaNum] = not_tested[0];
-			$('#nao_testado_'+cepaNum).html(not_tested[cepaNum].toString());
 			$('input.data_cepa').datepicker({
 				dateFormat: 'dd/mm/yy',
 				monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
@@ -435,7 +432,6 @@ $(document).ready(function(){
 
 	$('select.origem_cepa').live('change', function(){
 		var origemStr = $(this).val();
-		var l = ['R','H','E','S','Et','O','L','T','M','Z'];
 		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
 			$('#baciloscopia_metodo_' + num).removeAttr('disabled');
@@ -452,27 +448,11 @@ $(document).ready(function(){
 			$('#data_cepa_' + num).val('');
 			$('#material_cepa_' + num).attr('disabled', true);
 			$('#material_cepa_' + num).val('');
-			$('#metodo_cultura_cepa_' + num).attr('disabled', true);
-			$('#metodo_cultura_cepa_' + num).val('');
-			$('#resultado_cultura_cepa_' + num).attr('disabled', true);
-			$('#resultado_cultura_cepa_' + num).val('');
-			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
-			$('#dias_cultura_cepa_' + num).val('');
-			$('#dias_cultura_cepa_' + num).attr('disabled', true);
-			for(var i= 0; i<l.length; i++){
-				$('#sensibilidade_'+num+'_'+l[i]).attr('disabled', true);
-				$('#sensibilidade_'+num+'_'+l[i]).attr('checked', false);
-				$('#resistente_'   +num+'_'+l[i]).attr('disabled', true);
-				$('#resistente_'   +num+'_'+l[i]).attr('checked', false);
-				$('#sensibilidade_'+num+'_'+l[i]).parent().addClass('disabledField');
-				$('#resistente_'+num+'_'+l[i]).parent().addClass('disabledField');
-			}
 		}
 	});
 
 	$('select.baciloscopia_metodo').live('change',  function(){
 		var origemStr = $(this).val();
-		var l = ['R','H','E','S','Et','O','L','T','M','Z'];
 		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
 			$('#baciloscopia_data_' + num).removeAttr('disabled');
@@ -488,41 +468,15 @@ $(document).ready(function(){
 			$('#data_cepa_' + num).val('');
 			$('#material_cepa_' + num).attr('disabled', true);
 			$('#material_cepa_' + num).val('');
-			$('#metodo_cultura_cepa_' + num).attr('disabled', true);
-			$('#metodo_cultura_cepa_' + num).val('');
-			$('#resultado_cultura_cepa_' + num).attr('disabled', true);
-			$('#resultado_cultura_cepa_' + num).val('');
-			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
-			$('#dias_cultura_cepa_' + num).val('');
-			$('#dias_cultura_cepa_' + num).attr('disabled', true);
-			for(var i= 0; i<l.length; i++){
-				$('#sensibilidade_'+num+'_'+l[i]).attr('disabled', true);
-				$('#sensibilidade_'+num+'_'+l[i]).attr('checked', false);
-				$('#resistente_'   +num+'_'+l[i]).attr('disabled', true);
-				$('#resistente_'   +num+'_'+l[i]).attr('checked', false);
-				$('#sensibilidade_'+num+'_'+l[i]).parent().addClass('disabledField');
-				$('#resistente_'+num+'_'+l[i]).parent().addClass('disabledField');
-			}
 		}
 	});
 	$('select.baciloscopia_material_cepa').live('change',  function(){
 		var origemStr = $(this).val();
-		var l = ['R','H','E','S','Et','O','L','T','M','Z'];
 		num = parseInt($(this).attr('id').split('_')[3]);
 		if(origemStr.replace(/-/g,'')){
 			$('#numero_cepa_' + num).removeAttr('disabled');
 			$('#data_cepa_' + num).removeAttr('disabled');
 			$('#material_cepa_' + num).removeAttr('disabled');
-			$('#metodo_cultura_cepa_' + num).removeAttr('disabled');
-			$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
-			$('#dias_cultura_cepa_' + num).removeAttr('disabled');
-			$('#identificacao_cultura_cepa_' + num).removeAttr('disabled');
-			for(var i= 0; i<l.length; i++){
-				$('#sensibilidade_'+num+'_'+l[i]).removeAttr('disabled');
-				$('#resistente_'+num+'_'+l[i]).removeAttr('disabled');
-				$('#sensibilidade_'+num+'_'+l[i]).parent().removeClass('disabledField');
-				$('#resistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
-			}
 		} else {
 			$('#numero_cepa_' + num).attr('disabled', true);
 			$('#numero_cepa_' + num).val('');
@@ -530,24 +484,8 @@ $(document).ready(function(){
 			$('#data_cepa_' + num).val('');
 			$('#material_cepa_' + num).attr('disabled', true);
 			$('#material_cepa_' + num).val('');
-			$('#metodo_cultura_cepa_' + num).attr('disabled', true);
-			$('#metodo_cultura_cepa_' + num).val('');
-			$('#resultado_cultura_cepa_' + num).attr('disabled', true);
-			$('#resultado_cultura_cepa_' + num).val('');
-			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
-			$('#dias_cultura_cepa_' + num).val('');
-			$('#dias_cultura_cepa_' + num).attr('disabled', true);
-			for(var i= 0; i<l.length; i++){
-				$('#sensibilidade_'+num+'_'+l[i]).attr('disabled', true);
-				$('#sensibilidade_'+num+'_'+l[i]).attr('checked', false);
-				$('#resistente_'   +num+'_'+l[i]).attr('disabled', true);
-				$('#resistente_'   +num+'_'+l[i]).attr('checked', false);
-				$('#sensibilidade_'+num+'_'+l[i]).parent().addClass('disabledField');
-				$('#resistente_'+num+'_'+l[i]).parent().addClass('disabledField');
-			}
 		}
 	});
-
 	$('input.data_cepa').datepicker({
 		dateFormat: 'dd/mm/yy',
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
@@ -560,49 +498,6 @@ $(document).ready(function(){
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
 		maxDate: '+0d',
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-
-	$('input.input_resistente').live('click', function(){
-		params = $(this).attr('id').split('_');
-		id_sensivel = 'sensibilidade_' + params[1] + '_' + params[2];
-		id_resistente = 'resistente_'  + params[1] + '_' + params[2];
-		numCepa = params[1];
-		if($(this)[0].checked){
-			$('#' + id_sensivel).attr('disabled', true);
-			$('#' + id_sensivel).parent().addClass('disabledField');
-			not_tested[numCepa] = $.grep(not_tested[numCepa], function(value){
-				return value != $('#' + id_resistente).val();
-			});
-			$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
-		} else {
-			$('#' + id_sensivel).removeAttr('disabled');
-			$('#' + id_sensivel).parent().removeClass('disabledField');
-			not_tested[numCepa].push($(this).val());
-			not_tested[numCepa].sort();
-			$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
-		}
-	});
-
-
-	$('input.input_sensibilidade').live('click', function(){
-		params = $(this).attr('id').split('_');
-		id_sensivel = 'sensibilidade_' + params[1] + '_' + params[2];
-		id_resistente = 'resistente_'  + params[1] + '_' + params[2];
-		numCepa = params[1];
-		if($(this)[0].checked){
-			$('#' + id_resistente).attr('disabled', true);
-			$('#' + id_resistente).parent().addClass('disabledField');
-			not_tested[numCepa] = $.grep(not_tested[numCepa], function(value){
-				return value != $('#' + id_sensivel).val();
-			});
-			$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
-		} else {
-			$('#' + id_resistente).removeAttr('disabled');
-			$('#' + id_resistente).parent().removeClass('disabledField');
-			not_tested[numCepa].push($(this).val());
-			not_tested[numCepa].sort();
-			$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
-		}
 	});
 
 	//Soro
@@ -668,7 +563,11 @@ $(document).ready(function(){
 	$('#helpicon').css('cursor', 'pointer');
 	$('#helpicon').css('*cursor', 'hand');
 	$("#layer1").hide();
-	$('#helpicon').click(function(){
+	$('.helpicon').click(function(){
+		if($(this).parent().attr('id').split('_')[2] == 'cultura')
+			$('#layer1').css('top', '1800px');
+		if($(this).parent().attr('id').split('_')[2] == 'tbresistente')
+			$('#layer1').css('top', '2200px');
 		$('#layer1').show();
 	});
 	$('#layer1').draggable();
