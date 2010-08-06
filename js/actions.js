@@ -22,34 +22,39 @@ not_tested_tbresistente[0]  = medicines.sort();
 var sensivel  = new Array();
 var resistent = new Array();
 
+
+
+
 //Document is ready, let's play
 $(document).ready(function(){
+
+	$('.number').live('keypress', function(e){
+		if((e.which > 31 && e.which < 48)||(e.which > 57)){
+			return false;
+		}
+	});
+
+	$('.hour').live('keypress', function(e){
+		if((e.which > 31 && e.which < 48)||(e.which > 57)){
+			return false;
+		}
+	});
+
+	$('.hour').live('keyup', function() {
+		var hourForm = $(this).val();
+		var format = '##:##';
+		var i = hourForm.length;
+		var output = format.substring(0,1);
+		var text   = format.substring(i)
+		if (text.substring(0,1) != output) $(this).val(hourForm + text.substring(0,1))
+		$(this).rules('add', {validHour : true});
+		if (hourForm.length == 4){
+			$(this).valid();
+		}
+	});
+
 	var hlcolor = '#FFF8C6';
-	$('#data_antiHIV').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-	$('#data_aplicacao').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-	$('#data_leitura').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-	$('#data_rx').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-	$('#data_rx_90dias').datepicker({
+	$('.data').datepicker({
 		dateFormat: 'dd/mm/yy',
 		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
 		maxDate: '+0d',
@@ -324,95 +329,6 @@ $(document).ready(function(){
 
 	$('div.secondary').css('display', 'none');
 	//\Toggle Options
-	var cepaNum = 1;
-	var content = CEPARow(cepaNum);
-	$('table.cepa').append(content);
-	// add row button
-	$("#addline_button").click(function(){
-		var origemStr = $('#origem_cepa_'+ cepaNum).val();
-		if(origemStr.replace(/-/g,'')){
-			cepaNum++;
-			var content = CEPARow(cepaNum);
-			$('table.cepa').append(CEPARow(cepaNum));
-			$('input.data_cepa').datepicker({
-				dateFormat: 'dd/mm/yy',
-				monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-				maxDate: '+0d',
-				dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-			});
-		}
-	});
-
-	$('select.origem_cepa').live('change', function(){
-		var origemStr = $(this).val();
-		num = parseInt($(this).attr('id').split('_')[2]);
-		if(origemStr.replace(/-/g,'')){
-			$('#baciloscopia_metodo_' + num).removeAttr('disabled');
-		} else {
-			$('#baciloscopia_metodo_' + num).attr('disabled', true);
-			$('#baciloscopia_metodo_' + num).val('----');
-			$('#baciloscopia_material_cepa_' + num).attr('disabled', true);
-			$('#baciloscopia_material_cepa_' + num).val('----');
-			$('#baciloscopia_data_' + num).attr('disabled', true);
-			$('#baciloscopia_data_' + num).val('');
-			$('#numero_cepa_' + num).attr('disabled', true);
-			$('#numero_cepa_' + num).val('');
-			$('#data_cepa_' + num).attr('disabled', true);
-			$('#data_cepa_' + num).val('');
-			$('#material_cepa_' + num).attr('disabled', true);
-			$('#material_cepa_' + num).val('');
-		}
-	});
-
-	$('select.baciloscopia_metodo').live('change',  function(){
-		var origemStr = $(this).val();
-		num = parseInt($(this).attr('id').split('_')[2]);
-		if(origemStr.replace(/-/g,'')){
-			$('#baciloscopia_data_' + num).removeAttr('disabled');
-			$('#baciloscopia_material_cepa_' + num).removeAttr('disabled');
-		} else {
-			$('#baciloscopia_data_' + num).attr('disabled', true);
-			$('#baciloscopia_data_' + num).val('');
-			$('#baciloscopia_material_cepa_' + num).attr('disabled', true);
-			$('#baciloscopia_material_cepa_' + num).val('----');
-			$('#numero_cepa_' + num).attr('disabled', true);
-			$('#numero_cepa_' + num).val('');
-			$('#data_cepa_' + num).attr('disabled', true);
-			$('#data_cepa_' + num).val('');
-			$('#material_cepa_' + num).attr('disabled', true);
-			$('#material_cepa_' + num).val('');
-		}
-	});
-	$('select.baciloscopia_material_cepa').live('change',  function(){
-		var origemStr = $(this).val();
-		num = parseInt($(this).attr('id').split('_')[3]);
-		if(origemStr.replace(/-/g,'')){
-			$('#numero_cepa_' + num).removeAttr('disabled');
-			$('#data_cepa_' + num).removeAttr('disabled');
-			$('#material_cepa_' + num).removeAttr('disabled');
-		} else {
-			$('#numero_cepa_' + num).attr('disabled', true);
-			$('#numero_cepa_' + num).val('');
-			$('#data_cepa_' + num).attr('disabled', true);
-			$('#data_cepa_' + num).val('');
-			$('#material_cepa_' + num).attr('disabled', true);
-			$('#material_cepa_' + num).val('');
-		}
-	});
-	$('input.data_cepa').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-
-	$('input.baciloscopia_data').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-
 	//Soro
 	var soroNum = 1;
 	var content = soroRow(soroNum);

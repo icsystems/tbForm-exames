@@ -1,5 +1,5 @@
 function addMedicine(type, medicine, numCepa){
-	content = ($('<td />')
+	var content = ($('<td />')
 		.append($('<label />')
 			.attr('for', type + '_' + numCepa + '_' + medicine )
 			.append($('<input />')
@@ -9,7 +9,7 @@ function addMedicine(type, medicine, numCepa){
 				.attr('id', type + '_' + numCepa + '_' + medicine )
 				.addClass('input_'+type)
 			)
-			.append(' '+ medicine)
+			.appendText(' '+ medicine)
 		)
 	);
 	return content;

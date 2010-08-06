@@ -19,7 +19,19 @@ function CEPACulturaRow(numCepa){
 					.attr('value', 'fiocruz')
 				)
 			)
-			.attr('rowspan', '4')
+			.attr('rowspan', '5')
+		)
+		.append($('<td />')
+			.append('Número')
+			.addClass('description')
+		)
+		.append($('<td/>')
+			.append($('<input/>')
+				.attr('disabled', true)
+				.attr('name', 'numero_cepa_cultura_' + numCepa)
+				.attr(  'id', 'numero_cepa_cultura_' + numCepa)
+				.attr('size', '5')
+			)
 		)
 		.append($('<td />')
 			.append('Método')
@@ -76,31 +88,52 @@ function CEPACulturaRow(numCepa){
 	content = $.merge($.merge([], content), $('<tr />')
 		.addClass(cRow)
 		.append($('<td />')
-			.append('Resultado')
+			.append('Data da coleta')
 			.addClass('description')
 		)
 		.append($('<td />')
-			.append($('<select /> ')
-				.css(  'width', '100px')
+			.append($('<input/>')
 				.attr('disabled', true)
-				.attr('name', 'resultado_cultura_cepa_' + numCepa)
-				.attr(  'id', 'resultado_cultura_cepa_' + numCepa)
-				.addClass('resultado_cultura_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> + </option>')
-					.attr('value', '+')
+				.attr('name', 'data_cultura_cepa_' + numCepa)
+				.attr(  'id', 'data_cultura_cepa_' + numCepa)
+				.addClass('data')
+				.attr('size', '11')
+				.attr('readonly', 'readonly')
+			)
+			.append($('<div />')
+				.appendText('hora: ')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'hora_cultura_cepa_' + numCepa)
+					.attr(  'id', 'hora_cultura_cepa_' + numCepa)
+					.addClass('hour')
+					.attr('maxlength', '5')
+					.attr('size', '5')
 				)
-				.append($('<option> ++ </option>')
-					.attr('value', '++')
-				)
-				.append($('<option> +++ </option>')
-					.attr('value', '+++')
-				)
-				.append($('<option> Negativo </option>')
-					.attr('value', 'negativo')
-				)
-				.append($('<option> Ignorado </option>')
-					.attr('value', 'ignorado')
+			)
+		)
+		.append($('<td />')
+			.append('Data do Processamento')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<input/>')
+				.attr('disabled', true)
+				.attr('name', 'data_processamento_cultura_' + numCepa)
+				.attr(  'id', 'data_processamento_cultura_' + numCepa)
+				.addClass('data')
+				.attr('size', '11')
+				.attr('readonly', 'readonly')
+			)
+			.append($('<div />')
+				.appendText('hora: ')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'hora_processamento_cultura_' + numCepa)
+					.attr(  'id', 'hora_processamento_cultura_' + numCepa)
+					.addClass('hour')
+					.attr('maxlength', '5')
+					.attr('size', '5')
 				)
 			)
 		)
@@ -135,18 +168,37 @@ function CEPACulturaRow(numCepa){
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
-		.append($('<td />')
-			.append('Número de Dias')
+		.append($('<td colspan= "2"/>')
+			.append('Responsável')
 			.addClass('description')
 		)
 		.append($('<td />')
-			.append($('<input/>')
+			.append('Resultado')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<select /> ')
+				.css(  'width', '100px')
 				.attr('disabled', true)
-				.attr('name', 'dias_cultura_cepa_' + numCepa)
-				.attr(  'id', 'dias_cultura_cepa_' + numCepa)
-				.attr(  'size', 2)
-				.addClass('dias_cultura_cepa')
-				.addClass('number')
+				.attr('name', 'resultado_cultura_cepa_' + numCepa)
+				.attr(  'id', 'resultado_cultura_cepa_' + numCepa)
+				.addClass('resultado_cultura_cepa')
+				.append($('<option> ---- </option>'))
+				.append($('<option> + </option>')
+					.attr('value', '+')
+				)
+				.append($('<option> ++ </option>')
+					.attr('value', '++')
+				)
+				.append($('<option> +++ </option>')
+					.attr('value', '+++')
+				)
+				.append($('<option> Negativo </option>')
+					.attr('value', 'negativo')
+				)
+				.append($('<option> Ignorado </option>')
+					.attr('value', 'ignorado')
+				)
 			)
 		)
 		.append($('<td />')
@@ -160,6 +212,58 @@ function CEPACulturaRow(numCepa){
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
+		.append($('<td colspan="2"/>')
+			.append($('<input type="text"/> ')
+				.attr('disabled', true)
+				.attr('name', 'cultura_coleta_responsavel_' + numCepa)
+				.attr(  'id', 'cultura_coleta_responsavel_' + numCepa)
+				.attr('size', '20')
+				.addClass('cultura_coleta_responsavel')
+			)
+		)
+		.append($('<td />')
+			.append('Data do resultado')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<input/>')
+				.attr('disabled', true)
+				.attr('name', 'data_resultado_cultura_' + numCepa)
+				.attr(  'id', 'data_resultado_cultura_' + numCepa)
+				.addClass('data')
+				.attr('size', '11')
+				.attr('readonly', 'readonly')
+			)
+			.append($('<div />')
+				.appendText('hora: ')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'hora_resultado_cultura_' + numCepa)
+					.attr(  'id', 'hora_resultado_cultura_' + numCepa)
+					.addClass('hour')
+					.attr('maxlength', '5')
+					.attr('size', '5')
+				)
+			)
+		)
+		.append($('<td />')
+			.append('Data do TSA')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<input/>')
+				.attr('disabled', true)
+				.attr('name', 'data_tsa_cultura_' + numCepa)
+				.attr(  'id', 'data_tsa_cultura_' + numCepa)
+				.addClass('data')
+				.attr('size', '11')
+				.attr('readonly', 'readonly')
+			)
+		)
+	);
+	content = $.merge($.merge([], content) , $('<tr />')
+		.addClass(cRow)
+		.append($('<td colspan="2"/>'))
 		.append($('<td />')
 			.append('Identificação')
 			.addClass('description')
@@ -186,9 +290,7 @@ function CEPACulturaRow(numCepa){
 				)
 			)
 		)
-		.append($('<td />')
-			.attr('colspan', 2)
-		)
+		.append($('<td colspan="2"/>'))
 	);
 	return content;
 }
@@ -202,7 +304,7 @@ $(document).ready(function(){
 	$('#nao_testado_'+cepaCulturaNum).html(not_tested[cepaCulturaNum].toString());
 	// add row button
 	$("#addlineCultura_button").click(function(){
-		var origemStr = $('#origem_cultura_'+ cepaNum).val();
+		var origemStr = $('#origem_cultura_'+ cepaCulturaNum).val();
 		if(origemStr.replace(/-/g,'')){
 			cepaCulturaNum++;
 			var content = CEPACulturaRow(cepaCulturaNum);
@@ -217,6 +319,15 @@ $(document).ready(function(){
 		l = medicines;
 		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
+			$('#numero_cepa_cultura_' + num).removeAttr('disabled');
+			$('#cultura_coleta_responsavel_' + num).removeAttr('disabled');
+			$('#data_cultura_cepa_' + num).removeAttr('disabled');
+			$('#hora_cultura_cepa_' + num).removeAttr('disabled');
+			$('#data_processamento_cultura_' + num).removeAttr('disabled');
+			$('#data_tsa_cultura_' + num).removeAttr('disabled');
+			$('#hora_processamento_cultura_' + num).removeAttr('disabled');
+			$('#data_resultado_cultura_' + num).removeAttr('disabled');
+			$('#hora_resultado_cultura_' + num).removeAttr('disabled');
 			$('#metodo_cultura_cepa_' + num).removeAttr('disabled');
 			$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
 			$('#dias_cultura_cepa_' + num).removeAttr('disabled');
@@ -228,6 +339,24 @@ $(document).ready(function(){
 				$('#resistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
 			}
 		} else {
+			$('#numero_cepa_cultura_' + num).attr('disabled', true);
+			$('#numero_cepa_cultura_' + num).val('');
+			$('#cultura_coleta_responsavel_' + num).attr('disabled', true);
+			$('#cultura_coleta_responsavel_' + num).val('');
+			$('#data_cultura_cepa_' + num).attr('disabled', true);
+			$('#data_cultura_cepa_' + num).val('');
+			$('#hora_cultura_cepa_' + num).attr('disabled', true);
+			$('#hora_cultura_cepa_' + num).val('');
+			$('#data_processamento_cultura_' + num).attr('disabled', true);
+			$('#data_processamento_cultura_' + num).val('');
+			$('#hora_processamento_cultura_' + num).attr('disabled', true);
+			$('#hora_processamento_cultura_' + num).val('');
+			$('#data_tsa_cultura_' + num).attr('disabled', true);
+			$('#data_tsa_cultura_' + num).val('');
+			$('#data_resultado_cultura_' + num).attr('disabled', true);
+			$('#data_resultado_cultura_' + num).val('');
+			$('#hora_resultado_cultura_' + num).attr('disabled', true);
+			$('#hora_resultado_cultura_' + num).val('');
 			$('#metodo_cultura_cepa_' + num).attr('disabled', true);
 			$('#metodo_cultura_cepa_' + num).val('');
 			$('#resultado_cultura_cepa_' + num).attr('disabled', true);
