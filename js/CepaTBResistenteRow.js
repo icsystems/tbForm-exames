@@ -45,6 +45,9 @@ function CEPATBResistenteRow(numCepa){
 				.append($('<option>REMA</option>')
 					.attr('value', 'rema')
 				)
+				.append($('<option>Proporções</option>')
+					.attr('value', 'proporcoes')
+				)
 			)
 		)
 		.append($('<td />')
@@ -248,7 +251,8 @@ $(document).ready(function(){
 			}
 		}
 	});
-	$('input.input_resistente_tbresistente').live('click', function(){
+	$('input.input_resistente_tbresistente').livequery('click', function(){
+		console.log('resistencia');
 		params = $(this).attr('id').split('_');
 		id_sensivel = 'sensibilidade_tbresistente_' + params[2] + '_' + params[3];
 		id_resistente = 'resistente_tbresistente_'  + params[2] + '_' + params[3];
@@ -269,7 +273,8 @@ $(document).ready(function(){
 		}
 	});
 
-	$('input.input_sensibilidade_tbresistente').live('click', function(){
+	$('input.input_sensibilidade_tbresistente').livequery('click', function(){
+		console.log('resistencia');
 		params = $(this).attr('id').split('_');
 		id_sensivel = 'sensibilidade_tbresistente_' + params[2] + '_' + params[3];
 		id_resistente = 'resistente_tbresistente_'  + params[2] + '_' + params[3];

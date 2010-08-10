@@ -374,29 +374,29 @@ $(document).ready(function(){
 			}
 		}
 	});
-	$('input.input_resistente').live('click', function(){
+	$('input.input_resistente').livequery('click', function(ev){
 		params = $(this).attr('id').split('_');
 		id_sensivel = 'sensibilidade_' + params[1] + '_' + params[2];
 		id_resistente = 'resistente_'  + params[1] + '_' + params[2];
 		numCepa = params[1];
 		if($(this)[0].checked){
-			$('#' + id_sensivel).attr('disabled', true);
-			$('#' + id_sensivel).parent().addClass('disabledField');
-			not_tested[numCepa] = $.grep(not_tested[numCepa], function(value){
-				return value != $('#' + id_resistente).val();
+		$('#' + id_sensivel).attr('disabled', true);
+		$('#' + id_sensivel).parent().addClass('disabledField');
+		not_tested[numCepa] = $.grep(not_tested[numCepa], function(value){
+			return value != $('#' + id_resistente).val();
 			});
-			$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
+		$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
 		} else {
-			$('#' + id_sensivel).removeAttr('disabled');
-			$('#' + id_sensivel).parent().removeClass('disabledField');
-			not_tested[numCepa].push($(this).val());
-			not_tested[numCepa].sort();
-			$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
+		$('#' + id_sensivel).removeAttr('disabled');
+		$('#' + id_sensivel).parent().removeClass('disabledField');
+		not_tested[numCepa].push($(this).val());
+		not_tested[numCepa].sort();
+		$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
 		}
 	});
 
 
-	$('input.input_sensibilidade').live('click', function(){
+	$('input.input_sensibilidade').livequery('click', function(){
 		params = $(this).attr('id').split('_');
 		id_sensivel = 'sensibilidade_' + params[1] + '_' + params[2];
 		id_resistente = 'resistente_'  + params[1] + '_' + params[2];

@@ -29,6 +29,7 @@ var resistent = new Array();
 $(document).ready(function(){
 
 	$('.number').live('keypress', function(e){
+		console.log('aqui estou');
 		if((e.which > 31 && e.which < 48)||(e.which > 57)){
 			return false;
 		}
