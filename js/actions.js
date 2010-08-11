@@ -141,6 +141,7 @@ $(document).ready(function(){
 	$('#IGRA').change(function(){
 		var dep = new Array();
 		dep[0] = '#divIGRAMetodo';
+		dep[1] = '#divIGRAResultado'
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){
