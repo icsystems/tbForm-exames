@@ -334,7 +334,7 @@ $(document).ready( function(){
 		}
 	});
 
-	$('select.origem_cepa').live('change', function(){
+	$('select.origem_cepa').livequery('change', function(){
 		var origemStr = $(this).val();
 		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
@@ -387,7 +387,7 @@ $(document).ready( function(){
 	});
 	
 	var jaFoi = false;
-	$('.baciloscopia_metodo').live('change', function(){
+	$('.baciloscopia_metodo').livequery('change', function(){
 		if ($('.baciloscopia_metodo').val() == 'fluorescencia' && (!jaFoi))
 		{
 			$('.baciloscopia_resultado_cepa').append('<option id="baar4Positivos" value="++++">++++</option>');

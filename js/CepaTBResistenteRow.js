@@ -218,7 +218,7 @@ $(document).ready(function(){
 			$('#nao_testado_tbresistente_'+cepaTBResistenteNum).html(not_tested_tbresistente[cepaTBResistenteNum].toString());
 		}
 	});
-	$('select.origem_tbresistente').live('change', function(){
+	$('select.origem_tbresistente').livequery('change', function(){
 		var origemStr = $(this).val();
 		l = medicines;
 		num = parseInt($(this).attr('id').split('_')[2]);

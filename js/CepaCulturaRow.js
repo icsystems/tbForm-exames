@@ -314,7 +314,7 @@ $(document).ready(function(){
 			$('#nao_testado_'+cepaCulturaNum).html(not_tested[cepaCulturaNum].toString());
 		}
 	});
-	$('select.origem_cultura').live('change', function(){
+	$('select.origem_cultura').livequery('change', function(){
 		var origemStr = $(this).val();
 		l = medicines;
 		num = parseInt($(this).attr('id').split('_')[2]);
