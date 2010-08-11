@@ -141,6 +141,7 @@ function CEPARow(numCepa){
 				.attr(  'id', 'hora_cepa_' + numCepa)
 				.addClass('hour')
 				.attr('size', '5')
+				.attr('maxlength','5')
 			)
 		)
 		.append($('<td />')
@@ -209,6 +210,7 @@ function CEPARow(numCepa){
 				.attr(  'id', 'baciloscopia_hora_cepa_' + numCepa)
 				.addClass('hour')
 				.attr('size', '5')
+				.attr('maxlength','5')
 			)
 		)
 	);
@@ -277,6 +279,7 @@ function CEPARow(numCepa){
 				.attr(  'id', 'hora_recebimento_cepa_' + numCepa)
 				.addClass('hour')
 				.attr('size', '5')
+				.attr('maxlength','5')
 			)
 		)
 		.append($('<td colspan="2"/>'))
@@ -348,7 +351,10 @@ $(document).ready( function(){
 			$('#hora_recebimento_cepa_' + num).removeAttr('disabled');
 			$('#material_cepa_' + num).removeAttr('disabled');
 			$('#analise_responsavel_' + num).removeAttr('disabled');
+			$('#aspecto_escarro_' + num).removeAttr('disabled');
 		} else {
+			$('#aspecto_escarro_' + num).attr('disabled', true);
+			$('#aspecto_escarro_' + num).val('----');
 			$('#baciloscopia_metodo_' + num).attr('disabled', true);
 			$('#baciloscopia_metodo_' + num).val('----');
 			$('#baciloscopia_coleta_responsavel_' + num).attr('disabled',true);
