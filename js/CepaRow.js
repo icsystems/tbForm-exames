@@ -147,6 +147,31 @@ function CEPARow(numCepa){
 			.append('Resultado do BAAR')
 			.addClass('description')
 		)
+		.append($('<td />')
+			.append($('<select /> ')
+				.attr('disabled', true)
+				.css(  'width', '100px')
+				.attr('name', 'baciloscopia_resultado_cepa_' + numCepa)
+				.attr(  'id', 'baciloscopia_resultado_cepa_' + numCepa)
+				.addClass('baciloscopia_resultado_cepa')
+				.append($('<option> ---- </option>'))
+				.append($('<option> Negativo </option>')
+					.attr('value', 'negativo')
+				)
+				.append($('<option> Ignorado </option>')
+					.attr('value', 'ignorado')
+				)
+				.append($('<option> + </option>')
+					.attr('value', '+')
+				)
+				.append($('<option> ++ </option>')
+					.attr('value', '++')
+				)
+				.append($('<option> +++ </option>')
+					.attr('value', '+++')
+				)
+			)
+		)
 	);
 	content = $.merge($.merge([], content), $('<tr />')
 		.addClass(cRow)
@@ -318,7 +343,7 @@ $(document).ready( function(){
 			$('#numero_cepa_' + num).removeAttr('disabled');
 			$('#data_cepa_' + num).removeAttr('disabled');
 			$('#hora_cepa_' + num).removeAttr('disabled');
-			$('#baciloscopia_resultado_cepa_' + 1).removeAttr('disabled');
+			$('#baciloscopia_resultado_cepa_' + num).removeAttr('disabled');
 			$('#data_recebimento_cepa_' + num).removeAttr('disabled');
 			$('#hora_recebimento_cepa_' + num).removeAttr('disabled');
 			$('#material_cepa_' + num).removeAttr('disabled');
@@ -328,8 +353,8 @@ $(document).ready( function(){
 			$('#baciloscopia_metodo_' + num).val('----');
 			$('#baciloscopia_coleta_responsavel_' + num).attr('disabled',true);
 			$('#baciloscopia_coleta_responsavel_' + num).val('');
-			$('#baciloscopia_resultado_cepa_' + 1).attr('disabled', true);
-			$('#baciloscopia_resultado_cepa_' + 1).val('----');
+			$('#baciloscopia_resultado_cepa_' + num).attr('disabled', true);
+			$('#baciloscopia_resultado_cepa_' + num).val('----');
 			$('#baciloscopia_material_cepa_' + num).attr('disabled', true);
 			$('#baciloscopia_material_cepa_' + num).val('----');
 			$('#baciloscopia_data_' + num).attr('disabled', true);
@@ -354,38 +379,16 @@ $(document).ready( function(){
 			$('#material_cepa_' + num).val('');
 			}
 	});
-
-	/*$('.baciloscopia_metodo').live('change', function(){
-			$('.baciloscopia_resultado_cepa_').append($('<td />')
-				.append($('<select /> ')
-					.attr('disabled', true)
-					.css(  'width', '100px')
-					.attr('name', 'baciloscopia_resultado_cepa_' + numCepa)
-					.attr(  'id', 'baciloscopia_resultado_cepa_' + numCepa)
-					.addClass('baciloscopia_resultado_cepa')
-					.append($('<option> ---- </option>'))
-					.append($('<option> Negativo </option>')
-						.attr('value', 'negativo')
-					)
-					.append($('<option> Ignorado </option>')
-						.attr('value', 'ignorado')
-					)
-					.append($('<option> + </option>')
-						.attr('value', '+')
-					)
-					.append($('<option> ++ </option>')
-						.attr('value', '++')
-					)
-					.append($('<option> +++ </option>')
-						.attr('value', '+++')
-					)
-					if ($('.baciloscopia_metodo').val() == 'fluorescencia')
-					{
-						$('.baciloscopia_resultado_cepa_').append($('<option> ++++ </option>')
-								.attr('value', '++++')
-						);
-					}
-				)
-			)
-	});*/
+	
+	var jaFoi = false;
+	$('.baciloscopia_metodo').live('change', function(){
+		if ($('.baciloscopia_metodo').val() == 'fluorescencia' && (!jaFoi))
+		{
+			$('.baciloscopia_resultado_cepa').append('<option id="baar4Positivos" value="++++">++++</option>');
+			jaFoi = true;
+		}else if ($('.baciloscopia_metodo').val() == 'ziehl' && jaFoi){
+			$('#baar4Positivos').remove();
+			jaFoi = false;
+		}
+	});
 });
