@@ -258,6 +258,7 @@ $(document).ready(function(){
 		var dep = new Array();
 		dep[0] = '#divSIDA';
 		dep[1] = '#divDataSida';
+		dep[2] = '#divSIDAUsoAntiRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){
