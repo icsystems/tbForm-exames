@@ -56,39 +56,11 @@ function CEPACulturaRow(numCepa){
 				)
 			)
 		)
-		.append($('<td />')
-			.append('Sensibilidade')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<fieldset />')
-				.addClass('fs_sensibilidade')
-				.attr('id', 'sensibilidade_' + numCepa )
-				.append($('<table />')
-					.addClass('table_sensibilidade')
-					.append($('<tr />')
-						.append(addMedicine('sensibilidade', 'R', numCepa))
-						.append(addMedicine('sensibilidade', 'H', numCepa))
-						.append(addMedicine('sensibilidade', 'E', numCepa))
-						.append(addMedicine('sensibilidade', 'S', numCepa))
-						.append(addMedicine('sensibilidade', 'Z', numCepa))
-						.append(addMedicine('sensibilidade', 'C', numCepa))
-					)
-					.append($('<tr />')
-						.append(addMedicine('sensibilidade', 'Et', numCepa))
-						.append(addMedicine('sensibilidade', 'O', numCepa))
-						.append(addMedicine('sensibilidade', 'L', numCepa))
-						.append(addMedicine('sensibilidade', 'T', numCepa))
-						.append(addMedicine('sensibilidade', 'M', numCepa))
-					)
-				)
-			)
-		)
 	);
 	content = $.merge($.merge([], content), $('<tr />')
 		.addClass(cRow)
 		.append($('<td />')
-			.append('Data da coleta')
+			.append('Data do recebimento')
 			.addClass('description')
 		)
 		.append($('<td />')
@@ -137,34 +109,6 @@ function CEPACulturaRow(numCepa){
 				)
 			)
 		)
-		.append($('<td />')
-			.append('Resistência')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<fieldset />')
-				.addClass('fs_resistente')
-				.attr('id', 'resistente_' + numCepa )
-				.append($('<table />')
-					.addClass('table_resistente')
-					.append($('<tr />')
-						.append(addMedicine('resistente', 'R', numCepa))
-						.append(addMedicine('resistente', 'H', numCepa))
-						.append(addMedicine('resistente', 'E', numCepa))
-						.append(addMedicine('resistente', 'S', numCepa))
-						.append(addMedicine('resistente', 'Z', numCepa))
-						.append(addMedicine('resistente', 'C', numCepa))
-					)
-					.append($('<tr />')
-						.append(addMedicine('resistente', 'Et', numCepa))
-						.append(addMedicine('resistente', 'O', numCepa))
-						.append(addMedicine('resistente', 'L', numCepa))
-						.append(addMedicine('resistente', 'T', numCepa))
-						.append(addMedicine('resistente', 'M', numCepa))
-					)
-				)
-			)
-		)
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
@@ -201,14 +145,6 @@ function CEPACulturaRow(numCepa){
 				)
 			)
 		)
-		.append($('<td />')
-			.append('Não Testado ')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.attr('id', 'nao_testado_'+ numCepa)
-			.html(medicines.toString())
-		)
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
@@ -244,20 +180,6 @@ function CEPACulturaRow(numCepa){
 					.attr('maxlength', '5')
 					.attr('size', '5')
 				)
-			)
-		)
-		.append($('<td />')
-			.append('Data do TSA')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.append($('<input/>')
-				.attr('disabled', true)
-				.attr('name', 'data_tsa_cultura_' + numCepa)
-				.attr(  'id', 'data_tsa_cultura_' + numCepa)
-				.addClass('data')
-				.attr('size', '11')
-				.attr('readonly', 'readonly')
 			)
 		)
 	);
@@ -324,7 +246,6 @@ $(document).ready(function(){
 			$('#data_cultura_cepa_' + num).removeAttr('disabled');
 			$('#hora_cultura_cepa_' + num).removeAttr('disabled');
 			$('#data_processamento_cultura_' + num).removeAttr('disabled');
-			$('#data_tsa_cultura_' + num).removeAttr('disabled');
 			$('#hora_processamento_cultura_' + num).removeAttr('disabled');
 			$('#data_resultado_cultura_' + num).removeAttr('disabled');
 			$('#hora_resultado_cultura_' + num).removeAttr('disabled');
@@ -332,12 +253,6 @@ $(document).ready(function(){
 			$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
 			$('#dias_cultura_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_cultura_cepa_' + num).removeAttr('disabled');
-			for(var i= 0; i<l.length; i++){
-				$('#sensibilidade_'+num+'_'+l[i]).removeAttr('disabled');
-				$('#resistente_'+num+'_'+l[i]).removeAttr('disabled');
-				$('#sensibilidade_'+num+'_'+l[i]).parent().removeClass('disabledField');
-				$('#resistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
-			}
 		} else {
 			$('#numero_cepa_cultura_' + num).attr('disabled', true);
 			$('#numero_cepa_cultura_' + num).val('');
@@ -351,8 +266,6 @@ $(document).ready(function(){
 			$('#data_processamento_cultura_' + num).val('');
 			$('#hora_processamento_cultura_' + num).attr('disabled', true);
 			$('#hora_processamento_cultura_' + num).val('');
-			$('#data_tsa_cultura_' + num).attr('disabled', true);
-			$('#data_tsa_cultura_' + num).val('');
 			$('#data_resultado_cultura_' + num).attr('disabled', true);
 			$('#data_resultado_cultura_' + num).val('');
 			$('#hora_resultado_cultura_' + num).attr('disabled', true);
@@ -364,57 +277,6 @@ $(document).ready(function(){
 			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
 			$('#dias_cultura_cepa_' + num).val('');
 			$('#dias_cultura_cepa_' + num).attr('disabled', true);
-			for(var i= 0; i<l.length; i++){
-				$('#sensibilidade_'+num+'_'+l[i]).attr('disabled', true);
-				$('#sensibilidade_'+num+'_'+l[i]).attr('checked', false);
-				$('#resistente_'   +num+'_'+l[i]).attr('disabled', true);
-				$('#resistente_'   +num+'_'+l[i]).attr('checked', false);
-				$('#sensibilidade_'+num+'_'+l[i]).parent().addClass('disabledField');
-				$('#resistente_'+num+'_'+l[i]).parent().addClass('disabledField');
-			}
 		}
 	});
-	$('input.input_resistente').livequery('click', function(ev){
-		params = $(this).attr('id').split('_');
-		id_sensivel = 'sensibilidade_' + params[1] + '_' + params[2];
-		id_resistente = 'resistente_'  + params[1] + '_' + params[2];
-		numCepa = params[1];
-		if($(this)[0].checked){
-		$('#' + id_sensivel).attr('disabled', true);
-		$('#' + id_sensivel).parent().addClass('disabledField');
-		not_tested[numCepa] = $.grep(not_tested[numCepa], function(value){
-			return value != $('#' + id_resistente).val();
-			});
-		$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
-		} else {
-		$('#' + id_sensivel).removeAttr('disabled');
-		$('#' + id_sensivel).parent().removeClass('disabledField');
-		not_tested[numCepa].push($(this).val());
-		not_tested[numCepa].sort();
-		$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
-		}
-	});
-
-
-	$('input.input_sensibilidade').livequery('click', function(){
-		params = $(this).attr('id').split('_');
-		id_sensivel = 'sensibilidade_' + params[1] + '_' + params[2];
-		id_resistente = 'resistente_'  + params[1] + '_' + params[2];
-		numCepa = params[1];
-		if($(this)[0].checked){
-			$('#' + id_resistente).attr('disabled', true);
-			$('#' + id_resistente).parent().addClass('disabledField');
-			not_tested[numCepa] = $.grep(not_tested[numCepa], function(value){
-				return value != $('#' + id_sensivel).val();
-			});
-			$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
-		} else {
-			$('#' + id_resistente).removeAttr('disabled');
-			$('#' + id_resistente).parent().removeClass('disabledField');
-			not_tested[numCepa].push($(this).val());
-			not_tested[numCepa].sort();
-			$('#nao_testado_'+numCepa).html(not_tested[numCepa].toString());
-		}
-	});
-
 });

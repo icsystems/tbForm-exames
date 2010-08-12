@@ -331,6 +331,24 @@ $(document).ready(function(){
 		var origemStr = $(this).val();
 		l = medicines;
 		num = parseInt($(this).attr('id').split('_')[2]);
+		
+		/*$('table.cepaCultura').append(content);
+		not_tested[cepaCulturaNum] = new Array();
+		not_tested[cepaCulturaNum] = not_tested[0];
+		$('#nao_testado_'+cepaCulturaNum).html(not_tested[cepaCulturaNum].toString());
+		add row button
+		$("#addlineCultura_button").click(function(){
+			var origemStr = $('#origem_cultura_'+ cepaCulturaNum).val();
+			if(origemStr.replace(/-/g,'')){
+			cepaCulturaNum++;
+			var content = CEPACulturaRow(cepaCulturaNum);
+			$('table.cepaCultura').append(CEPACulturaRow(cepaCulturaNum));
+			not_tested[cepaCulturaNum] = new Array();
+			not_tested[cepaCulturaNum] = not_tested[0];
+			$('#nao_testado_'+cepaCulturaNum).html(not_tested[cepaCulturaNum].toString());
+			}
+			});*/
+
 		if(origemStr.replace(/-/g,'')){
 			$('#numero_cepa_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#cultura_coleta_tbresistente_responsavel_' + num).removeAttr('disabled');
