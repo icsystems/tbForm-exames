@@ -33,9 +33,7 @@ function CEPATBResistenteRow(numCepa){
 				.attr(  'id', 'metodo_tbresistente_cepa_' + numCepa)
 				.addClass('metodo_tbresistente_cepa')
 				.append($('<option> ---- </option>'))
-				.append($('<option>Fita Hain</option>')
-					.attr('value', 'fita_hain')
-				)
+					.attr('value','')
 				.append($('<option>Genexpert</option>')
 					.attr('value', 'genexpert')
 				)
@@ -193,7 +191,18 @@ function CEPATBResistenteRow(numCepa){
 			)
 		)
 		.append($('<td />')
-			.attr('colspan', 2)
+				.append('Data do TSA')
+				.addClass('description')
+		)
+		.append($('<td />')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'data_tsa_cultura_' + numCepa)
+					.attr(  'id', 'data_tsa_cultura_' + numCepa)
+					.addClass('data')
+					.attr('size', '11')
+					.attr('readonly', 'readonly')
+			)
 		)
 	);
 	return content;
@@ -227,6 +236,7 @@ $(document).ready(function(){
 			$('#resultado_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#dias_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_tbresistente_cepa_' + num).removeAttr('disabled');
+			$('#data_tsa_cultura_' + num).removeAttr('disabled');
 			for(var i= 0; i<l.length; i++){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
 				$('#resistente_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
@@ -234,6 +244,8 @@ $(document).ready(function(){
 				$('#resistente_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
 			}
 		} else {
+			$('#data_tsa_cultura_' + num).attr('disabled', true);
+			$('#data_tsa_cultura_' + num).val('');
 			$('#metodo_tbresistente_cepa_' + num).attr('disabled', true);
 			$('#metodo_tbresistente_cepa_' + num).val('');
 			$('#resultado_tbresistente_cepa_' + num).attr('disabled', true);
