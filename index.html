@@ -5,9 +5,12 @@
 	<link rel="stylesheet" type="text/css" href="./css/form_style.css" />
 	<link rel="stylesheet" type="text/css" href="./css/page_style.css" />
 	<link rel="stylesheet" type="text/css" href="./css/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="./css/readonly.css" />
+	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
 	<script src="./js/ie-console.js"				type='text;javascript'></script>
 	<script src='./js/jquery.js'          		type='text/javascript'></script>
 	<script src='./js/jquery-ui.js'       		type='text/javascript'></script>
+	<script src="js/jquery.autocomplete.js"		type='text/javascript'></script>
 	<script src='./js/jquery.form.js'     		type='text/javascript'></script>
 	<script src='./js/jquery.validate.js' 		type='text/javascript'></script>
 	<script src='./js/tb.validation.jquery.js' 	type='text/javascript'></script>
@@ -139,13 +142,13 @@
 				<label for='sida'>Resultado:</label>
 				<select name='sida' id='sida' class='selectOne sinais'>
 					<option value='pendente' selected> Pendente  </option>
-					<option value='sim'> Positivo </option>
-					<option value='nao'> Negativo  </option>
+					<option value='positivo'> Positivo </option>
+					<option value='negativo'> Negativo  </option>
 				</select>
 			</div>
 			<div id='divDataSida' class='secondary'>
 				<label for='data_sida'> Ano do Exame:</label>
-				<input  name="data_sida" id="data_sida" class='data' type="text" class='number' maxlength=4 size='8'/>
+				<input  name="data_sida" id="data_sida" type="text" class='number' maxlength=4 size='8'/>
 			</div>
 			<div id='divSidaContagemLinfocitos' class='secondary'>
 				<label for='sidaContagemLinfocitos'> Valor de linfócitos totais </label>
@@ -162,6 +165,10 @@
 					<option value='sim'> Sim  </option>
 					<option value='nao'> N&atilde;o  </option>
 				</select>
+			</div>
+			<div id='divDataInicioUsoRetroviral' class='secondary'>
+				<label for='dataInicioUsoRetroviral'> Ano de início: </label>
+				<input name='dataInicioUsoRetroviral' id='dataInicioUsoRetroviral' type='text' class='numero' maxlength='4' size='8'/>
 			</div>
 			<div id='divDataSidaUsoAntiRetroviral' class='secondary'>
 				<label for='data_sida_uso_anti_retroviral'> Ano do início da utilização:</label>
@@ -240,11 +247,8 @@
 			<thead>
 				<tr>
 					<th > Nome do Laboratório </th>
+					<th colspan='2'> CEPA       </th>
 					<th colspan='2'> Cultura       </th>
-					<th colspan='2' id='th_sensibilidade_cultura'>
-						Sensibilidade
-						<img id="helpicon_cultura" class="helpicon" width="15" src="images/help.png" style="cursor: pointer;"/> 
-					</th>
 				</tr>
 			</thead>
 			</table>

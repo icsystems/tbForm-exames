@@ -29,7 +29,6 @@ var resistent = new Array();
 $(document).ready(function(){
 
 	$('.number').live('keypress', function(e){
-		console.log('aqui estou');
 		if((e.which > 31 && e.which < 48)||(e.which > 57)){
 			return false;
 		}
@@ -61,6 +60,23 @@ $(document).ready(function(){
 		maxDate: '+0d',
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 	});
+
+	var d = new Date();
+	var cYear = d.getFullYear();
+	years = new Array();
+
+	for (i=cYear-100; i <=cYear; i++)
+		years.push(i.toString());
+
+
+	$('#dataInicioUsoRetroviral').autocomplete({
+		lookup: years
+	});
+
+	$('#data_sida').autocomplete({
+		lookup: years
+	});
+
 	//Toggle options
 	// Soro
 	$('#soroColetado').change(function(){
@@ -257,10 +273,49 @@ $(document).ready(function(){
 	$('#exameSida').change(function(){
 		var dep = new Array();
 		dep[0] = '#divSIDA';
-		dep[1] = '#divDataSida';
-		dep[2] = '#divSIDAUsoAntiRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+				});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		}
+		// Se nao, ocultar colunas listadas a cima
+		else {
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+		}
+	});
+	$('#sida').change(function(){
+		var dep = new Array();
+		dep[0] = '#divDataSida';
+		dep[1] = '#divSidaContagemLinfocitos';
+		dep[2] = '#divSIDAUsoAntiRetroviral';
+		dep[3] = '#divDataInicioUsoRetroviral';
+		// Se sim, disponibilizar colunas listadas a cima
+		if($(this).val()=='positivo'){
+			console.log('entrei');
 			for(div in dep){
 				var elems = $('*', dep[div]);
 				$(elems).each(function(){
