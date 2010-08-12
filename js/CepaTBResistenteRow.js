@@ -22,6 +22,18 @@ function CEPATBResistenteRow(numCepa){
 			.attr('rowspan', '4')
 		)
 		.append($('<td />')
+			.append('Número')
+			.addClass('description')
+			)
+		.append($('<td/>')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'numero_cepa_tbresistente_cultura_' + numCepa)
+					.attr(  'id', 'numero_cepa_tbresistente_cultura_' + numCepa)
+					.attr('size', '5')
+				)
+		)
+		.append($('<td />')
 			.append('Método')
 			.addClass('description')
 		)
@@ -80,33 +92,54 @@ function CEPATBResistenteRow(numCepa){
 	content = $.merge($.merge([], content), $('<tr />')
 		.addClass(cRow)
 		.append($('<td />')
-			.append('Resultado')
+			.append('Data da coleta')
 			.addClass('description')
 		)
 		.append($('<td />')
-			.append($('<select /> ')
-				.css(  'width', '100px')
+			.append($('<input/>')
 				.attr('disabled', true)
-				.attr('name', 'resultado_tbresistente_cepa_' + numCepa)
-				.attr(  'id', 'resultado_tbresistente_cepa_' + numCepa)
-				.addClass('resultado_tbresistente_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> + </option>')
-					.attr('value', '+')
-				)
-				.append($('<option> ++ </option>')
-					.attr('value', '++')
-				)
-				.append($('<option> +++ </option>')
-					.attr('value', '+++')
-				)
-				.append($('<option> Negativo </option>')
-					.attr('value', 'negativo')
-				)
-				.append($('<option> Ignorado </option>')
-					.attr('value', 'ignorado')
+				.attr('name', 'data_cultura_tbresistente_cepa_' + numCepa)
+				.attr(  'id', 'data_cultura_tbresistente_cepa_' + numCepa)
+				.addClass('data')
+				.attr('size', '11')
+				.attr('readonly', 'readonly')
+			)
+			.append($('<div />')
+				.appendText('hora: ')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'hora_cultura_tbresistente_cepa_' + numCepa)
+					.attr(  'id', 'hora_cultura_tbresistente_cepa_' + numCepa)
+					.addClass('hour')
+					.attr('maxlength', '5')
+					.attr('size', '5')
 				)
 			)
+		)
+		.append($('<td />')
+				.append('Data do Processamento')
+				.addClass('description')
+		)
+		.append($('<td />')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'data_processamento_tbresistente_cultura_' + numCepa)
+					.attr(  'id', 'data_processamento_tbresistente_cultura_' + numCepa)
+					.addClass('data')
+					.attr('size', '11')
+					.attr('readonly', 'readonly')
+				)
+				.append($('<div />')
+					.appendText('hora: ')
+					.append($('<input/>')
+						.attr('disabled', true)
+						.attr('name', 'hora_processamento_tbresistente_cultura_' + numCepa)
+						.attr(  'id', 'hora_processamento_tbresistente_cultura_' + numCepa)
+						.addClass('hour')
+						.attr('maxlength', '5')
+						.attr('size', '5')
+					)
+				)
 		)
 		.append($('<td />')
 			.append('Resistência')
@@ -139,7 +172,48 @@ function CEPATBResistenteRow(numCepa){
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
+		.append($('<td colspan= "2"/>')
+			.append('Responsável')
+			.addClass('description')
+		)
 		.append($('<td />')
+			.append('Resultado')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<select /> ')
+				.css(  'width', '100px')
+				.attr('disabled', true)
+				.attr('name', 'resultado_tbresistente_cepa_' + numCepa)
+				.attr(  'id', 'resultado_tbresistente_cepa_' + numCepa)
+				.addClass('resultado_tbresistente_cepa')
+				.append($('<option> ---- </option>'))
+				.append($('<option> + </option>')
+					.attr('value', '+')
+				)
+				.append($('<option> ++ </option>')
+					.attr('value', '++')
+				)
+				.append($('<option> +++ </option>')
+					.attr('value', '+++')
+				)
+				.append($('<option> Negativo </option>')
+					.attr('value', 'negativo')
+				)
+				.append($('<option> Ignorado </option>')
+					.attr('value', 'ignorado')
+				)
+			)
+		)
+		.append($('<td />')
+			.append('Não Testado ')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.attr('id','nao_testado_tbresistente_' + numCepa)
+			.html(medicines.toString())
+		)
+		/*.append($('<td />')
 			.append('Número de Dias')
 			.addClass('description')
 		)
@@ -152,19 +226,59 @@ function CEPATBResistenteRow(numCepa){
 				.addClass('dias_tbresistente_cepa')
 				.addClass('number')
 			)
-		)
-		.append($('<td />')
-			.append('Não Testado ')
-			.addClass('description')
-		)
-		.append($('<td />')
-			.attr('id','nao_testado_tbresistente_' + numCepa)
-			.html(medicines.toString())
-		)
+		)*/
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
+		.append($('<td colspan="2"/>')
+			.append($('<input type="text"/> ')
+				.attr('disabled', true)
+				.attr('name', 'cultura_coleta_tbresistente_responsavel_' + numCepa)
+				.attr(  'id', 'cultura_coleta_tbresistente_responsavel_' + numCepa)
+				.attr('size', '20')
+				.addClass('cultura_coleta_responsavel')
+			)
+		)
 		.append($('<td />')
+			.append('Data do resultado')
+			.addClass('description')
+		)
+		.append($('<td />')
+			.append($('<input/>')
+				.attr('disabled', true)
+				.attr('name', 'data_resultado_tbresistente_cultura_' + numCepa)
+				.attr(  'id', 'data_resultado_tbresistente_cultura_' + numCepa)
+				.addClass('data')
+				.attr('size', '11')
+				.attr('readonly', 'readonly')
+			)
+			.append($('<div />')
+				.appendText('hora: ')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'hora_resultado_tbresistente_cultura_' + numCepa)
+					.attr(  'id', 'hora_resultado_tbresistente_cultura_' + numCepa)
+					.addClass('hour')
+					.attr('maxlength', '5')
+					.attr('size', '5')
+				)
+			)
+		)
+		.append($('<td />')
+				.append('Data do TSA')
+				.addClass('description')
+		)
+		.append($('<td />')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'data_tsa_tbresistente_cultura_' + numCepa)
+					.attr(  'id', 'data_tsa_tbresistente_cultura_' + numCepa)
+					.addClass('data')
+					.attr('size', '11')
+					.attr('readonly', 'readonly')
+			)
+		)
+		/*.append($('<td />')
 			.append('Identificação')
 			.addClass('description')
 		)
@@ -189,21 +303,7 @@ function CEPATBResistenteRow(numCepa){
 					.attr('value', 'ignorado')
 				)
 			)
-		)
-		.append($('<td />')
-				.append('Data do TSA')
-				.addClass('description')
-		)
-		.append($('<td />')
-				.append($('<input/>')
-					.attr('disabled', true)
-					.attr('name', 'data_tsa_cultura_' + numCepa)
-					.attr(  'id', 'data_tsa_cultura_' + numCepa)
-					.addClass('data')
-					.attr('size', '11')
-					.attr('readonly', 'readonly')
-			)
-		)
+		)*/
 	);
 	return content;
 }
@@ -232,11 +332,19 @@ $(document).ready(function(){
 		l = medicines;
 		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
+			$('#numero_cepa_tbresistente_cultura_' + num).removeAttr('disabled');
+			$('#cultura_coleta_tbresistente_responsavel_' + num).removeAttr('disabled');
+			$('#data_cultura_tbresistente_cepa_' + num).removeAttr('disabled');
+			$('#hora_cultura_tbresistente_cepa_' + num).removeAttr('disabled');
+			$('#hora_processamento_tbresistente_cultura_' + num).removeAttr('disabled');
+			$('#hora_resultado_tbresistente_cultura_' + num).removeAttr('disabled');
+			$('#data_processamento_tbresistente_cultura_' + num).removeAttr('disabled');
+			$('#data_resultado_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#metodo_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#resultado_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#dias_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_tbresistente_cepa_' + num).removeAttr('disabled');
-			$('#data_tsa_cultura_' + num).removeAttr('disabled');
+			$('#data_tsa_tbresistente_cultura_' + num).removeAttr('disabled');
 			for(var i= 0; i<l.length; i++){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
 				$('#resistente_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
@@ -244,8 +352,24 @@ $(document).ready(function(){
 				$('#resistente_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
 			}
 		} else {
-			$('#data_tsa_cultura_' + num).attr('disabled', true);
-			$('#data_tsa_cultura_' + num).val('');
+			$('#numero_cepa_cultura_' + num).attr('disabled', true);
+			$('#cultura_coleta_responsavel_' + num).attr('disabled', true);
+			$('#cultura_coleta_responsavel_' + num).val('');
+			$('#data_cultura_cepa_' + num).attr('disabled', true);
+			$('#data_cultura_cepa_' + num).val('');
+			$('#data_processamento_tbresistente_cultura_' + num).attr('disabled', true);
+			$('#data_processamento_tbresistente_cultura_' + num).val('');
+			$('#data_resultado_tbresistente_cultura_' + num).attr('disabled', true);
+			$('#data_resultado_tbresistente_cultura_' + num).val('');
+			$('#hora_cultura_cepa_' + num).attr('disabled', true);
+			$('#hora_cultura_cepa_' + num).val('');
+			$('#hora_processamento_tbresistente_cultura_' + num).attr('disabled', true);
+			$('#hora_processamento_tbresistente_cultura_' + num).val('');
+			$('#hora_resultado_tbresistente_cultura_' + num).attr('disabled', true);
+			$('#hora_resultado_tbresistente_cultura_' + num).val('');
+			$('#numero_cepa_cultura_' + num).val('');
+			$('#data_tsa_tbresistente_cultura_' + num).attr('disabled', true);
+			$('#data_tsa_tbresistente_cultura_' + num).val('');
 			$('#metodo_tbresistente_cepa_' + num).attr('disabled', true);
 			$('#metodo_tbresistente_cepa_' + num).val('');
 			$('#resultado_tbresistente_cepa_' + num).attr('disabled', true);
