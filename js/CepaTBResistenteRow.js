@@ -1,3 +1,10 @@
+//Declaracao das variaveis
+var medicines = ['R','H','E','S','Et','O','L','T','M','Z', 'C'];
+var not_tested_tbresistente = new Array();
+not_tested_tbresistente[0]  = medicines.sort();
+var	resistence_tbresistente = new Array();
+var	sensibility_tbresistente = new Array();
+
 function CEPATBResistenteRow(numCepa){
 	if(numCepa % 2 == 0) var cRow = 'even';
 	else var cRow = 'odd';
@@ -88,6 +95,13 @@ function CEPATBResistenteRow(numCepa){
 				)
 			)
 		)
+		.append($('<td />')
+			.append($("<input type='hidden'/>")
+				.attr('name', 'valores_tbresistente_sensibilidade_' + numCepa)
+				.attr(  'id', 'valores_tbresistente_sensibilidade_' + numCepa)
+				.attr('readonly', 'readonly')
+			)
+		)
 	);
 	content = $.merge($.merge([], content), $('<tr />')
 		.addClass(cRow)
@@ -169,6 +183,13 @@ function CEPATBResistenteRow(numCepa){
 				)
 			)
 		)
+		.append($('<td />')
+			.append($("<input type='hidden'/>")
+				.attr('name', 'valores_tbresistente_resistencia_' + numCepa)
+				.attr(  'id', 'valores_tbresistente_resistencia_' + numCepa)
+				.attr('readonly', 'readonly')
+			)
+		)
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
 		.addClass(cRow)
@@ -212,6 +233,13 @@ function CEPATBResistenteRow(numCepa){
 		.append($('<td />')
 			.attr('id','nao_testado_tbresistente_' + numCepa)
 			.html(medicines.toString())
+		)
+		.append($('<td />')
+			.append($("<input type='hidden'>")
+				.attr('name', 'valores_tbresistente_nao_testado_' + numCepa)
+				.attr(  'id', 'valores_tbresistente_nao_testado_' + numCepa)
+				.attr('readonly', 'readonly')
+			)
 		)
 		/*.append($('<td />')
 			.append('Número de Dias')
@@ -315,6 +343,8 @@ $(document).ready(function(){
 	not_tested_tbresistente[cepaTBResistenteNum] = new Array();
 	not_tested_tbresistente[cepaTBResistenteNum] = medicines;
 	$('#nao_testado_tbresistente_'+cepaTBResistenteNum).html(not_tested_tbresistente[cepaTBResistenteNum].toString());
+	resistence_tbresistente[cepaTBResistenteNum] = new Array();
+	sensibility_tbresistente[cepaTBResistenteNum] = new Array();
 	// add row button
 	$("#addlineTBResistente_button").click(function(){
 		var origemStr = $('#origem_tbresistente_'+ cepaTBResistenteNum).val();
@@ -325,13 +355,14 @@ $(document).ready(function(){
 			not_tested_tbresistente[cepaTBResistenteNum] = new Array();
 			not_tested_tbresistente[cepaTBResistenteNum] = medicines;
 			$('#nao_testado_tbresistente_'+cepaTBResistenteNum).html(not_tested_tbresistente[cepaTBResistenteNum].toString());
+			resistence_tbresistente[cepaTBResistenteNum] = new Array();
+			sensibility_tbresistente[cepaTBResistenteNum] = new Array();
 		}
 	});
 	$('select.origem_tbresistente').livequery('change', function(){
 		var origemStr = $(this).val();
 		l = medicines;
 		num = parseInt($(this).attr('id').split('_')[2]);
-		
 		/*$('table.cepaCultura').append(content);
 		not_tested[cepaCulturaNum] = new Array();
 		not_tested[cepaCulturaNum] = not_tested[0];
@@ -406,7 +437,6 @@ $(document).ready(function(){
 		}
 	});
 	$('input.input_resistente_tbresistente').livequery('click', function(){
-		console.log('resistencia');
 		params = $(this).attr('id').split('_');
 		id_sensivel = 'sensibilidade_tbresistente_' + params[2] + '_' + params[3];
 		id_resistente = 'resistente_tbresistente_'  + params[2] + '_' + params[3];
@@ -418,17 +448,26 @@ $(document).ready(function(){
 				return value != $('#' + id_resistente).val();
 			});
 			$('#nao_testado_tbresistente_'+numCepaTBResistente).html(not_tested_tbresistente[numCepaTBResistente].toString());
-		} else {
+			$('#valores_tbresistente_nao_testado_'+numCepaTBResistente).val(not_tested_tbresistente[numCepaTBResistente].toString());
+			if($.inArray($(this).val(),resistence_tbresistente[numCepaTBResistente]) < 0)
+				resistence_tbresistente[numCepaTBResistente].push($(this).val());
+			resistence_tbresistente[numCepaTBResistente].sort();
+			$('#valores_tbresistente_resistencia_'+numCepaTBResistente).val(resistence_tbresistente[numCepaTBResistente].toString());
+		}else {
 			$('#' + id_sensivel).removeAttr('disabled');
 			$('#' + id_sensivel).parent().removeClass('disabledField');
 			not_tested_tbresistente[numCepaTBResistente].push($(this).val());
 			not_tested_tbresistente[numCepaTBResistente].sort();
+			$('#valores_tbresistente_nao_testado_'+numCepaTBResistente).val(not_tested_tbresistente[numCepaTBResistente].toString());
 			$('#nao_testado_tbresistente_'+numCepaTBResistente).html(not_tested_tbresistente[numCepaTBResistente].toString());
+			resistence_tbresistente[numCepaTBResistente] = $.grep(resistence_tbresistente[numCepaTBResistente], function(value){
+				return value != $('#' + id_resistente).val();
+			});
+			$('#valores_tbresistente_resistencia_'+numCepaTBResistente).val(resistence_tbresistente[numCepaTBResistente].toString());
 		}
 	});
 
 	$('input.input_sensibilidade_tbresistente').livequery('click', function(){
-		console.log('resistencia');
 		params = $(this).attr('id').split('_');
 		id_sensivel = 'sensibilidade_tbresistente_' + params[2] + '_' + params[3];
 		id_resistente = 'resistente_tbresistente_'  + params[2] + '_' + params[3];
@@ -439,13 +478,23 @@ $(document).ready(function(){
 			not_tested_tbresistente[numCepaTBResistente] = $.grep(not_tested_tbresistente[numCepaTBResistente], function(value){
 				return value != $('#' + id_sensivel).val();
 			});
+			$('#valores_tbresistente_nao_testado_'+numCepaTBResistente).val(not_tested_tbresistente[numCepaTBResistente].toString());
 			$('#nao_testado_tbresistente_'+numCepaTBResistente).html(not_tested_tbresistente[numCepaTBResistente].toString());
+			if($.inArray($(this).val(),sensibility_tbresistente[numCepaTBResistente]) < 0)
+				sensibility_tbresistente[numCepaTBResistente].push($(this).val());
+			sensibility_tbresistente[numCepaTBResistente].sort();
+			$('#valores_tbresistente_sensibilidade_'+numCepaTBResistente).val(sensibility_tbresistente[numCepaTBResistente].toString());
 		} else {
 			$('#' + id_resistente).removeAttr('disabled');
 			$('#' + id_resistente).parent().removeClass('disabledField');
 			not_tested_tbresistente[numCepaTBResistente].push($(this).val());
 			not_tested_tbresistente[numCepaTBResistente].sort();
+			$('#valores_tbresistente_nao_testado_'+numCepaTBResistente).val(not_tested_tbresistente[numCepaTBResistente].toString());
 			$('#nao_testado_tbresistente_'+numCepaTBResistente).html(not_tested_tbresistente[numCepaTBResistente].toString());
+			sensibility_tbresistente[numCepaTBResistente] = $.grep(sensibility_tbresistente[numCepaTBResistente], function(value){
+				return value != $('#' + id_sensivel).val();
+			});
+			$('#valores_tbresistente_sensibilidade_'+numCepaTBResistente).val(sensibility_tbresistente[numCepaTBResistente].toString());
 		}
 	});
 });

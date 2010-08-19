@@ -12,12 +12,9 @@ if(typeof(String.prototype.trim) === "undefined")
 		return String(this).replace(/^\s+|\s+$/g, '');
 	};
 }
-var medicines = ['R','H','E','S','Et','O','L','T','M','Z', 'C'];
 
 var not_tested = new Array();
 not_tested[0]  = medicines.sort();
-var not_tested_tbresistente = new Array();
-not_tested_tbresistente[0]  = medicines.sort();
 
 var sensivel  = new Array();
 var resistent = new Array();
@@ -54,11 +51,13 @@ $(document).ready(function(){
 	});
 
 	var hlcolor = '#FFF8C6';
-	$('.data').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+	$('.data').livequery('click',function(){
+		$(this).datepicker({
+			dateFormat: 'dd/mm/yy',
+			monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+			maxDate: '+0d',
+			dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+		});
 	});
 
 	var d = new Date();
@@ -273,6 +272,7 @@ $(document).ready(function(){
 	$('#exameSida').change(function(){
 		var dep = new Array();
 		dep[0] = '#divSIDA';
+		dep[1] = '#divDataSida';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){
@@ -309,10 +309,9 @@ $(document).ready(function(){
 	});
 	$('#sida').change(function(){
 		var dep = new Array();
-		dep[0] = '#divDataSida';
-		dep[1] = '#divSidaContagemLinfocitos';
-		dep[2] = '#divSIDAUsoAntiRetroviral';
-		dep[3] = '#divDataInicioUsoRetroviral';
+		dep[0] = '#divSidaContagemLinfocitos';
+		dep[1] = '#divSIDAUsoAntiRetroviral';
+		dep[2] = '#divDataInicioUsoRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='positivo'){
 			console.log('entrei');
