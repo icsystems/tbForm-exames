@@ -19,9 +19,6 @@ not_tested[0]  = medicines.sort();
 var sensivel  = new Array();
 var resistent = new Array();
 
-
-
-
 //Document is ready, let's play
 $(document).ready(function(){
 
@@ -50,15 +47,24 @@ $(document).ready(function(){
 		}
 	});
 
-	var hlcolor = '#FFF8C6';
-	$('.data').livequery('click',function(){
-		$(this).datepicker({
-			dateFormat: 'dd/mm/yy',
-			monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-			maxDate: '+0d',
-			dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+	$(function(){
+		$('.data').livequery('click', function() {
+			$(this).datepicker({
+						dateFormat: 'dd/mm/yy',
+						monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+						maxDate: '+0d',
+						changeMonth: true,
+						changeYear: true,
+						maxDate   : '+0y',
+						minDate   : '-130y',
+						yearRange : '-130:+130',
+						dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+						showOn:'focus'}
+								).focus();
 		});
 	});
+
+	var hlcolor = '#FFF8C6';
 
 	var d = new Date();
 	var cYear = d.getFullYear();

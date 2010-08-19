@@ -385,14 +385,18 @@ $(document).ready( function(){
 			$('#material_cepa_' + num).val('');
 			}
 	});
-	
+
 	var jaFoi = false;
 	$('.baciloscopia_metodo').livequery('change', function(){
-		if ($('.baciloscopia_metodo').val() == 'fluorescencia' && (!jaFoi))
+		var origemStr = $(this).val();
+		num = parseInt($(this).attr('id').split('_')[2]);
+		console.log(num);
+		if ($('#baciloscopia_metodo_' + num).val() == 'fluorescencia' && (!jaFoi))
 		{
-			$('.baciloscopia_resultado_cepa').append('<option id="baar4Positivos" value="++++">++++</option>');
+			console.log($(this).val());
+			$('#baciloscopia_resultado_cepa_' + num).append('<option id="baar4Positivos" value="++++">++++</option>');
 			jaFoi = true;
-		}else if ($('.baciloscopia_metodo').val() == 'ziehl' && jaFoi){
+		}else if ($('#baciloscopia_metodo_' + num).val() == 'ziehl' && jaFoi){
 			$('#baar4Positivos').remove();
 			jaFoi = false;
 		}
