@@ -7,7 +7,8 @@
 	<link rel="stylesheet" type="text/css" href="./css/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" href="./css/readonly.css" />
 	<link rel="stylesheet" type="text/css" href="./css/styles.css" />
-	<script src="./js/ie-console.js"				type='text;javascript'></script>
+	<link rel="stylesheet" type="text/css" href="./css/jquery.timeentry.css.css" />
+	<script src="./js/ie-console.js"			type='text/javascript'></script>
 	<script src='./js/jquery.js'          		type='text/javascript'></script>
 	<script src='./js/jquery-ui.js'       		type='text/javascript'></script>
 	<script src="js/jquery.autocomplete.js"		type='text/javascript'></script>
@@ -19,6 +20,7 @@
 	<script src='./js/messages_ptbr.js'       	type='text/javascript'></script>
 	<script src='./js/addMedicine.js'           type='text/javascript'></script>
 	<script src="./js/jquery.livequery.js"		type='text/javascript'></script>
+	<script src="./js/jquery.timeentry.js"      		type='text/javascript'></script>
 	<script src='./js/CepaRow.js'              	type='text/javascript'></script>
 	<script src='./js/CepaCulturaRow.js'        type='text/javascript'></script>
 	<script src='./js/CepaTBResistenteRow.js'   type='text/javascript'></script>
@@ -288,6 +290,18 @@
 					<option value='negativo'          > Negativo  </option>
 					<option value='ignorado'          > Ignorado  </option>
 				</select>
+			</div>
+			<div id='divDataColetaPCR' class='secondary'>
+				<label for='data_coleta_pcr'> Data da Coleta:</label>
+				<input  name="data_coleta_pcr" id="data_coleta_pcr" class='data' type="text" />
+			</div>
+			<div id='divDataRecebimentoLaboratorioPCR' class='secondary'>
+				<label for='data_recebimento_laboratorio_pcr'> Data do recebimento no Laboratório:</label>
+				<input  name="data_recebimento_laboratorio_pcr" id="data_recebimento_laboratorio_pcr" class='data' type="text" />
+			</div>
+			<div id='divDataResultadoPCR' class='secondary'>
+				<label for='data_resultado_pcr'> Data do Resultado:</label>
+				<input  name="data_resultado_pcr" id="data_resultado_pcr" class='data' type="text" />
 			</div>
 		</fieldset>
 		<fieldset>

@@ -34,9 +34,9 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.hour').live('keyup', function() {
-		var hourForm = $(this).val();
-		var format = '##:##';
+	$('.hour').timeEntry({show24Hours: true}).livequery('keyup', function() {
+		//var hourForm = $(this).val();
+		/*var format = '##:##';
 		var i = hourForm.length;
 		var output = format.substring(0,1);
 		var text   = format.substring(i)
@@ -45,6 +45,8 @@ $(document).ready(function(){
 		if (hourForm.length == 4){
 			$(this).valid();
 		}
+		*/
+		//$(this).val($(this).val() + ($(this).val() || 'blank') + '\n');
 	});
 
 	$(function(){
@@ -202,6 +204,9 @@ $(document).ready(function(){
 		var dep = new Array();
 		dep[0] = '#divPCRMetodo';
 		dep[1] = '#divPCRResultado';
+		dep[2] = '#divDataColetaPCR';
+		dep[3] = '#divDataRecebimentoLaboratorioPCR';
+		dep[4] = '#divDataResultadoPCR';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){
