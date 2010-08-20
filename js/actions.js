@@ -320,7 +320,6 @@ $(document).ready(function(){
 		dep[2] = '#divDataInicioUsoRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='positivo'){
-			console.log('entrei');
 			for(div in dep){
 				var elems = $('*', dep[div]);
 				$(elems).each(function(){

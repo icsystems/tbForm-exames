@@ -390,10 +390,8 @@ $(document).ready( function(){
 	$('.baciloscopia_metodo').livequery('change', function(){
 		var origemStr = $(this).val();
 		num = parseInt($(this).attr('id').split('_')[2]);
-		console.log(num);
 		if ($('#baciloscopia_metodo_' + num).val() == 'fluorescencia' && (!jaFoi))
 		{
-			console.log($(this).val());
 			$('#baciloscopia_resultado_cepa_' + num).append('<option id="baar4Positivos" value="++++">++++</option>');
 			jaFoi = true;
 		}else if ($('#baciloscopia_metodo_' + num).val() == 'ziehl' && jaFoi){
