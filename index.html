@@ -81,19 +81,27 @@
 		</fieldset>
 		<fieldset>
 			<legend>Prova Tuberculínica (PT)</legend>
-			<div id='divResultadoLeitura' class='primary required'>
+			<div id='divProvaRealizada' class='primary required'>
+				<label for='provaRealizada'>Prova Realizada?</label>
+				<select name='provaRealizada' id='provaRealizada' class='selectOne required'>
+					<option value=''    > ------    </option>
+					<option value='sim'	> Sim 		</option>
+					<option value='nao'	> Não 		</option>
+				</select>
+			</div>
+			<div id='divResultadoLeitura' class='secondary'>
 				<label for='resultadoLeitura'> Resultado da leitura:</label>
 				<input  name="resultadoLeitura" id="resultadoLeitura" type="text" size='2' maxlength='2'/> mm de enduraç&atilde;o
 			</div>
-			<div id='divDataAplicaç&atilde;o' class='primary required'>
+			<div id='divDataAplicacao' class='secondary'>
 				<label for='data_aplicacao'> Data de aplicaç&atilde;o do PPD:</label>
 				<input  name="data_aplicacao" id="data_aplicacao" class='data' type="text" />
 			</div>
-			<div id='divDataLeitura' class='primary required'>
+			<div id='divDataLeitura' class='secondary'>
 				<label for='data_leitura'> Data da Leitura:</label>
 				<input  name="data_leitura" id="data_leitura" class='data' type="text" />
 			</div>
-			<div id='divPt' class='primary required'>
+			<div id='divPt' class='secondary'>
 				<label for='pt'> Responsável pela leitura:</label>
 				<input  name="pt" id="pt" type="text" />
 			</div>
@@ -155,6 +163,10 @@
 			<div id='divSidaContagemLinfocitos' class='secondary'>
 				<label for='sidaContagemLinfocitos'> Valor de linfócitos totais </label>
 				<input  name="sidaContagemLinfocitos" id="sidaContagemLinfocitos" type="text" class='number' maxlength=4 size='5'/> mm<sup>3</sup>
+			</div>
+			<div id='divSidaContagemLinfocitos60dias' class='secondary'>
+				<label for='sidaContagemLinfocitos60dias'> Valor de linfócitos totais presente no hemograma nos últimos 60 dias </label>
+				<input  name="sidaContagemLinfocitos60dias" id="sidaContagemLinfocitos60dias" type="text" class='number' maxlength=4 size='5'/> mm<sup>3</sup>
 			</div>
 			<div id='divDataContagemLinfocitos' class='secondary'>
 				<label for='data_contagem_linfocitos'> Data da realização do exame:</label>

@@ -194,6 +194,47 @@ $(document).ready(function(){
 			}
 		}
 	});
+	//Prova Realizada?
+	$('#provaRealizada').change(function(){
+		var dep = new Array();
+		dep[0] = '#divResultadoLeitura';
+		dep[1] = '#divDataAplicacao';
+		dep[2] = '#divDataLeitura';
+		dep[3] = '#divPt';
+		// Se sim, disponibilizar colunas listadas a cima
+		if($(this).val()=='sim'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+				});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		}
+		// Se nao, ocultar colunas listadas a cima
+		else {
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+		}
+	});
 	//PCR
 	$('#pcr').change(function(){
 		var dep = new Array();
@@ -355,6 +396,7 @@ $(document).ready(function(){
 		dep[0] = '#divSidaContagemLinfocitos';
 		dep[1] = '#divSIDAUsoAntiRetroviral';
 		dep[2] = '#divDataInicioUsoRetroviral';
+		dep[3] = '#divSidaContagemLinfocitos60dias';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='positivo'){
 			for(div in dep){
