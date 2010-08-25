@@ -54,7 +54,20 @@ function CEPACulturaRow(numCepa){
 				.append($('<option> Ogawa </option>')
 					.attr('value', 'ogawa')
 				)
+				.append($('<option> Outro </option>')
+					.attr('value', 'outro')
+				)
 			)
+		.append($('<div />')
+			.appendText('outro: ')
+			.append($('<input/>')
+				.attr('disabled', true)
+				.attr('name', 'outro_metodo_cultura_' + numCepa)
+				.attr(  'id', 'outro_metodo_cultura_' + numCepa)
+				.addClass('text')
+				.attr('size', '10')
+			)
+		)
 		)
 	);
 	content = $.merge($.merge([], content), $('<tr />')
@@ -277,6 +290,18 @@ $(document).ready(function(){
 			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
 			$('#dias_cultura_cepa_' + num).val('');
 			$('#dias_cultura_cepa_' + num).attr('disabled', true);
+		}
+	});
+	$('select.metodo_cultura_cepa').livequery('change', function(){
+		var origemStr = $('select.origem_cultura').val();
+		l = medicines;
+		num = parseInt($('select.origem_cultura').attr('id').split('_')[2]);
+		if ($(this).val() == 'outro')
+		{
+			$('#outro_metodo_cultura_' + num).removeAttr('disabled');
+		}else{
+			$('#outro_metodo_cultura_' + num).attr('disabled', true);
+			$('#outro_metodo_cultura_' + num).val('');
 		}
 	});
 });

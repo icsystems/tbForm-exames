@@ -22,13 +22,13 @@ var resistent = new Array();
 //Document is ready, let's play
 $(document).ready(function(){
 
-	$('.number').live('keypress', function(e){
+	$('.number').livequery('keypress', function(e){
 		if((e.which > 31 && e.which < 48)||(e.which > 57)){
 			return false;
 		}
 	});
 
-	$('.hour').live('keypress', function(e){
+	$('.hour').livequery('keypress', function(e){
 		if((e.which > 31 && e.which < 48)||(e.which > 57)){
 			return false;
 		}
@@ -74,11 +74,6 @@ $(document).ready(function(){
 
 	for (i=cYear-100; i <=cYear; i++)
 		years.push(i.toString());
-
-
-	$('#dataInicioUsoRetroviral').autocomplete({
-		lookup: years
-	});
 
 	$('#data_sida').autocomplete({
 		lookup: years
@@ -241,6 +236,43 @@ $(document).ready(function(){
 			}
 		}
 	})
+	$('#pcrMetodo').change(function(){
+		var dep = new Array();
+		dep[0] = '#divOutroMetodoPCR';
+		// Se sim, disponibilizar colunas listadas a cima
+		if($(this).val()=='outro'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+				});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		}
+		// Se nao, ocultar colunas listadas a cima
+		else {
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+		}
+	});
 	//Detecão TB Resistente
 	$('#detecao_tb_resistente').change(function(){
 		var dep = new Array();
@@ -369,30 +401,6 @@ $(document).ready(function(){
 		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 	});
 
-	$('#padrao').change(function(){
-		var baixa = new Array();
-		baixa[0] = '#divcasoBaixaProbabilidade';
-		//Definindo a probabilidade
-		if ($(this).val() == 'padraoTipico')
-		$('#probabilidadeTBAtivaAposEstudoRX').val('Alta');
-		else if ($(this).val() == 'padraoCompativel')
-		$('#probabilidadeTBAtivaAposEstudoRX').val('Média');
-		else if ($(this).val() == 'padraoAtipico'){
-			$('#probabilidadeTBAtivaAposEstudoRX').val('Baixa');
-			for(div in baixa){
-			if($(baixa[div]).css('display') != 'block')
-				$(baixa[div]).toggle(function() {
-					$(this).css('background-color', hlcolor);
-					$(this).animate({backgroundColor : "white"}, 4000);
-				});
-			}
-		}
-
-	if($(this).val() != 'padraoAtipico')
-		for(div in baixa)
-			if($(baixa[div]).css('display') != 'none')
-				$(baixa[div]).toggle();
-	});
 
 	$('div.secondary').css('display', 'none');
 	//\Toggle Options
