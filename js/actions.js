@@ -22,6 +22,21 @@ var resistent = new Array();
 //Document is ready, let's play
 $(document).ready(function(){
 
+	$("#form_exams").keypress(function(e) {
+		if (e.which == 13) {
+			return false;
+		}
+	});
+
+	$('.text').livequery('keypress', function(e){
+		if((e.which > 32 && e.which < 65)||
+			(e.which > 90 && e.which < 97)||
+			(e.which > 122 && e.which < 127)||
+			(e.which > 127 && e.which < 192)){
+			return false;
+		}
+	});
+
 	$('.number').livequery('keypress', function(e){
 		if((e.which > 31 && e.which < 48)||(e.which > 57)){
 			return false;
@@ -517,21 +532,6 @@ $(document).ready(function(){
 				required: true
 			},
 			sangueColetado: {
-				required: true
-			},
-			resultadoLeitura:{
-				required: true,
-				number: true
-			},
-			data_aplicacao:{
-				date: true,
-				required: true
-			},
-			data_leitura:{
-				date: true,
-				required: true
-			},
-			pt:{
 				required: true
 			},
 			HIVteste:{
