@@ -431,18 +431,6 @@ $(document).ready(function(){
 			}
 		}
 	});
-	$('#data_rx').datepicker({
-		dateFormat: 'dd/mm/yy',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		maxDate: '+0d',
-		changeMonth: true,
-		changeYear: true,
-		maxDate : '+0y',
-		minDate : '-130y',
-		yearRange : '-130:+130',
-		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-	});
-
 
 	$('div.secondary').css('display', 'none');
 	//\Toggle Options
