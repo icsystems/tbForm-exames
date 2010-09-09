@@ -50,18 +50,6 @@ $(document).ready(function(){
 	});
 
 	$('.hour').timeEntry({show24Hours: true}).livequery('keyup', function() {
-		//var hourForm = $(this).val();
-		/*var format = '##:##';
-		var i = hourForm.length;
-		var output = format.substring(0,1);
-		var text   = format.substring(i)
-		if (text.substring(0,1) != output) $(this).val(hourForm + text.substring(0,1))
-		$(this).rules('add', {validHour : true});
-		if (hourForm.length == 4){
-			$(this).valid();
-		}
-		*/
-		//$(this).val($(this).val() + ($(this).val() || 'blank') + '\n');
 	});
 
 	$(function(){
@@ -69,6 +57,7 @@ $(document).ready(function(){
 			$(this).datepicker({
 						dateFormat: 'dd/mm/yy',
 						monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+						monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Aug','Set','Out','Nov','Dez'],
 						maxDate: '+0d',
 						changeMonth: true,
 						changeYear: true,

@@ -402,6 +402,36 @@ $(document).ready(function(){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
 				$('#resistente_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
 			}
+			$('#data_cultura_tbresistente_cepa_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_processamento_tbresistente_cultura_'+num).val('');
+				}
+				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_resultado_tbresistente_cultura_'+num).val('');
+				}
+			});
+			$('#data_processamento_tbresistente_cultura_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_processamento_tbresistente_cultura_'+num).val('');
+				}
+			});
+			$('#data_resultado_tbresistente_cultura_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_resultado_tbresistente_cultura_'+num).val('');
+				}
+			});
 		} else {
 			$('#numero_cepa_cultura_' + num).attr('disabled', true);
 			$('#cultura_coleta_responsavel_' + num).attr('disabled', true);
@@ -436,6 +466,36 @@ $(document).ready(function(){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).parent().addClass('disabledField');
 				$('#resistente_tbresistente_'+num+'_'+l[i]).parent().addClass('disabledField');
 			}
+			$('#data_cultura_tbresistente_cepa_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_processamento_tbresistente_cultura_'+num).val('');
+				}
+				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_resultado_tbresistente_cultura_'+num).val('');
+				}
+			});
+			$('#data_processamento_tbresistente_cultura_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_processamento_tbresistente_cultura_'+num).val('');
+				}
+			});
+			$('#data_resultado_tbresistente_cultura_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_resultado_tbresistente_cultura_'+num).val('');
+				}
+			});
 		}
 	});
 	$('input.input_resistente_tbresistente').livequery('click', function(){

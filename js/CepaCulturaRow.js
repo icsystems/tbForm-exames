@@ -268,6 +268,36 @@ $(document).ready(function(){
 			$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
 			$('#dias_cultura_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_cultura_cepa_' + num).removeAttr('disabled');
+			$('#data_cultura_cepa_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_processamento_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_cultura_cepa_'+num).val('');
+					$('#data_processamento_cultura_'+num).val('');
+				}
+				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_resultado_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+					$('#data_cultura_cepa_'+num).val('');
+					$('#data_resultado_cultura_'+num).val('');
+				}
+			});
+			$('#data_processamento_cultura_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_processamento_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_cultura_cepa_'+num).val('');
+					$('#data_processamento_cultura_'+num).val('');
+				}
+			});
+			$('#data_resultado_cultura_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_resultado_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+					$('#data_cultura_cepa_'+num).val('');
+					$('#data_resultado_cultura_'+num).val('');
+				}
+			});
 		} else {
 			$('#numero_cepa_cultura_' + num).attr('disabled', true);
 			$('#numero_cepa_cultura_' + num).val('');
@@ -292,6 +322,36 @@ $(document).ready(function(){
 			$('#identificacao_cultura_cepa_' + num).attr('disabled', true);
 			$('#dias_cultura_cepa_' + num).val('');
 			$('#dias_cultura_cepa_' + num).attr('disabled', true);
+			$('#data_cultura_cepa_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_processamento_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_cultura_cepa_'+num).val('');
+					$('#data_processamento_cultura_'+num).val('');
+				}
+				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_resultado_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+					$('#data_cultura_cepa_'+num).val('');
+					$('#data_resultado_cultura_'+num).val('');
+				}
+			});
+			$('#data_processamento_cultura_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_processamento_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_cultura_cepa_'+num).val('');
+					$('#data_processamento_cultura_'+num).val('');
+				}
+			});
+			$('#data_resultado_cultura_'+num).livequery('change', function(){
+				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_resultado_cultura_'+num).val()))
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+					$('#data_cultura_cepa_'+num).val('');
+					$('#data_resultado_cultura_'+num).val('');
+				}
+			});
 		}
 	});
 	$('select.metodo_cultura_cepa').livequery('change', function(){
