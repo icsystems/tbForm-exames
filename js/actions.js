@@ -44,13 +44,14 @@ $(document).ready(function(){
 	});
 
 	$('.hour').livequery('keypress', function(e){
-		if((e.which > 31 && e.which < 48)||(e.which > 57)){
+		if((e.which > 31 && e.which < 48)||(e.which > 57))
 			return false;
-		}
+		$('.hour').timeEntry({show24Hours: true});
 	});
 
-	$('.hour').timeEntry({show24Hours: true}).livequery('keyup', function() {
-	});
+	/*$('.hour').livequery('keyup', function() {
+		$('.hour').timeEntry({show24Hours: true});
+	});*/
 
 	$(function(){
 		$('.data').livequery('click', function() {

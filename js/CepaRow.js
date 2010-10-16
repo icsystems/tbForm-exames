@@ -384,6 +384,17 @@ $(document).ready( function(){
 					$('#baciloscopia_data_' + num).val('');
 				}
 			});
+			var jaFoi = false;
+			$('#baciloscopia_metodo_' + num).livequery('change', function(){
+				if ($('#baciloscopia_metodo_' + num).val() == 'fluorescencia' && (!jaFoi))
+				{
+					$('#baciloscopia_resultado_cepa_' + num).append('<option id="baar4Positivos" value="++++">++++</option>');
+					jaFoi = true;
+				}else if ($('#baciloscopia_metodo_' + num).val() == 'ziehl' && jaFoi){
+					$('#baar4Positivos').remove();
+					jaFoi = false;
+				}
+			});
 		} else {
 			$('#aspecto_escarro_' + num).attr('disabled', true);
 			$('#aspecto_escarro_' + num).val('----');
@@ -445,20 +456,18 @@ $(document).ready( function(){
 					$('#baciloscopia_data_' + num).val('');
 				}
 			});
+			var jaFoi = false;
+			$('#baciloscopia_metodo_' + num).livequery('change', function(){
+				if ($('#baciloscopia_metodo_' + num).val() == 'fluorescencia' && (!jaFoi))
+				{
+					$('#baciloscopia_resultado_cepa_' + num).append('<option id="baar4Positivos" value="++++">++++</option>');
+					jaFoi = true;
+				}else if ($('#baciloscopia_metodo_' + num).val() == 'ziehl' && jaFoi){
+					$('#baar4Positivos').remove();
+					jaFoi = false;
+				}
+			});
 			}
 	});
 
-	var jaFoi = false;
-	$('.baciloscopia_metodo').livequery('change', function(){
-		var origemStr = $(this).val();
-		num = parseInt($(this).attr('id').split('_')[2]);
-		if ($('#baciloscopia_metodo_' + num).val() == 'fluorescencia' && (!jaFoi))
-		{
-			$('#baciloscopia_resultado_cepa_' + num).append('<option id="baar4Positivos" value="++++">++++</option>');
-			jaFoi = true;
-		}else if ($('#baciloscopia_metodo_' + num).val() == 'ziehl' && jaFoi){
-			$('#baar4Positivos').remove();
-			jaFoi = false;
-		}
-	});
 });
