@@ -49,8 +49,8 @@ function CEPACulturaRow(numCepa){
 				.append($('<option> LJ </option>')
 					.attr('value', 'lj')
 				)
-				.append($('<option> MGIT </option>')
-					.attr('value', 'mgit')
+				.append($('<option> MGIT 960 </option>')
+					.attr('value', 'mgit960')
 				)
 				.append($('<option> Ogawa </option>')
 					.attr('value', 'ogawa')
@@ -158,6 +158,26 @@ function CEPACulturaRow(numCepa){
 					.attr('value', 'ignorado')
 				)
 			)
+			.append($('<div />')
+				.append($('<input />')
+					.attr('id','numero_colonias_' + numCepa)
+					.attr('name','numero_colonias_' + numCepa)
+					.attr('disabled','true')
+					.attr('size','2')
+					.attr('maxlength','2')
+					.addClass('number')
+				)
+				.appendText(' colônias')
+			)
+			.append($('<div />')
+				.append($('<input />')
+					.attr('id','colonia_contaminada_' + numCepa)
+					.attr('name','colonia_contaminada_' + numCepa)
+					.attr('disabled','true')
+					.attr('type','checkbox')
+				)
+				.appendText(' contaminada')
+			)
 		)
 	);
 	content = $.merge($.merge([], content) , $('<tr />')
@@ -257,6 +277,8 @@ $(document).ready(function(){
 		num = parseInt($(this).attr('id').split('_')[2]);
 		if(origemStr.replace(/-/g,'')){
 			$('#numero_cepa_cultura_' + num).removeAttr('disabled');
+			$('#numero_colonias_' + num).removeAttr('disabled');
+			$('#colonia_contaminada_' + num).removeAttr('disabled');
 			$('#cultura_coleta_responsavel_' + num).removeAttr('disabled');
 			$('#data_cultura_cepa_' + num).removeAttr('disabled');
 			$('#hora_cultura_cepa_' + num).removeAttr('disabled');
@@ -300,6 +322,10 @@ $(document).ready(function(){
 			});
 		} else {
 			$('#numero_cepa_cultura_' + num).attr('disabled', true);
+			$('#numero_colonias_' + num).attr('disabled',true);
+			$('#numero_colonias_' + num).val('');
+			$('#colonia_contaminada_' + num).attr('disabled',true);
+			$('#colonia_contaminada_' + num).attr('checked',false);
 			$('#numero_cepa_cultura_' + num).val('');
 			$('#cultura_coleta_responsavel_' + num).attr('disabled', true);
 			$('#cultura_coleta_responsavel_' + num).val('');

@@ -107,14 +107,14 @@ function CEPATBResistenteRow(numCepa){
 	content = $.merge($.merge([], content), $('<tr />')
 		.addClass(cRow)
 		.append($('<td />')
-			.append('Data da coleta')
+			.append('Data do Recebimento')
 			.addClass('description')
 		)
 		.append($('<td />')
 			.append($('<input/>')
 				.attr('disabled', true)
-				.attr('name', 'data_cultura_tbresistente_cepa_' + numCepa)
-				.attr(  'id', 'data_cultura_tbresistente_cepa_' + numCepa)
+				.attr('name', 'data_recebimento_tbresistente_cepa_' + numCepa)
+				.attr(  'id', 'data_recebimento_tbresistente_cepa_' + numCepa)
 				.addClass('data')
 				.attr('size', '11')
 				.attr('readonly', 'readonly')
@@ -123,8 +123,8 @@ function CEPATBResistenteRow(numCepa){
 				.appendText('hora: ')
 				.append($('<input/>')
 					.attr('disabled', true)
-					.attr('name', 'hora_cultura_tbresistente_cepa_' + numCepa)
-					.attr(  'id', 'hora_cultura_tbresistente_cepa_' + numCepa)
+					.attr('name', 'hora_recebimento_tbresistente_cepa_' + numCepa)
+					.attr(  'id', 'hora_recebimento_tbresistente_cepa_' + numCepa)
 					.addClass('hour')
 					.attr('maxlength', '5')
 					.attr('size', '5')
@@ -209,21 +209,11 @@ function CEPATBResistenteRow(numCepa){
 				.attr('name', 'resultado_tbresistente_cepa_' + numCepa)
 				.attr(  'id', 'resultado_tbresistente_cepa_' + numCepa)
 				.addClass('resultado_tbresistente_cepa')
-				.append($('<option> ---- </option>'))
-				.append($('<option> + </option>')
-					.attr('value', '+')
+				.append($('<option> Sensível </option>')
+					.attr('value', 'sensivel')
 				)
-				.append($('<option> ++ </option>')
-					.attr('value', '++')
-				)
-				.append($('<option> +++ </option>')
-					.attr('value', '+++')
-				)
-				.append($('<option> Negativo </option>')
-					.attr('value', 'negativo')
-				)
-				.append($('<option> Ignorado </option>')
-					.attr('value', 'ignorado')
+				.append($('<option> Resistente </option>')
+					.attr('value', 'resistente')
 				)
 			)
 		)
@@ -385,8 +375,8 @@ $(document).ready(function(){
 		if(origemStr.replace(/-/g,'')){
 			$('#numero_cepa_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#cultura_coleta_tbresistente_responsavel_' + num).removeAttr('disabled');
-			$('#data_cultura_tbresistente_cepa_' + num).removeAttr('disabled');
-			$('#hora_cultura_tbresistente_cepa_' + num).removeAttr('disabled');
+			$('#data_recebimento_tbresistente_cepa_' + num).removeAttr('disabled');
+			$('#hora_recebimento_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#hora_processamento_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#hora_resultado_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#data_processamento_tbresistente_cultura_' + num).removeAttr('disabled');
@@ -402,33 +392,33 @@ $(document).ready(function(){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
 				$('#resistente_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
 			}
-			$('#data_cultura_tbresistente_cepa_'+num).livequery('change', function(){
-				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+			$('#data_recebimento_tbresistente_cepa_'+num).livequery('change', function(){
+				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_processamento_tbresistente_cultura_'+num).val('');
 				}
-				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_resultado_tbresistente_cultura_'+num).val('');
 				}
 			});
 			$('#data_processamento_tbresistente_cultura_'+num).livequery('change', function(){
-				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_processamento_tbresistente_cultura_'+num).val('');
 				}
 			});
 			$('#data_resultado_tbresistente_cultura_'+num).livequery('change', function(){
-				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_resultado_tbresistente_cultura_'+num).val('');
 				}
 			});
@@ -466,33 +456,33 @@ $(document).ready(function(){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).parent().addClass('disabledField');
 				$('#resistente_tbresistente_'+num+'_'+l[i]).parent().addClass('disabledField');
 			}
-			$('#data_cultura_tbresistente_cepa_'+num).livequery('change', function(){
-				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+			$('#data_recebimento_tbresistente_cepa_'+num).livequery('change', function(){
+				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_processamento_tbresistente_cultura_'+num).val('');
 				}
-				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_resultado_tbresistente_cultura_'+num).val('');
 				}
 			});
 			$('#data_processamento_tbresistente_cultura_'+num).livequery('change', function(){
-				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_processamento_tbresistente_cultura_'+num).val('');
 				}
 			});
 			$('#data_resultado_tbresistente_cultura_'+num).livequery('change', function(){
-				if (Date.parse($('#data_cultura_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_cultura_tbresistente_cepa_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_resultado_tbresistente_cultura_'+num).val('');
 				}
 			});

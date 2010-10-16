@@ -95,7 +95,7 @@
 				<input  name="resultadoLeitura" id="resultadoLeitura" type="text" class='number' size='2' maxlength='2'/> mm de enduraç&atilde;o
 			</div>
 			<div id='divDataAplicacao' class='secondary'>
-				<label for='data_aplicacao'> Data de aplicaç&atilde;o do PPD:</label>
+				<label for='data_aplicacao'> Data de aplicaç&atilde;o do PT:</label>
 				<input  name="data_aplicacao" id="data_aplicacao" class='data' type="text" />
 			</div>
 			<div id='divDataLeitura' class='secondary'>
@@ -161,10 +161,6 @@
 				<label for='data_sida'> Ano do Exame:</label>
 				<input  name="data_sida" id="data_sida" type="text" class='number' maxlength=4 size='8'/>
 			</div>
-			<div id='divSidaContagemLinfocitos' class='secondary'>
-				<label for='sidaContagemLinfocitos'> Valor de linfócitos totais </label>
-				<input  name="sidaContagemLinfocitos" id="sidaContagemLinfocitos" type="text" class='number' maxlength=4 size='5'/> mm<sup>3</sup>
-			</div>
 			<div id='divSidaContagemLinfocitos60dias' class='secondary'>
 				<label for='sidaContagemLinfocitos60dias'> Valor de linfócitos totais presente no hemograma nos últimos 60 dias </label>
 				<input  name="sidaContagemLinfocitos60dias" id="sidaContagemLinfocitos60dias" type="text" class='number' maxlength=4 size='5'/> mm<sup>3</sup>
@@ -204,6 +200,23 @@
 			<div class='add-row'><input value="Adicionar Linha" class='inputButton' id='addline_button' type="button"></div>
 		</fieldset>
 		<fieldset>
+			<legend>Diagnóstico </legend>
+			<div id='divDiagnostico' class='primary required'>
+			<fieldset>
+				<legend>Amostra:</legend>
+				<label for='amostra' class='labelRadio'>
+					<input type="radio" name="amostra" class='required' value="1amostra"/> 1ª amostra
+				</label>
+				<label for='amostra' class='labelRadio'>
+					<input type="radio" name="amostra" class='required' value="2amostra" /> 2ª amostra
+				</label>
+				<label for='amostra' class='labelRadio'>
+					<input type="radio" name="amostra" class='required' value="pool" /> Pool
+				</label>
+			</fieldset>
+			</div>
+		</fieldset>
+		<fieldset>
 			<legend>Cultura</legend>
 			<table class='datatable cepaCultura'>
 			<thead>
@@ -217,10 +230,10 @@
 			<div class='add-row'><input value="Adicionar Linha" class='inputButton' id='addlineCultura_button' type="button"></div>
 		</fieldset>
 		<fieldset>
-			<legend> PCR </legend>
-			<div id='divPCR' class='primary required'>
-				<label for='pcr'>PCR:</label>
-				<select name='pcr' id='pcr' class='selectOne required'>
+			<legend> Testes Moleculares(diagnóstico de TB) </legend>
+			<div id='divTestesMoleculares' class='primary required'>
+				<label for='testesMoleculares'>Testes Moleculares:</label>
+				<select name='testesMoleculares' id='testesMoleculares' class='selectOne required'>
 					<option value=''             > ------    </option>
 					<option value='sim'          > Sim       </option>
 					<option value='nao'          > Não  </option>
@@ -279,6 +292,25 @@
 			</thead>
 			</table>
 			<div class='add-row'><input value="Adicionar Linha" class='inputButton' id='addlineTBResistente_button' type="button"></div>
+		</fieldset>
+		<fieldset>
+			<legend>Testes Moleculares de Resistência</legend>
+			<div id='divGenXpert' name='divGenXpert' class='primary required'>
+				<label for='genXpert'>GenXpert: </label>
+				<select id='genXpert' name='genXpert'>
+					<option value=''		>-------</option>
+					<option value='negativo'>Negativo</option>
+					<option value='positivo'>Positivo</option>
+				</select>
+			</div>
+			<div id='divGenXpertPositivo' name='divGenXpertPositivo' class='secondary'>
+				<label for='genXpertPositivo'></label>
+				<select id='genXpertPositivo' name='genXpertPositivo'>
+					<option value=''				>-------</option>
+					<option value='rifSensivel'		>Rif Sensível</option>
+					<option value='rifResistente'	>Rif Resistente</option>
+				</select>
+			</div>
 		</fieldset>
 		<fieldset>
 			<legend> MDRTBplus (Fita hain) </legend>
