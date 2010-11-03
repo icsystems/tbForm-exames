@@ -362,6 +362,10 @@ $(document).ready(function(){
 		var dep = new Array();
 		dep[0] = '#divSIDA';
 		dep[1] = '#divDataSida';
+		var ped = new Array();
+		ped[0] = '#divSidaContagemLinfocitos60dias';
+		ped[1] = '#divSIDAUsoAntiRetroviral';
+		ped[2] = '#divDataInicioUsoRetroviral';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){
@@ -393,6 +397,18 @@ $(document).ready(function(){
 				});
 				if($(dep[div]).css('display') != 'none')
 					$(dep[div]).toggle();
+			}
+			for(div in ped){
+				var elems = $('*', ped[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(ped[div]).css('display') != 'none')
+					$(ped[div]).toggle();
 			}
 		}
 	});
@@ -432,13 +448,12 @@ $(document).ready(function(){
 			}
 		}
 	});
-	$('#sida').change(function(){
+	$('#testesMolecularesResistencia').change(function(){
 		var dep = new Array();
-		dep[0] = '#divSIDAUsoAntiRetroviral';
-		dep[1] = '#divDataInicioUsoRetroviral';
-		dep[2] = '#divSidaContagemLinfocitos60dias';
+		dep[0] = '#divGenXpert';
+		dep[1] = '#divFitaHain';
 		// Se sim, disponibilizar colunas listadas a cima
-		if($(this).val()=='positivo'){
+		if($(this).val()=='sim'){
 			for(div in dep){
 				var elems = $('*', dep[div]);
 				$(elems).each(function(){
@@ -471,9 +486,96 @@ $(document).ready(function(){
 			}
 		}
 	});
+	$('#sidaUsoAntiRetroviral').change(function(){
+		var dep = new Array();
+		dep[0] = '#divDataInicioUsoRetroviral';
+		// Se sim, disponibilizar colunas listadas a cima
+		if($(this).val()=='sim'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+				});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		} else {
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+		}
+	});
+	$('#sida').change(function(){
+		var dep = new Array();
+		dep[0] = '#divSIDAUsoAntiRetroviral';
+		dep[1] = '#divSidaContagemLinfocitos60dias';
+		var ped = new Array();
+		ped[0] = '#divDataInicioUsoRetroviral';
+		// Se sim, disponibilizar colunas listadas a cima
+		if($(this).val()=='positivo'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+				});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		}
+		// Se nao, ocultar colunas listadas a cima
+		else {
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+			for(div in ped){
+				var elems = $('*', ped[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(ped[div]).css('display') != 'none')
+					$(ped[div]).toggle();
+			}
+		}
+	});
 
 	$('div.secondary').css('display', 'none');
-	//\Toggle Options
+	//Toggle Options
 	//Soro
 	var soroNum = 1;
 	var content = soroRow(soroNum);

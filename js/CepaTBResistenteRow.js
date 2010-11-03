@@ -284,20 +284,6 @@ function CEPATBResistenteRow(numCepa){
 				)
 			)
 		)
-		.append($('<td />')
-				.append('Data do TSA')
-				.addClass('description')
-		)
-		.append($('<td />')
-				.append($('<input/>')
-					.attr('disabled', true)
-					.attr('name', 'data_tsa_tbresistente_cultura_' + numCepa)
-					.attr(  'id', 'data_tsa_tbresistente_cultura_' + numCepa)
-					.addClass('data')
-					.attr('size', '11')
-					.attr('readonly', 'readonly')
-			)
-		)
 		/*.append($('<td />')
 			.append('Identificação')
 			.addClass('description')
@@ -385,7 +371,6 @@ $(document).ready(function(){
 			$('#resultado_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#dias_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_tbresistente_cepa_' + num).removeAttr('disabled');
-			$('#data_tsa_tbresistente_cultura_' + num).removeAttr('disabled');
 			for(var i= 0; i<l.length; i++){
 				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
 				$('#resistente_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
@@ -439,8 +424,6 @@ $(document).ready(function(){
 			$('#hora_resultado_tbresistente_cultura_' + num).attr('disabled', true);
 			$('#hora_resultado_tbresistente_cultura_' + num).val('');
 			$('#numero_cepa_cultura_' + num).val('');
-			$('#data_tsa_tbresistente_cultura_' + num).attr('disabled', true);
-			$('#data_tsa_tbresistente_cultura_' + num).val('');
 			$('#metodo_tbresistente_cepa_' + num).attr('disabled', true);
 			$('#metodo_tbresistente_cepa_' + num).val('');
 			$('#resultado_tbresistente_cepa_' + num).attr('disabled', true);
