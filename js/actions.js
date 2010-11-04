@@ -281,7 +281,49 @@ $(document).ready(function(){
 					$(dep[div]).toggle();
 			}
 		}
-	})
+	});
+	$('#data_coleta_pcr').change(function(){
+		if (Date.parse($('#data_coleta_pcr').val()) > Date.parse($('#data_recebimento_laboratorio_pcr').val()))
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Recebimento');
+			$('#data_coleta_pcr').val('');
+			$('#data_recebimento_laboratorio_pcr').val('');
+		}
+		if (Date.parse($('#data_coleta_pcr').val()) > Date.parse($('#data_resultado_pcr').val()))
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Resultado');
+			$('#data_coleta_pcr').val('');
+			$('#data_resultado_pcr').val('');
+		}
+	});
+	$('#data_recebimento_laboratorio_pcr').change(function(){
+		if (Date.parse($('#data_coleta_pcr').val()) > Date.parse($('#data_recebimento_laboratorio_pcr').val()))
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Recebimento');
+			$('#data_coleta_pcr').val('');
+			$('#data_recebimento_laboratorio_pcr').val('');
+		}
+		if (Date.parse($('#data_recebimento_laboratorio_pcr').val()) > Date.parse($('#data_resultado_pcr').val()))
+		{
+			alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+			$('#data_resultado_pcr').val('');
+			$('#data_recebimento_laboratorio_pcr').val('');
+		}
+	});
+	$('#data_resultado_pcr').change(function(){
+		if (Date.parse($('#data_coleta_pcr').val()) > Date.parse($('#data_resultado_pcr').val()))
+		{
+			alert('A Data da Coleta deve ser anterior à Data do Resultado');
+			$('#data_coleta_pcr').val('');
+			$('#data_resultado_pcr').val('');
+		}
+		if (Date.parse($('#data_recebimento_laboratorio_pcr').val()) > Date.parse($('#data_resultado_pcr').val()))
+		{
+			alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+			$('#data_resultado_pcr').val('');
+			$('#data_recebimento_laboratorio_pcr').val('');
+		}
+	});
 	$('#pcrMetodo').change(function(){
 		var dep = new Array();
 		dep[0] = '#divOutroMetodoPCR';
