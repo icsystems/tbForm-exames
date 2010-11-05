@@ -481,6 +481,7 @@ $(document).ready(function(){
 					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_resultado_tbresistente_cultura_'+num).val('');
 				}
+				$('#hora_recebimento_tbresistente_cepa_' + num).addClass('required');
 			});
 			$('#data_processamento_tbresistente_cultura_'+num).livequery('change', function(){
 				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
@@ -489,6 +490,7 @@ $(document).ready(function(){
 					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_processamento_tbresistente_cultura_'+num).val('');
 				}
+				$('#hora_processamento_tbresistente_cultura_' + num).addClass('required');
 			});
 			$('#data_resultado_tbresistente_cultura_'+num).livequery('change', function(){
 				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
@@ -497,8 +499,12 @@ $(document).ready(function(){
 					$('#data_recebimento_tbresistente_cepa_'+num).val('');
 					$('#data_resultado_tbresistente_cultura_'+num).val('');
 				}
+				$('#hora_resultado_tbresistente_cultura_' + num).addClass('required');
 			});
 		} else {
+			$('#hora_recebimento_tbresistente_cepa_' + num).removeClass('required');
+			$('#hora_processamento_tbresistente_cultura_' + num).removeClass('required');
+			$('#hora_resultado_tbresistente_cultura_' + num).removeClass('required');
 			$('#numero_cepa_tbresistente_cultura_' + num).attr('disabled',true);
 			$('#numero_cepa_tbresistente_cultura_' + num).val('');
 			$('#data_recebimento_tbresistente_cepa_' + num).attr('disabled',true);

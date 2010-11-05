@@ -363,6 +363,7 @@ $(document).ready(function(){
 					$('#data_cultura_cepa_'+num).val('');
 					$('#data_resultado_cultura_'+num).val('');
 				}
+				$('#hora_cultura_cepa_' + num).addClass('required');
 			});
 			$('#data_processamento_cultura_'+num).livequery('change', function(){
 				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_processamento_cultura_'+num).val()))
@@ -377,6 +378,7 @@ $(document).ready(function(){
 					$('#data_processamento_cultura_'+num).val('');
 					$('#data_resultado_cultura_'+num).val('');
 				}
+				$('#hora_processamento_cultura_' + num).addClass('required');
 			});
 			$('#data_resultado_cultura_'+num).livequery('change', function(){
 				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_resultado_cultura_'+num).val()))
@@ -391,8 +393,12 @@ $(document).ready(function(){
 					$('#data_processamento_cultura_'+num).val('');
 					$('#data_resultado_cultura_'+num).val('');
 				}
+				$('#hora_resultado_cultura_' + num).addClass('required');
 			});
 		} else {
+			$('#hora_cultura_cepa_' + num).removeClass('required');
+			$('#hora_processamento_cultura_' + num).removeClass('required');
+			$('#hora_resultado_cultura_' + num).removeClass('required');
 			$('#numero_cepa_cultura_' + num).attr('disabled', true);
 			$('#numero_colonias_' + num).attr('disabled',true);
 			$('#numero_colonias_' + num).val('');

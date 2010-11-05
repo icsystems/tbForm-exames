@@ -421,6 +421,7 @@ $(document).ready( function(){
 					$('#data_recebimento_cepa_' + num).val('');
 					$('#baciloscopia_data_' + num).val('');
 				}
+				$('#hora_recebimento_cepa_'+num).addClass('required');
 			});
 			$('#data_cepa_' + num).livequery('change', function(){
 				if (Date.parse($('#data_cepa_' + num).val()) > Date.parse($('#baciloscopia_data_' + num).val()))
@@ -429,6 +430,7 @@ $(document).ready( function(){
 					$('#data_cepa_' + num).val('');
 					$('#baciloscopia_data_' + num).val('');
 				}
+				$('#hora_cepa_' + num).addClass('required');
 			});
 			$('#baciloscopia_data_' + num).livequery('change', function(){
 				if (Date.parse($('#data_recebimento_cepa_' + num).val()) > Date.parse($('#baciloscopia_data_' + num).val()))
@@ -443,6 +445,7 @@ $(document).ready( function(){
 					$('#data_cepa_' + num).val('');
 					$('#baciloscopia_data_' + num).val('');
 				}
+				$('#baciloscopia_hora_cepa_' + num).addClass('required');
 			});
 			var jaFoi = false;
 			$('#baciloscopia_metodo_' + num).livequery('change', function(){
@@ -456,6 +459,9 @@ $(document).ready( function(){
 				}
 			});
 		} else {
+			$('#hora_cepa_' + num).removeClass('required');
+			$('#hora_recebimento_cepa_'+num).removeClass('required');
+			$('#baciloscopia_hora_cepa_' + num).removeClass('required');
 			$('#aspecto_escarro_' + num).attr('disabled', true);
 			$('#aspecto_escarro_' + num).val('----');
 			$('#baciloscopia_metodo_' + num).attr('disabled', true);
