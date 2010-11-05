@@ -387,6 +387,16 @@ $(document).ready(function(){
 	resistence_tbresistente[cepaTBResistenteNum] = new Array();
 	sensibility_tbresistente[cepaTBResistenteNum] = new Array();
 	// add row button
+	$('#testeSensibilidade').change(function(){
+		if ($(this).val() == 'naoRealizado')
+			$('select.origem_tbresistente').each(function(){
+				$(this).val('');
+				$(this).change();
+				$(this).attr('disabled',true);
+			});
+		else
+			$('select.origem_tbresistente').removeAttr('disabled');
+	});
 	$("#addlineTBResistente_button").click(function(){
 		var origemStr = $('#origem_tbresistente_'+ cepaTBResistenteNum).val();
 		if(origemStr.replace(/-/g,'')){
@@ -489,6 +499,14 @@ $(document).ready(function(){
 				}
 			});
 		} else {
+			$('#numero_cepa_tbresistente_cultura_' + num).attr('disabled',true);
+			$('#numero_cepa_tbresistente_cultura_' + num).val('');
+			$('#data_recebimento_tbresistente_cepa_' + num).attr('disabled',true);
+			$('#data_recebimento_tbresistente_cepa_' + num).val('');
+			$('#hora_recebimento_tbresistente_cepa_' + num).attr('disabled',true);
+			$('#hora_recebimento_tbresistente_cepa_' + num).val('');
+			$('#cultura_coleta_tbresistente_responsavel_' + num).attr('disabled',true);
+			$('#cultura_coleta_tbresistente_responsavel_' + num).val('');
 			$('#numero_cepa_cultura_' + num).attr('disabled', true);
 			$('#cultura_coleta_responsavel_' + num).attr('disabled', true);
 			$('#cultura_coleta_responsavel_' + num).val('');
