@@ -26,14 +26,19 @@ $(document).ready(function(){
 	//Relation between forms
 	//Diagnóstico - Consulta e FollowUp
 	var urlString = $(location).attr('href');
+	var urlArray = urlString.split('/');
 	var numPaciente = urlString[urlString.length - 2];
+	var numArgs = 3;
 	if (urlString.search("edit") != -1)
 		var numForm = parseInt(urlString[urlString.length - 4]);
 	else
 		var numForm = parseInt(urlString[urlString.length - 4]) + 1;
+	var urlbase = '';
+	for (var j = 0; j < urlArray.length - numArgs-1; j++)
+		urlbase += urlArray[j] + '/';
 	$.ajax({
 		type: 'POST',
-		url:'../../../patientLastRegister/' + numForm + '/' + numPaciente + '/',
+		url: urlbase + '/patientLastRegister/' + numForm + '/' + numPaciente + '/',
 		dataType: "html",
 		success: function(text){
 			if (window.DOMParser)
@@ -45,208 +50,210 @@ $(document).ready(function(){
 				xml.async="false";
 				xml.loadXML(text);
 			}
-			//console.log(text);
-			//console.log(xml);
-			if (urlString.search("edit") != -1){
-				//Edit
-				var elements = xml.getElementsByTagName('exames')[0].childNodes;
-				$(elements).each(function(){
-					var el = $(this).get(0);
-					if($(el)[0].nodeType == xml.ELEMENT_NODE){
-						var tagname = $(el)[0].tagName;
-						//console.log(tagname + ' : ' + $(el).text());
-						var hlcolor = '#FFF8C6';
-						//Radio
-						if (tagname == 'amostra')
-							$('input[name=amostra]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).attr('checked',true);
-							});
-						//Checkbox
-						if (tagname == 'fitaHain')
-							$('input[name=fitaHain]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).attr('checked',true);
-							});
-						if (tagname == 'isoniazida')
-							$('input[name=isoniazida]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).attr('checked',true);
-							});
-						if (tagname == 'rifampicina')
-							$('input[name=rifampicina]').each(function(){
-								if ($(el).text().search($(this).val()) != -1)
-									$(this).attr('checked',true);
-							});
-						//Tables
-						if (tagname == 'soroColetado')
-						{
-							var values = $(el).text().split(' ');
-							var i;
-							var index = 1;
-							for (i=0;i<values.length;i++)
-								if (values[i] != "")
-								{
-									$('table').find('#soroColetado_' + index.toString()).val(values[i]);
-									if (values[i] == 'sim')
-										$('#numeroSoro_' + index.toString()).removeAttr('disabled');
-									if (i < values.length - 2)
-										if (values[i+2] != ''){
-											$('#numeroSoro_' + index.toString()).val('1');
-											$('#addSoro_button').click();
-										}
-									index++;
-								}
-						}
-						if (tagname == 'numeroSoro')
-						{
-							var values = $(el).text().split(' ');
-							var i;
-							var index = 1;
-							for (i=0;i<values.length;i++)
-								if (values[i] != "")
-								{
-									$('table').find('#numeroSoro_' + index.toString()).val(values[i]);
-									index++;
-								}
-						}
-						if (tagname == 'sangueColetado')
-						{
-							var values = $(el).text().split(' ');
-							var i;
-							var index = 1;
-							for (i=0;i<values.length;i++)
-								if (values[i] != "")
-								{
-									$('table').find('#sangueColetado_' + index.toString()).val(values[i]);
-									if (values[i] == 'sim')
-										$('#numeroSangue_' + index.toString()).removeAttr('disabled');
-									if (i < values.length - 2)
-										if (values[i+2] != ''){
-											$('#numeroSangue_' + index.toString()).val('1');
-											$('#addSangue_button').click();
-										}
-									index++;
-								}
-						}
-						if (tagname == 'numeroSangue')
-						{
-							var values = $(el).text().split(' ');
-							var i;
-							var index = 1;
-							for (i=0;i<values.length;i++)
-								if (values[i] != "")
-								{
-									$('table').find('#numeroSangue_' + index.toString()).val(values[i]);
-									index++;
-								}
-						}
-						if (tagname.search('origem_cepa') != -1)
-						{
-							//console.log($('#'+tagname));
-							//console.log($('table').find('#'+tagname));
-							if (tagname[tagname.length - 1] > 1)
-								$('#addline_button').click();
-							var num = tagname[tagname.length - 1];
-							$('#baciloscopia_metodo_' + num).removeAttr('disabled');
-							$('#baciloscopia_coleta_responsavel_' + num).removeAttr('disabled');
-							$('#baciloscopia_data_' + num).removeAttr('disabled');
-							$('#baciloscopia_hora_cepa_' + num).removeAttr('disabled');
-							$('#baciloscopia_material_cepa_' + num).removeAttr('disabled');
-							$('#numero_cepa_' + num).removeAttr('disabled');
-							$('#data_cepa_' + num).removeAttr('disabled');
-							$('#hora_cepa_' + num).removeAttr('disabled');
-							$('#baciloscopia_resultado_cepa_' + num).removeAttr('disabled');
-							$('#data_recebimento_cepa_' + num).removeAttr('disabled');
-							$('#hora_recebimento_cepa_' + num).removeAttr('disabled');
-							$('#material_cepa_' + num).removeAttr('disabled');
-							$('#analise_responsavel_' + num).removeAttr('disabled');
-							$('#aspecto_escarro_' + num).removeAttr('disabled');
-						}
-						if (tagname.search('origem_cultura') != -1)
-						{
-							if (tagname[tagname.length - 1] > 1)
-								$('#addlineCultura_button').click();
-							var num = tagname[tagname.length - 1];
-							$('#numero_cepa_cultura_' + num).removeAttr('disabled');
-							$('#cultura_coleta_responsavel_' + num).removeAttr('disabled');
-							$('#data_cultura_cepa_' + num).removeAttr('disabled');
-							$('#hora_cultura_cepa_' + num).removeAttr('disabled');
-							$('#data_processamento_cultura_' + num).removeAttr('disabled');
-							$('#hora_processamento_cultura_' + num).removeAttr('disabled');
-							$('#data_resultado_cultura_' + num).removeAttr('disabled');
-							$('#hora_resultado_cultura_' + num).removeAttr('disabled');
-							$('#metodo_cultura_cepa_' + num).removeAttr('disabled');
-							$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
-							$('#dias_cultura_cepa_' + num).removeAttr('disabled');
-							$('#identificacao_cultura_cepa_' + num).removeAttr('disabled');
-						}
-						if (tagname.search('origem_tbresistente') != -1)
-						{
-							if (tagname[tagname.length - 1] > 1)
-								$('#addlineTBResistente_button').click();
-							var num = tagname[tagname.length - 1];
-							$('#numero_cepa_tbresistente_cultura_' + num).removeAttr('disabled');
-							$('#cultura_coleta_tbresistente_responsavel_' + num).removeAttr('disabled');
-							$('#data_cultura_tbresistente_cepa_' + num).removeAttr('disabled');
-							$('#hora_cultura_tbresistente_cepa_' + num).removeAttr('disabled');
-							$('#hora_processamento_tbresistente_cultura_' + num).removeAttr('disabled');
-							$('#hora_resultado_tbresistente_cultura_' + num).removeAttr('disabled');
-							$('#data_processamento_tbresistente_cultura_' + num).removeAttr('disabled');
-							$('#data_resultado_tbresistente_cultura_' + num).removeAttr('disabled');
-							$('#metodo_tbresistente_cepa_' + num).removeAttr('disabled');
-							$('#resultado_tbresistente_cepa_' + num).removeAttr('disabled');
-							$('#dias_tbresistente_cepa_' + num).removeAttr('disabled');
-							$('#identificacao_tbresistente_cepa_' + num).removeAttr('disabled');
-							$('#data_tsa_tbresistente_cultura_' + num).removeAttr('disabled');
-						}
-						if (tagname.search('valores_tbresistente_sensibilidade') != -1)
-						{
-							var num = tagname[tagname.length - 1];
-							var values = $(el).text().split(',');
-							var i;
-							for (i=0;i<values.length;i++){
-								$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',true);
-								$('#sensibilidade_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
-								$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',false);
-								$('#resistente_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+			if (xml.getElementsByTagName('error')[0] != undefined){
+				if (urlString.search("edit") != -1){
+					//Edit
+					var fichaId = xml.getElementsByTagName('ficha_id')[0].childNodes[0].nodeValue;
+					$('#form_exams').append("<input type='hidden' name='edit' id='edit' value='" + fichaId  + "'/>");
+					var elements = xml.getElementsByTagName('exames')[0].childNodes;
+					$(elements).each(function(){
+						var el = $(this).get(0);
+						if($(el)[0].nodeType == xml.ELEMENT_NODE){
+							var tagname = $(el)[0].tagName;
+							//console.log(tagname + ' : ' + $(el).text());
+							var hlcolor = '#FFF8C6';
+							//Radio
+							if (tagname == 'amostra')
+								$('input[name=amostra]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).attr('checked',true);
+								});
+							//Checkbox
+							if (tagname == 'fitaHain')
+								$('input[name=fitaHain]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).attr('checked',true);
+								});
+							if (tagname == 'isoniazida')
+								$('input[name=isoniazida]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).attr('checked',true);
+								});
+							if (tagname == 'rifampicina')
+								$('input[name=rifampicina]').each(function(){
+									if ($(el).text().search($(this).val()) != -1)
+										$(this).attr('checked',true);
+								});
+							//Tables
+							if (tagname == 'soroColetado')
+							{
+								var values = $(el).text().split(' ');
+								var i;
+								var index = 1;
+								for (i=0;i<values.length;i++)
+									if (values[i] != "")
+									{
+										$('table').find('#soroColetado_' + index.toString()).val(values[i]);
+										if (values[i] == 'sim')
+											$('#numeroSoro_' + index.toString()).removeAttr('disabled');
+										if (i < values.length - 2)
+											if (values[i+2] != ''){
+												$('#numeroSoro_' + index.toString()).val('1');
+												$('#addSoro_button').click();
+											}
+										index++;
+									}
 							}
-						}
-						if (tagname.search('valores_tbresistente_resistencia') != -1)
-						{
-							var num = tagname[tagname.length - 1];
-							var values = $(el).text().split(',');
-							var i;
-							for (i=0;i<values.length;i++){
-								$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',true);
-								$('#resistente_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
-								$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',false);
-								$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+							if (tagname == 'numeroSoro')
+							{
+								var values = $(el).text().split(' ');
+								var i;
+								var index = 1;
+								for (i=0;i<values.length;i++)
+									if (values[i] != "")
+									{
+										$('table').find('#numeroSoro_' + index.toString()).val(values[i]);
+										index++;
+									}
 							}
-						}
-						if (tagname.search('valores_tbresistente_nao_testado') != -1)
-							$('#nao_testado_tbresistente_' + tagname[tagname.length-1]).html($(el).text());
+							if (tagname == 'sangueColetado')
+							{
+								var values = $(el).text().split(' ');
+								var i;
+								var index = 1;
+								for (i=0;i<values.length;i++)
+									if (values[i] != "")
+									{
+										$('table').find('#sangueColetado_' + index.toString()).val(values[i]);
+										if (values[i] == 'sim')
+											$('#numeroSangue_' + index.toString()).removeAttr('disabled');
+										if (i < values.length - 2)
+											if (values[i+2] != ''){
+												$('#numeroSangue_' + index.toString()).val('1');
+												$('#addSangue_button').click();
+											}
+										index++;
+									}
+							}
+							if (tagname == 'numeroSangue')
+							{
+								var values = $(el).text().split(' ');
+								var i;
+								var index = 1;
+								for (i=0;i<values.length;i++)
+									if (values[i] != "")
+									{
+										$('table').find('#numeroSangue_' + index.toString()).val(values[i]);
+										index++;
+									}
+							}
+							if (tagname.search('origem_cepa') != -1)
+							{
+								//console.log($('#'+tagname));
+								//console.log($('table').find('#'+tagname));
+								if (tagname[tagname.length - 1] > 1)
+									$('#addline_button').click();
+								var num = tagname[tagname.length - 1];
+								$('#baciloscopia_metodo_' + num).removeAttr('disabled');
+								$('#baciloscopia_coleta_responsavel_' + num).removeAttr('disabled');
+								$('#baciloscopia_data_' + num).removeAttr('disabled');
+								$('#baciloscopia_hora_cepa_' + num).removeAttr('disabled');
+								$('#baciloscopia_material_cepa_' + num).removeAttr('disabled');
+								$('#numero_cepa_' + num).removeAttr('disabled');
+								$('#data_cepa_' + num).removeAttr('disabled');
+								$('#hora_cepa_' + num).removeAttr('disabled');
+								$('#baciloscopia_resultado_cepa_' + num).removeAttr('disabled');
+								$('#data_recebimento_cepa_' + num).removeAttr('disabled');
+								$('#hora_recebimento_cepa_' + num).removeAttr('disabled');
+								$('#material_cepa_' + num).removeAttr('disabled');
+								$('#analise_responsavel_' + num).removeAttr('disabled');
+								$('#aspecto_escarro_' + num).removeAttr('disabled');
+							}
+							if (tagname.search('origem_cultura') != -1)
+							{
+								if (tagname[tagname.length - 1] > 1)
+									$('#addlineCultura_button').click();
+								var num = tagname[tagname.length - 1];
+								$('#numero_cepa_cultura_' + num).removeAttr('disabled');
+								$('#cultura_coleta_responsavel_' + num).removeAttr('disabled');
+								$('#data_cultura_cepa_' + num).removeAttr('disabled');
+								$('#hora_cultura_cepa_' + num).removeAttr('disabled');
+								$('#data_processamento_cultura_' + num).removeAttr('disabled');
+								$('#hora_processamento_cultura_' + num).removeAttr('disabled');
+								$('#data_resultado_cultura_' + num).removeAttr('disabled');
+								$('#hora_resultado_cultura_' + num).removeAttr('disabled');
+								$('#metodo_cultura_cepa_' + num).removeAttr('disabled');
+								$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
+								$('#dias_cultura_cepa_' + num).removeAttr('disabled');
+								$('#identificacao_cultura_cepa_' + num).removeAttr('disabled');
+							}
+							if (tagname.search('origem_tbresistente') != -1)
+							{
+								if (tagname[tagname.length - 1] > 1)
+									$('#addlineTBResistente_button').click();
+								var num = tagname[tagname.length - 1];
+								$('#numero_cepa_tbresistente_cultura_' + num).removeAttr('disabled');
+								$('#cultura_coleta_tbresistente_responsavel_' + num).removeAttr('disabled');
+								$('#data_cultura_tbresistente_cepa_' + num).removeAttr('disabled');
+								$('#hora_cultura_tbresistente_cepa_' + num).removeAttr('disabled');
+								$('#hora_processamento_tbresistente_cultura_' + num).removeAttr('disabled');
+								$('#hora_resultado_tbresistente_cultura_' + num).removeAttr('disabled');
+								$('#data_processamento_tbresistente_cultura_' + num).removeAttr('disabled');
+								$('#data_resultado_tbresistente_cultura_' + num).removeAttr('disabled');
+								$('#metodo_tbresistente_cepa_' + num).removeAttr('disabled');
+								$('#resultado_tbresistente_cepa_' + num).removeAttr('disabled');
+								$('#dias_tbresistente_cepa_' + num).removeAttr('disabled');
+								$('#identificacao_tbresistente_cepa_' + num).removeAttr('disabled');
+								$('#data_tsa_tbresistente_cultura_' + num).removeAttr('disabled');
+							}
+							if (tagname.search('valores_tbresistente_sensibilidade') != -1)
+							{
+								var num = tagname[tagname.length - 1];
+								var values = $(el).text().split(',');
+								var i;
+								for (i=0;i<values.length;i++){
+									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',true);
+									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
+									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',false);
+									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+								}
+							}
+							if (tagname.search('valores_tbresistente_resistencia') != -1)
+							{
+								var num = tagname[tagname.length - 1];
+								var values = $(el).text().split(',');
+								var i;
+								for (i=0;i<values.length;i++){
+									$('#resistente_tbresistente_' + num + '_' + values[i]).attr('checked',true);
+									$('#resistente_tbresistente_' + num + '_' + values[i]).removeAttr('disabled');
+									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('checked',false);
+									$('#sensibilidade_tbresistente_' + num + '_' + values[i]).attr('disabled',true);
+								}
+							}
+							if (tagname.search('valores_tbresistente_nao_testado') != -1)
+								$('#nao_testado_tbresistente_' + tagname[tagname.length-1]).html($(el).text());
 
-						$('#'+tagname).val($(el).text());
-						$('#'+tagname).change();
-					}
-				});
-			}else{
-			//Relation
-				var elements = xml.getElementsByTagName('documento')[0].childNodes;
-				$(elements).each(function(){
-					var el = $(this).get(0);
-					if($(el)[0].nodeType == xml.ELEMENT_NODE){
-						var tagname = $(el)[0].tagName;
-						idDiv = $('#'+tagname).parent().attr('id');
-						//console.log(tagname + ' : ' + $(el).text());
-						var hlcolor = '#FFF8C6';
-						if (tagname == 'numeroPaciente')
-							$('#' + tagname).val($(el).text());
-						if (tagname == 'unidade')
-							$('#' + tagname).val($(el).text());
-					}
-				});
+							$('#'+tagname).val($(el).text());
+							$('#'+tagname).change();
+						}
+					});
+				}else{
+				//Relation
+					var elements = xml.getElementsByTagName('documento')[0].childNodes;
+					$(elements).each(function(){
+						var el = $(this).get(0);
+						if($(el)[0].nodeType == xml.ELEMENT_NODE){
+							var tagname = $(el)[0].tagName;
+							idDiv = $('#'+tagname).parent().attr('id');
+							//console.log(tagname + ' : ' + $(el).text());
+							var hlcolor = '#FFF8C6';
+							if (tagname == 'numeroPaciente')
+								$('#' + tagname).val($(el).text());
+							if (tagname == 'unidade')
+								$('#' + tagname).val($(el).text());
+						}
+					});
+				}
 			}
 		}
 	});

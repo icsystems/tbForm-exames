@@ -377,6 +377,46 @@ function CEPARow(numCepa){
 }
 
 $(document).ready( function(){
+	/*---------------------------Auxiliar function-------------------------------*/
+	$.fn.compareDate = function(argumento){
+		//Essa funcao eh utilizada para comprar a ordem
+		//cronologica entre duas datas.
+		//Caso a data do argumento seja menor, e retornado o numero 1
+		//caso contrario, e retornado -1
+
+		//Caso uma delas nao foi preenchida, a funcao retorna 0
+		if ($(this).val().length == 0)
+			return 0;
+		if ($(argumento).val().length == 0)
+			return 0;
+		//Criacao de um array contendo dia, mes e ano
+		var arrayData1 = $(this).val().split('/');
+		var arrayData2 = $(argumento).val().split('/');
+		//Compara anos
+		if (arrayData1[2] > arrayData2[2])
+			return 1;
+		else if (arrayData1[2] < arrayData2[2])
+			return -1;
+		else
+		{
+			//Compara mes
+			if (arrayData1[1] > arrayData2[1])
+				return 1;
+			else if (arrayData1[1] < arrayData2[1])
+				return -1;
+			else
+			{
+				//Compara dia
+				if (arrayData1[0] > arrayData2[0])
+					return 1;
+				else if (arrayData1[0] < arrayData2[0])
+					return -1;
+				else return 0;
+			}
+		}
+
+	}
+	/*---------------------------------------------------------------------------*/
 	var cepaNum = 1;
 	var content = CEPARow(cepaNum);
 	$('table.cepa').append(content);
@@ -415,8 +455,8 @@ $(document).ready( function(){
 			$('#analise_responsavel_' + num).removeAttr('disabled');
 			$('#aspecto_escarro_' + num).removeAttr('disabled');
 			$('#data_recebimento_cepa_' + num).livequery('change', function(){
-				console.log(Date.parse($('#data_recebimento_cepa_' + num).val()));
-				if (Date.parse($('#data_recebimento_cepa_' + num).val()) > Date.parse($('#baciloscopia_data_' + num).val()))
+				console.log($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)));
+				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) == -1)
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
 					$('#data_recebimento_cepa_' + num).val('');
