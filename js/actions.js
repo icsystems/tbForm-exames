@@ -431,10 +431,63 @@ $(document).ready(function(){
 	//Prova Realizada?
 	$('#provaRealizada').change(function(){
 		var dep = new Array();
+		dep[0] = '#divDataAplicacao';
+		dep[1] = '#divLeituraRealizada';
+		var ped = new Array();
+		ped[0] = '#divResultadoLeitura';
+		ped[1] = '#divDataLeitura';
+		ped[2] = '#divPt';
+		// Se sim, disponibilizar colunas listadas a cima
+		if($(this).val()=='sim'){
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).addClass('required');
+				});
+				if($(dep[div]).css('display') != 'block')
+					$(dep[div]).toggle(function() {
+						$(this).css('background-color', hlcolor);
+						$(this).animate({backgroundColor : "white"}, 4000);
+					});
+			}
+		}
+		// Se nao, ocultar colunas listadas a cima
+		else {
+			for(div in dep){
+				var elems = $('*', dep[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(dep[div]).css('display') != 'none')
+					$(dep[div]).toggle();
+			}
+			for(div in ped){
+				var elems = $('*', ped[div]);
+				$(elems).each(function(){
+					var element = $(this);
+					if (   element[0].nodeName != 'FIELDSET'
+					    && element[0].nodeName != 'SMALL'
+					    && element[0].nodeName != 'OPTION')
+						$(this).removeClass('required');
+				});
+				if($(ped[div]).css('display') != 'none')
+					$(ped[div]).toggle();
+			}
+		}
+	});
+	$('#leituraRealizada').change(function(){
+		var dep = new Array();
 		dep[0] = '#divResultadoLeitura';
-		dep[1] = '#divDataAplicacao';
-		dep[2] = '#divDataLeitura';
-		dep[3] = '#divPt';
+		dep[1] = '#divDataLeitura';
+		dep[2] = '#divPt';
 		// Se sim, disponibilizar colunas listadas a cima
 		if($(this).val()=='sim'){
 			for(div in dep){

@@ -259,24 +259,27 @@ function CEPATBResistenteRow(numCepa){
 			.addClass('description')
 		)
 		.append($('<td />')
-			.append('Resultado')
+			.append('Data do resultado')
 			.addClass('description')
 		)
 		.append($('<td />')
-			.append($('<select /> ')
-				.css(  'width', '100px')
+			.append($('<input/>')
 				.attr('disabled', true)
-				.attr('name', 'resultado_tbresistente_cepa_' + numCepa)
-				.attr(  'id', 'resultado_tbresistente_cepa_' + numCepa)
-				.addClass('resultado_tbresistente_cepa')
-				.append($('<option> ---- </option>')
-					.attr('value', '')
-				)
-				.append($('<option> Sensível </option>')
-					.attr('value', 'sensivel')
-				)
-				.append($('<option> Resistente </option>')
-					.attr('value', 'resistente')
+				.attr('name', 'data_resultado_tbresistente_cultura_' + numCepa)
+				.attr(  'id', 'data_resultado_tbresistente_cultura_' + numCepa)
+				.addClass('data')
+				.attr('size', '11')
+				.attr('readonly', 'readonly')
+			)
+			.append($('<div />')
+				.appendText('hora: ')
+				.append($('<input/>')
+					.attr('disabled', true)
+					.attr('name', 'hora_resultado_tbresistente_cultura_' + numCepa)
+					.attr(  'id', 'hora_resultado_tbresistente_cultura_' + numCepa)
+					.addClass('hour')
+					.attr('maxlength', '5')
+					.attr('size', '5')
 				)
 			)
 		)
@@ -322,28 +325,28 @@ function CEPATBResistenteRow(numCepa){
 				.addClass('cultura_coleta_responsavel')
 			)
 		)
+		.append($('<td colspan="2"/>')
+			.append('')
+		)
 		.append($('<td />')
-			.append('Data do resultado')
+			.append('Resultado')
 			.addClass('description')
 		)
 		.append($('<td />')
-			.append($('<input/>')
+			.append($('<select /> ')
+				.css(  'width', '100px')
 				.attr('disabled', true)
-				.attr('name', 'data_resultado_tbresistente_cultura_' + numCepa)
-				.attr(  'id', 'data_resultado_tbresistente_cultura_' + numCepa)
-				.addClass('data')
-				.attr('size', '11')
-				.attr('readonly', 'readonly')
-			)
-			.append($('<div />')
-				.appendText('hora: ')
-				.append($('<input/>')
-					.attr('disabled', true)
-					.attr('name', 'hora_resultado_tbresistente_cultura_' + numCepa)
-					.attr(  'id', 'hora_resultado_tbresistente_cultura_' + numCepa)
-					.addClass('hour')
-					.attr('maxlength', '5')
-					.attr('size', '5')
+				.attr('name', 'resultado_tbresistente_cepa_' + numCepa)
+				.attr(  'id', 'resultado_tbresistente_cepa_' + numCepa)
+				.addClass('resultado_tbresistente_cepa')
+				.append($('<option> ---- </option>')
+					.attr('value', '')
+				)
+				.append($('<option> Sensível </option>')
+					.attr('value', 'sensivel')
+				)
+				.append($('<option> Resistente </option>')
+					.attr('value', 'resistente')
 				)
 			)
 		)
@@ -441,32 +444,34 @@ $(document).ready(function(){
 			$('#data_processamento_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#data_resultado_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#metodo_tbresistente_cepa_' + num).removeAttr('disabled');
-			$('#resultado_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#dias_tbresistente_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_tbresistente_cepa_' + num).removeAttr('disabled');
-			$('#resultado_tbresistente_cepa_' + num).livequery('change', function(){
-				if ($(this).val() == 'resistente'){
-					for(var i= 0; i<l.length; i++){
-						$('#sensibilidade_tbresistente_'+num+'_'+l[i]).attr('disabled',true);
-						$('#resistente_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
-						$('#sensibilidade_tbresistente_'+num+'_'+l[i]).parent().addClass('disabledField');
-						$('#resistente_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
-					}
-				}else if ($(this).val() == 'sensivel'){
-					for(var i= 0; i<l.length; i++){
-						$('#sensibilidade_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
-						$('#resistente_tbresistente_'+num+'_'+l[i]).attr('disabled',true);
-						$('#sensibilidade_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
-						$('#resistente_tbresistente_'+num+'_'+l[i]).parent().addClass('disabledField');
-					}
-				}else{
-					for(var i= 0; i<l.length; i++){
-						$('#sensibilidade_tbresistente_'+num+'_'+l[i]).attr('disabled',true);
-						$('#sensibilidade_tbresistente_'+num+'_'+l[i]).parent().addClass('disabledField');
-						$('#resistente_tbresistente_'+num+'_'+l[i]).attr('disabled',true);
-						$('#resistente_tbresistente_'+num+'_'+l[i]).parent().addClass('disabledField');
-					}
+			for(var i= 0; i<l.length; i++){
+				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
+				$('#resistente_tbresistente_'+num+'_'+l[i]).removeAttr('disabled');
+				$('#sensibilidade_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
+				$('#resistente_tbresistente_'+num+'_'+l[i]).parent().removeClass('disabledField');
+			}
+			$('.input_sensibilidade_tbresistente').livequery('change',function(){
+				var allChecked = true;
+				for(var i= 0; i<l.length; i++){
+					if (!$('#sensibilidade_tbresistente_'+num+'_'+l[i]).is(':checked'))
+						allChecked = false;
 				}
+				if (allChecked)
+					$('#resultado_tbresistente_cepa_' + num).val('sensivel');
+				else
+					$('#resultado_tbresistente_cepa_' + num).val('');
+			});
+			$('.input_resistente_tbresistente').livequery('change',function(){
+				var oneChecked = false;
+				for(var i= 0; i<l.length; i++)
+					if ($('#resistente_tbresistente_'+num+'_'+l[i]).is(':checked'))
+						oneChecked = true;
+				if (oneChecked)
+					$('#resultado_tbresistente_cepa_' + num).val('resistente');
+				else
+					$('#resultado_tbresistente_cepa_' + num).val('');
 			});
 			$('#data_recebimento_tbresistente_cepa_'+num).livequery('change', function(){
 				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
