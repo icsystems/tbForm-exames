@@ -72,7 +72,7 @@
 			<legend>Prova Tuberculínica (PT)</legend>
 			<div id='divProvaRealizada' class='primary required'>
 				<label for='provaRealizada'>Prova Tuberculínica Realizada?</label>
-				<select name='provaRealizada' id='provaRealizada' class='selectOne required'>
+				<select name='provaRealizada' id='provaRealizada' class='selectOne'>
 					<option value=''    > ------    </option>
 					<option value='sim'	> Sim 		</option>
 					<option value='nao'	> Não 		</option>
@@ -99,7 +99,7 @@
 			<legend> IGRA </legend>
 			<div id='divIGRA' class='primary required'>
 				<label for='IGRA'>IGRA:</label>
-				<select name='IGRA' id='IGRA' class='selectOne required'>
+				<select name='IGRA' id='IGRA' class='selectOne'>
 					<option value=''             > ------    </option>
 					<option value='sim'          > Sim       </option>
 					<option value='nao'          > Não  </option>
@@ -119,7 +119,7 @@
 			</div>
 			<div id='divIGRAResultado' class='secondary'>
 				<label for='IGRAResultado'>Resultado:</label>
-				<select name='IGRAResultado' id='IGRAResultado' class='selectOne required'>
+				<select name='IGRAResultado' id='IGRAResultado' class='selectOne'>
 						<option value=''          > ------     </option>
 						<option value='positivo'  > Positivo   </option>
 						<option value='negativo'  > Negativo   </option>
@@ -193,13 +193,13 @@
 			<fieldset>
 				<legend>Amostra:</legend>
 				<label for='amostra' class='labelRadio'>
-					<input type="radio" name="amostra" class='required' value="1amostra"/> 1ª amostra
+					<input type="radio" name="amostra"  value="1amostra"/> 1ª amostra
 				</label>
 				<label for='amostra' class='labelRadio'>
-					<input type="radio" name="amostra" class='required' value="2amostra" /> 2ª amostra
+					<input type="radio" name="amostra" value="2amostra" /> 2ª amostra
 				</label>
 				<label for='amostra' class='labelRadio'>
-					<input type="radio" name="amostra" class='required' value="pool" /> Pool
+					<input type="radio" name="amostra" value="pool" /> Pool
 				</label>
 			</fieldset>
 			</div>
@@ -221,7 +221,7 @@
 			<legend> Testes Moleculares(diagnóstico de TB) </legend>
 			<div id='divTestesMoleculares' class='primary required'>
 				<label for='testesMoleculares'>Testes Moleculares:</label>
-				<select name='testesMoleculares' id='testesMoleculares' class='selectOne required'>
+				<select name='testesMoleculares' id='testesMoleculares' class='selectOne'>
 					<option value=''             > ------    </option>
 					<option value='sim'          > Sim       </option>
 					<option value='nao'          > Não  </option>
@@ -268,7 +268,7 @@
 			<legend> Teste de Sensibilidade </legend>
 			<div id='divTesteSensibilidade' class='primary required'>
 				<label for='testeSensibilidade'>Teste de Sensibilidade:</label>
-				<select name='testeSensibilidade' id='testeSensibilidade' class='select required'>
+				<select name='testeSensibilidade' id='testeSensibilidade' class='selectOne'>
 					<option value=''             	> ------    	</option>
 					<option value='realizado'       > Realizado  	</option>
 					<option value='naoRealizado'    > Não Relizado  </option>
@@ -295,7 +295,7 @@
 			<legend>Testes Moleculares de Resistência</legend>
 			<div id='divGenXpert' name='divGenXpert' class='primary required'>
 				<label for='genXpert'>GenXpert: </label>
-				<select id='genXpert' name='genXpert'>
+				<select id='genXpert' name='genXpert' class='selectOne'>
 					<option value=''		>-------</option>
 					<option value='negativo'>Negativo</option>
 					<option value='positivo'>Positivo</option>
@@ -370,19 +370,19 @@
 			<fieldset>
 				<legend> Isoniazida	</legend>
 				<label for='isoniazida' class='labelRadio'>
-					<input type="radio" name="isoniazida" class='required' value="sensivel"/> Sensível
+					<input type="radio" name="isoniazida" value="sensivel"/> Sensível
 				</label>
 				<label for='isoniazida' class='labelRadio'>
-					<input type="radio" name="isoniazida" class='required' value="resistente" /> Resistente
+					<input type="radio" name="isoniazida" value="resistente" /> Resistente
 				</label>
 			</fieldset>
 			<fieldset>
 				<legend> Rifampicina </legend>
 				<label for='rifampicina' class='labelRadio'>
-					<input type="radio" name="rifampicina" class='required' value="sensivel"/> Sensível
+					<input type="radio" name="rifampicina" value="sensivel"/> Sensível
 				</label>
 				<label for='rifampicina' class='labelRadio'>
-					<input type="radio" name="rifampicina" class='required' value="resistente" /> Resistente
+					<input type="radio" name="rifampicina" value="resistente" /> Resistente
 				</label>
 			</fieldset>
 		</div>
