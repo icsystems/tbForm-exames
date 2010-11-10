@@ -915,8 +915,8 @@ $(document).ready(function(){
 	$("#addSoro_button").click(function(){
 		if($('#soroColetado_'+soroNum).val() == 'sim'){
 			if($('#numeroSoro_'+soroNum).valid()){
-				$('#numeroSoro_'+ numSoro).attr('readonly', 'true');
-				$('#soroColetado_'+ numSoro).attr('readonly', 'true');
+				$('#numeroSoro_'+ soroNum).attr('readonly', 'true');
+				$('#soroColetado_'+ soroNum).attr('readonly', 'true');
 				soroNum++;
 				var content = soroRow(soroNum);
 				$('table.soro').append(content);
