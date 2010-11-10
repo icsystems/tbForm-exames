@@ -528,7 +528,7 @@ $(document).ready( function(){
 			$('#baciloscopia_hora_cepa_' + num).val('');
 			$('#numero_cepa_' + num).attr('disabled', true);
 			$('#numero_cepa_' + num).val('');
-			$('#analise_responsavel_' + num).atrr('disabled',true);
+			$('#analise_responsavel_' + num).attr('disabled',true);
 			$('#analise_responsavel_' + num).val('');
 			$('#data_cepa_' + num).attr('disabled', true);
 			$('#data_cepa_' + num).val('');
