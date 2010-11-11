@@ -381,6 +381,50 @@ function CEPATBResistenteRow(numCepa){
 }
 
 $(document).ready(function(){
+	/*---------------------------Auxiliar function-------------------------------*/
+	$.fn.compareDate = function(argumento){
+		//Essa funcao eh utilizada para comprar a ordem
+		//cronologica entre duas datas.
+		//Caso a data do argumento seja menor, e retornado o numero 1
+		//caso contrario, e retornado -1
+
+		//Caso uma delas nao foi preenchida, a funcao retorna 0
+		if ($(this).val().length == 0 || $(argumento).val().length == 0)
+			return 0;
+		//Criacao de um array contendo dia, mes e ano
+		var arrayData1 = $(this).val().split('/');
+		var arrayData2 = $(argumento).val().split('/');
+		var ano1 = parseInt(arrayData1[2],10);
+		var ano2 = parseInt(arrayData2[2],10);
+		var mes1 = parseInt(arrayData1[1],10);
+		var mes2 = parseInt(arrayData2[1],10);
+		var dia1 = parseInt(arrayData1[0],10);
+		var dia2 = parseInt(arrayData2[0],10);
+		//Compara anos
+		if (ano1 > ano2)
+			return 1;
+		else if (ano1 < ano2)
+			return -1;
+		else
+		{
+			//Compara mes
+			if (mes1 > mes2)
+				return 1;
+			else if (mes1 < mes2)
+				return -1;
+			else
+			{
+				//Compara dia
+				if (dia1 > dia2)
+					return 1;
+				else if (dia1 < dia2)
+					return -1;
+				else return 0;
+			}
+		}
+
+	}
+	/*---------------------------------------------------------------------------*/
 	var cepaTBResistenteNum = 1;
 	var content = CEPATBResistenteRow(cepaTBResistenteNum);
 	$('table.cepaTBResistente').append(content);
@@ -417,23 +461,6 @@ $(document).ready(function(){
 		var origemStr = $(this).val();
 		l = medicines;
 		num = parseInt($(this).attr('id').split('_')[2]);
-		/*$('table.cepaCultura').append(content);
-		not_tested[cepaCulturaNum] = new Array();
-		not_tested[cepaCulturaNum] = not_tested[0];
-		$('#nao_testado_'+cepaCulturaNum).html(not_tested[cepaCulturaNum].toString());
-		add row button
-		$("#addlineCultura_button").click(function(){
-			var origemStr = $('#origem_cultura_'+ cepaCulturaNum).val();
-			if(origemStr.replace(/-/g,'')){
-			cepaCulturaNum++;
-			var content = CEPACulturaRow(cepaCulturaNum);
-			$('table.cepaCultura').append(CEPACulturaRow(cepaCulturaNum));
-			not_tested[cepaCulturaNum] = new Array();
-			not_tested[cepaCulturaNum] = not_tested[0];
-			$('#nao_testado_'+cepaCulturaNum).html(not_tested[cepaCulturaNum].toString());
-			}
-			});*/
-
 		if(origemStr.replace(/-/g,'')){
 			$('#numero_cepa_tbresistente_cultura_' + num).removeAttr('disabled');
 			$('#cultura_coleta_tbresistente_responsavel_' + num).removeAttr('disabled');
@@ -473,38 +500,59 @@ $(document).ready(function(){
 				else
 					$('#resultado_tbresistente_cepa_' + num).val('');
 			});
-			$('#data_recebimento_tbresistente_cepa_'+num).livequery('change', function(){
-				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+			$('#data_processamento_tbresistente_cultura_' + num).livequery('change', function(){
+				if ($(this).val())
+					$('#hora_processamento_tbresistente_cultura_'+num).addClass('required');
+				else
+					$('#hora_processamento_tbresistente_cultura_'+num).removeClass('required');
+				if ($($('#data_processamento_tbresistente_cultura_' + num)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) == 1)
+				{
+					alert('A Data do Processamento deve ser anterior à Data do Resultado');
+					$('#data_processamento_tbresistente_cultura_' + num).val('');
+					$('#data_resultado_tbresistente_cultura_' + num).val('');
+				}
+				if ($($('#data_processamento_tbresistente_cultura_' + num)).compareDate($('#data_recebimento_tbresistente_cepa_' + num)) == -1)
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_recebimento_tbresistente_cepa_'+num).val('');
-					$('#data_processamento_tbresistente_cultura_'+num).val('');
+					$('#data_processamento_tbresistente_cultura_' + num).val('');
+					$('#data_recebimento_tbresistente_cepa_' + num).val('');
 				}
-				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+			});
+			$('#data_recebimento_tbresistente_cepa_' + num).livequery('change', function(){
+				if ($(this).val())
+					$('#hora_recebimento_tbresistente_cepa_' + num).addClass('required');
+				else
+					$('#hora_recebimento_tbresistente_cepa_' + num).removeClass('required');
+				if ($($('#data_recebimento_tbresistente_cepa_' + num)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) == 1)
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_recebimento_tbresistente_cepa_'+num).val('');
-					$('#data_resultado_tbresistente_cultura_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_' + num).val('');
+					$('#data_resultado_tbresistente_cultura_' + num).val('');
 				}
-				$('#hora_recebimento_tbresistente_cepa_' + num).addClass('required');
-			});
-			$('#data_processamento_tbresistente_cultura_'+num).livequery('change', function(){
-				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_processamento_tbresistente_cultura_'+num).val()))
+				if ($($('#data_recebimento_tbresistente_cepa_' + num)).compareDate($('#data_processamento_tbresistente_cultura_' + num)) == 1)
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_recebimento_tbresistente_cepa_'+num).val('');
-					$('#data_processamento_tbresistente_cultura_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_' + num).val('');
+					$('#data_processamento_tbresistente_cultura_' + num).val('');
 				}
-				$('#hora_processamento_tbresistente_cultura_' + num).addClass('required');
 			});
-			$('#data_resultado_tbresistente_cultura_'+num).livequery('change', function(){
-				if (Date.parse($('#data_recebimento_tbresistente_cepa_'+num).val()) > Date.parse($('#data_resultado_tbresistente_cultura_'+num).val()))
+			$('#data_resultado_tbresistente_cultura_' + num).livequery('change', function(){
+				if ($(this).val())
+					$('#hora_resultado_tbresistente_cultura_' + num).addClass('required');
+				else
+					$('#hora_resultado_tbresistente_cultura_' + num).removeClass('required');
+				if ($($('#data_processamento_tbresistente_cultura_' + num)).compareDate($('#data_resultado_tbresistente_cultura_' + num)) == 1)
+				{
+					alert('A Data do Processamento deve ser anterior à Data do Resultado');
+					$('#data_processamento_tbresistente_cultura_' + num).val('');
+					$('#data_resultado_tbresistente_cultura_' + num).val('');
+				}
+				if ($($('#data_resultado_tbresistente_cultura_' + num)).compareDate($('#data_recebimento_tbresistente_cepa_' + num)) == -1)
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_recebimento_tbresistente_cepa_'+num).val('');
-					$('#data_resultado_tbresistente_cultura_'+num).val('');
+					$('#data_recebimento_tbresistente_cepa_' + num).val('');
+					$('#data_resultado_tbresistente_cultura_' + num).val('');
 				}
-				$('#hora_resultado_tbresistente_cultura_' + num).addClass('required');
 			});
 		} else {
 			$('#hora_recebimento_tbresistente_cepa_' + num).removeClass('required');

@@ -385,31 +385,35 @@ $(document).ready( function(){
 		//caso contrario, e retornado -1
 
 		//Caso uma delas nao foi preenchida, a funcao retorna 0
-		if ($(this).val().length == 0)
-			return 0;
-		if ($(argumento).val().length == 0)
+		if ($(this).val().length == 0 || $(argumento).val().length == 0)
 			return 0;
 		//Criacao de um array contendo dia, mes e ano
 		var arrayData1 = $(this).val().split('/');
 		var arrayData2 = $(argumento).val().split('/');
+		var ano1 = parseInt(arrayData1[2],10);
+		var ano2 = parseInt(arrayData2[2],10);
+		var mes1 = parseInt(arrayData1[1],10);
+		var mes2 = parseInt(arrayData2[1],10);
+		var dia1 = parseInt(arrayData1[0],10);
+		var dia2 = parseInt(arrayData2[0],10);
 		//Compara anos
-		if (arrayData1[2] > arrayData2[2])
+		if (ano1 > ano2)
 			return 1;
-		else if (arrayData1[2] < arrayData2[2])
+		else if (ano1 < ano2)
 			return -1;
 		else
 		{
 			//Compara mes
-			if (arrayData1[1] > arrayData2[1])
+			if (mes1 > mes2)
 				return 1;
-			else if (arrayData1[1] < arrayData2[1])
+			else if (mes1 < mes2)
 				return -1;
 			else
 			{
 				//Compara dia
-				if (arrayData1[0] > arrayData2[0])
+				if (dia1 > dia2)
 					return 1;
-				else if (arrayData1[0] < arrayData2[0])
+				else if (dia1 < dia2)
 					return -1;
 				else return 0;
 			}
@@ -455,47 +459,58 @@ $(document).ready( function(){
 			$('#analise_responsavel_' + num).removeAttr('disabled');
 			$('#aspecto_escarro_' + num).removeAttr('disabled');
 			$('#data_recebimento_cepa_' + num).livequery('change', function(){
-				console.log($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)));
+				if ($(this).val())
+					$('#hora_recebimento_cepa_'+num).addClass('required');
+				else
+					$('#hora_recebimento_cepa_'+num).removeClass('required');
 				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) == -1)
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
 					$('#data_recebimento_cepa_' + num).val('');
 					$('#baciloscopia_data_' + num).val('');
 				}
-				if ($(this).val())
-					$('#hora_recebimento_cepa_'+num).addClass('required');
-				else
-					$('#hora_recebimento_cepa_'+num).removeClass('required');
+				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#data_cepa_' + num)) == -1)
+				{
+					alert('A Data da Coleta deve ser anterior à Data do Recebimento');
+					$('#data_recebimento_cepa_' + num).val('');
+					$('#data_cepa_' + num).val('');
+				}
 			});
 			$('#data_cepa_' + num).livequery('change', function(){
-				if (Date.parse($('#data_cepa_' + num).val()) > Date.parse($('#baciloscopia_data_' + num).val()))
+				if ($(this).val())
+					$('#hora_cepa_' + num).addClass('required');
+				else
+					$('#hora_cepa_' + num).removeClass('required');
+				if ($($('#data_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) == 1)
 				{
 					alert('A Data da Coleta deve ser anterior à Data do Resultado');
 					$('#data_cepa_' + num).val('');
 					$('#baciloscopia_data_' + num).val('');
 				}
-				if ($(this).val())
-					$('#hora_cepa_' + num).addClass('required');
-				else
-					$('#hora_cepa_' + num).removeClass('required');
+				if ($($('#data_cepa_' + num)).compareDate($('#data_recebimento_cepa_' + num)) == 1)
+				{
+					alert('A Data da Coleta deve ser anterior à Data do Recebimento');
+					$('#data_cepa_' + num).val('');
+					$('#data_recebimento_cepa_' + num).val('');
+				}
 			});
 			$('#baciloscopia_data_' + num).livequery('change', function(){
-				if (Date.parse($('#data_recebimento_cepa_' + num).val()) > Date.parse($('#baciloscopia_data_' + num).val()))
+				if ($(this).val())
+					$('#baciloscopia_hora_cepa_' + num).addClass('required');
+				else
+					$('#baciloscopia_hora_cepa_' + num).removeClass('required');
+				if ($($('#data_recebimento_cepa_' + num)).compareDate($('#baciloscopia_data_' + num)) == 1)
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
 					$('#data_recebimento_cepa_' + num).val('');
 					$('#baciloscopia_data_' + num).val('');
 				}
-				if (Date.parse($('#data_cepa_' + num).val()) > Date.parse($('#baciloscopia_data_' + num).val()))
+				if ($($('#baciloscopia_data_' + num)).compareDate($('#data_cepa_' + num)) == -1)
 				{
 					alert('A Data da Coleta deve ser anterior à Data do Resultado');
 					$('#data_cepa_' + num).val('');
 					$('#baciloscopia_data_' + num).val('');
 				}
-				if ($(this).val())
-					$('#baciloscopia_hora_cepa_' + num).addClass('required');
-				else
-					$('#baciloscopia_hora_cepa_' + num).removeClass('required');
 			});
 			var jaFoi = false;
 			$('#baciloscopia_metodo_' + num).livequery('change', function(){

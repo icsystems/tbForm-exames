@@ -305,6 +305,50 @@ function CEPACulturaRow(numCepa){
 }
 
 $(document).ready(function(){
+	/*---------------------------Auxiliar function-------------------------------*/
+	$.fn.compareDate = function(argumento){
+		//Essa funcao eh utilizada para comprar a ordem
+		//cronologica entre duas datas.
+		//Caso a data do argumento seja menor, e retornado o numero 1
+		//caso contrario, e retornado -1
+
+		//Caso uma delas nao foi preenchida, a funcao retorna 0
+		if ($(this).val().length == 0 || $(argumento).val().length == 0)
+			return 0;
+		//Criacao de um array contendo dia, mes e ano
+		var arrayData1 = $(this).val().split('/');
+		var arrayData2 = $(argumento).val().split('/');
+		var ano1 = parseInt(arrayData1[2],10);
+		var ano2 = parseInt(arrayData2[2],10);
+		var mes1 = parseInt(arrayData1[1],10);
+		var mes2 = parseInt(arrayData2[1],10);
+		var dia1 = parseInt(arrayData1[0],10);
+		var dia2 = parseInt(arrayData2[0],10);
+		//Compara anos
+		if (ano1 > ano2)
+			return 1;
+		else if (ano1 < ano2)
+			return -1;
+		else
+		{
+			//Compara mes
+			if (mes1 > mes2)
+				return 1;
+			else if (mes1 < mes2)
+				return -1;
+			else
+			{
+				//Compara dia
+				if (dia1 > dia2)
+					return 1;
+				else if (dia1 < dia2)
+					return -1;
+				else return 0;
+			}
+		}
+
+	}
+	/*---------------------------------------------------------------------------*/
 	var cepaCulturaNum = 1;
 	var content = CEPACulturaRow(cepaCulturaNum);
 	$('table.cepaCultura').append(content);
@@ -342,50 +386,59 @@ $(document).ready(function(){
 			$('#resultado_cultura_cepa_' + num).removeAttr('disabled');
 			$('#dias_cultura_cepa_' + num).removeAttr('disabled');
 			$('#identificacao_cultura_cepa_' + num).removeAttr('disabled');
-			$('#data_cultura_cepa_'+num).livequery('change', function(){
-				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_processamento_cultura_'+num).val()))
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_cultura_cepa_'+num).val('');
-					$('#data_processamento_cultura_'+num).val('');
-				}
-				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_resultado_cultura_'+num).val()))
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_cultura_cepa_'+num).val('');
-					$('#data_resultado_cultura_'+num).val('');
-				}
-				$('#hora_cultura_cepa_' + num).addClass('required');
-			});
-			$('#data_processamento_cultura_'+num).livequery('change', function(){
-				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_processamento_cultura_'+num).val()))
-				{
-					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
-					$('#data_cultura_cepa_'+num).val('');
-					$('#data_processamento_cultura_'+num).val('');
-				}
-				if (Date.parse($('#data_processamento_cultura_'+num).val()) > Date.parse($('#data_resultado_cultura_'+num).val()))
+			$('#data_processamento_cultura_' + num).livequery('change', function(){
+				if ($(this).val())
+					$('#hora_processamento_cultura_'+num).addClass('required');
+				else
+					$('#hora_processamento_cultura_'+num).removeClass('required');
+				if ($($('#data_processamento_cultura_' + num)).compareDate($('#data_resultado_cultura_' + num)) == 1)
 				{
 					alert('A Data do Processamento deve ser anterior à Data do Resultado');
-					$('#data_processamento_cultura_'+num).val('');
-					$('#data_resultado_cultura_'+num).val('');
+					$('#data_processamento_cultura_' + num).val('');
+					$('#data_resultado_cultura_' + num).val('');
 				}
-				$('#hora_processamento_cultura_' + num).addClass('required');
+				if ($($('#data_processamento_cultura_' + num)).compareDate($('#data_cultura_cepa_' + num)) == -1)
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_processamento_cultura_' + num).val('');
+					$('#data_cultura_cepa_' + num).val('');
+				}
 			});
-			$('#data_resultado_cultura_'+num).livequery('change', function(){
-				if (Date.parse($('#data_cultura_cepa_'+num).val()) > Date.parse($('#data_resultado_cultura_'+num).val()))
+			$('#data_cultura_cepa_' + num).livequery('change', function(){
+				if ($(this).val())
+					$('#hora_cultura_cepa_' + num).addClass('required');
+				else
+					$('#hora_cultura_cepa_' + num).removeClass('required');
+				if ($($('#data_cultura_cepa_' + num)).compareDate($('#data_resultado_cultura_' + num)) == 1)
 				{
 					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
-					$('#data_cultura_cepa_'+num).val('');
-					$('#data_resultado_cultura_'+num).val('');
+					$('#data_cultura_cepa_' + num).val('');
+					$('#data_resultado_cultura_' + num).val('');
 				}
-				if (Date.parse($('#data_processamento_cultura_'+num).val()) > Date.parse($('#data_resultado_cultura_'+num).val()))
+				if ($($('#data_cultura_cepa_' + num)).compareDate($('#data_processamento_cultura_' + num)) == 1)
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Processamento');
+					$('#data_cultura_cepa_' + num).val('');
+					$('#data_processamento_cultura_' + num).val('');
+				}
+			});
+			$('#data_resultado_cultura_' + num).livequery('change', function(){
+				if ($(this).val())
+					$('#hora_resultado_cultura_' + num).addClass('required');
+				else
+					$('#hora_resultado_cultura_' + num).removeClass('required');
+				if ($($('#data_processamento_cultura_' + num)).compareDate($('#data_resultado_cultura_' + num)) == 1)
 				{
 					alert('A Data do Processamento deve ser anterior à Data do Resultado');
-					$('#data_processamento_cultura_'+num).val('');
-					$('#data_resultado_cultura_'+num).val('');
+					$('#data_processamento_cultura_' + num).val('');
+					$('#data_resultado_cultura_' + num).val('');
 				}
-				$('#hora_resultado_cultura_' + num).addClass('required');
+				if ($($('#data_resultado_cultura_' + num)).compareDate($('#data_cultura_cepa_' + num)) == -1)
+				{
+					alert('A Data do Recebimento deve ser anterior à Data do Resultado');
+					$('#data_cultura_cepa_' + num).val('');
+					$('#data_resultado_cultura_' + num).val('');
+				}
 			});
 		} else {
 			$('#hora_cultura_cepa_' + num).removeClass('required');
